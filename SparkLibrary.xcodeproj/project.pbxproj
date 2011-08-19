@@ -1,0 +1,291 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A5EDC08B13FE7DF900B37A0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5EDC08A13FE7DF900B37A0D /* UIKit.framework */; };
+		A5EDC08D13FE7DF900B37A0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5EDC08C13FE7DF900B37A0D /* Foundation.framework */; };
+		A5EDC08F13FE7DF900B37A0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5EDC08E13FE7DF900B37A0D /* CoreGraphics.framework */; };
+		A5EDC09513FE7DF900B37A0D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5EDC09313FE7DF900B37A0D /* InfoPlist.strings */; };
+		A5EDC09713FE7DF900B37A0D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EDC09613FE7DF900B37A0D /* main.m */; };
+		A5EDC09B13FE7DF900B37A0D /* SparkLibraryAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EDC09A13FE7DF900B37A0D /* SparkLibraryAppDelegate.m */; };
+		A5EDC09E13FE7DF900B37A0D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5EDC09C13FE7DF900B37A0D /* MainWindow.xib */; };
+		A5EDC0A113FE7DF900B37A0D /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5EDC0A013FE7DF900B37A0D /* RootViewController.m */; };
+		A5EDC0A413FE7DF900B37A0D /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5EDC0A213FE7DF900B37A0D /* RootViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A5EDC08613FE7DF900B37A0D /* SparkLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SparkLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A5EDC08A13FE7DF900B37A0D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A5EDC08C13FE7DF900B37A0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A5EDC08E13FE7DF900B37A0D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A5EDC09213FE7DF900B37A0D /* SparkLibrary-Info.plist */ = {isa = PBXFileReference; path = "SparkLibrary-Info.plist"; sourceTree = "<group>"; };
+		A5EDC09413FE7DF900B37A0D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A5EDC09613FE7DF900B37A0D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A5EDC09813FE7DF900B37A0D /* SparkLibrary-Prefix.pch */ = {isa = PBXFileReference; path = "SparkLibrary-Prefix.pch"; sourceTree = "<group>"; };
+		A5EDC09913FE7DF900B37A0D /* SparkLibraryAppDelegate.h */ = {isa = PBXFileReference; path = SparkLibraryAppDelegate.h; sourceTree = "<group>"; };
+		A5EDC09A13FE7DF900B37A0D /* SparkLibraryAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SparkLibraryAppDelegate.m; sourceTree = "<group>"; };
+		A5EDC09D13FE7DF900B37A0D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		A5EDC09F13FE7DF900B37A0D /* RootViewController.h */ = {isa = PBXFileReference; path = RootViewController.h; sourceTree = "<group>"; };
+		A5EDC0A013FE7DF900B37A0D /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		A5EDC0A313FE7DF900B37A0D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A5EDC08313FE7DF900B37A0D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5EDC08B13FE7DF900B37A0D /* UIKit.framework in Frameworks */,
+				A5EDC08D13FE7DF900B37A0D /* Foundation.framework in Frameworks */,
+				A5EDC08F13FE7DF900B37A0D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A5EDC07B13FE7DF800B37A0D = {
+			isa = PBXGroup;
+			children = (
+				A5EDC09013FE7DF900B37A0D /* SparkLibrary */,
+				A5EDC08913FE7DF900B37A0D /* Frameworks */,
+				A5EDC08713FE7DF900B37A0D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A5EDC08713FE7DF900B37A0D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A5EDC08613FE7DF900B37A0D /* SparkLibrary.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A5EDC08913FE7DF900B37A0D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A5EDC08A13FE7DF900B37A0D /* UIKit.framework */,
+				A5EDC08C13FE7DF900B37A0D /* Foundation.framework */,
+				A5EDC08E13FE7DF900B37A0D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A5EDC09013FE7DF900B37A0D /* SparkLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				A5EDC09913FE7DF900B37A0D /* SparkLibraryAppDelegate.h */,
+				A5EDC09A13FE7DF900B37A0D /* SparkLibraryAppDelegate.m */,
+				A5EDC09C13FE7DF900B37A0D /* MainWindow.xib */,
+				A5EDC09F13FE7DF900B37A0D /* RootViewController.h */,
+				A5EDC0A013FE7DF900B37A0D /* RootViewController.m */,
+				A5EDC0A213FE7DF900B37A0D /* RootViewController.xib */,
+				A5EDC09113FE7DF900B37A0D /* Supporting Files */,
+			);
+			path = SparkLibrary;
+			sourceTree = "<group>";
+		};
+		A5EDC09113FE7DF900B37A0D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A5EDC09213FE7DF900B37A0D /* SparkLibrary-Info.plist */,
+				A5EDC09313FE7DF900B37A0D /* InfoPlist.strings */,
+				A5EDC09613FE7DF900B37A0D /* main.m */,
+				A5EDC09813FE7DF900B37A0D /* SparkLibrary-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A5EDC08513FE7DF900B37A0D /* SparkLibrary */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A5EDC0A713FE7DF900B37A0D /* Build configuration list for PBXNativeTarget "SparkLibrary" */;
+			buildPhases = (
+				A5EDC08213FE7DF900B37A0D /* Sources */,
+				A5EDC08313FE7DF900B37A0D /* Frameworks */,
+				A5EDC08413FE7DF900B37A0D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SparkLibrary;
+			productName = SparkLibrary;
+			productReference = A5EDC08613FE7DF900B37A0D /* SparkLibrary.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A5EDC07D13FE7DF800B37A0D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = Home;
+			};
+			buildConfigurationList = A5EDC08013FE7DF800B37A0D /* Build configuration list for PBXProject "SparkLibrary" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A5EDC07B13FE7DF800B37A0D;
+			productRefGroup = A5EDC08713FE7DF900B37A0D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A5EDC08513FE7DF900B37A0D /* SparkLibrary */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A5EDC08413FE7DF900B37A0D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5EDC09513FE7DF900B37A0D /* InfoPlist.strings in Resources */,
+				A5EDC09E13FE7DF900B37A0D /* MainWindow.xib in Resources */,
+				A5EDC0A413FE7DF900B37A0D /* RootViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A5EDC08213FE7DF900B37A0D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5EDC09713FE7DF900B37A0D /* main.m in Sources */,
+				A5EDC09B13FE7DF900B37A0D /* SparkLibraryAppDelegate.m in Sources */,
+				A5EDC0A113FE7DF900B37A0D /* RootViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A5EDC09313FE7DF900B37A0D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5EDC09413FE7DF900B37A0D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A5EDC09C13FE7DF900B37A0D /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5EDC09D13FE7DF900B37A0D /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		A5EDC0A213FE7DF900B37A0D /* RootViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A5EDC0A313FE7DF900B37A0D /* en */,
+			);
+			name = RootViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A5EDC0A513FE7DF900B37A0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A5EDC0A613FE7DF900B37A0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A5EDC0A813FE7DF900B37A0D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SparkLibrary/SparkLibrary-Prefix.pch";
+				INFOPLIST_FILE = "SparkLibrary/SparkLibrary-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A5EDC0A913FE7DF900B37A0D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SparkLibrary/SparkLibrary-Prefix.pch";
+				INFOPLIST_FILE = "SparkLibrary/SparkLibrary-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A5EDC08013FE7DF800B37A0D /* Build configuration list for PBXProject "SparkLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5EDC0A513FE7DF900B37A0D /* Debug */,
+				A5EDC0A613FE7DF900B37A0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A5EDC0A713FE7DF900B37A0D /* Build configuration list for PBXNativeTarget "SparkLibrary" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A5EDC0A813FE7DF900B37A0D /* Debug */,
+				A5EDC0A913FE7DF900B37A0D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A5EDC07D13FE7DF800B37A0D /* Project object */;
+}
