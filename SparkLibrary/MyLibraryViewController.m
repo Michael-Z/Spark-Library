@@ -49,13 +49,12 @@ NSMutableDictionary* plistDict;
     [view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"navBarTop.png"]]];
     [self.navigationController.navigationBar addSubview:view];
     [view release];
-    [self getList];
-    
+     
     [self checkAndCreatePList];
     
     plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
     
-    self.categories = [plistDict objectForKey:@"Categories"];
+    self.categories = [plistDict objectForKey:@"myBooks"];
     
     
     

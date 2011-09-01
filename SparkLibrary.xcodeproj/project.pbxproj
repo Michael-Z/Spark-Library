@@ -48,6 +48,7 @@
 		A55D93A8140E633300C1F1B3 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = A55D93A1140E633300C1F1B3 /* zip.c */; };
 		A55D93A9140E633300C1F1B3 /* ZipArchive.mm in Sources */ = {isa = PBXBuildFile; fileRef = A55D93A4140E633300C1F1B3 /* ZipArchive.mm */; };
 		A55D93B2140E7F5C00C1F1B3 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A55D93B1140E7F5C00C1F1B3 /* MBProgressHUD.m */; };
+		A55D93B8140FAE0600C1F1B3 /* myLibBooks.plist in Resources */ = {isa = PBXBuildFile; fileRef = A55D93B7140FAE0600C1F1B3 /* myLibBooks.plist */; };
 		A5624E62140C15C0005BE598 /* libraryButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A5624E61140C15C0005BE598 /* libraryButton.png */; };
 		A5624E66140C30BF005BE598 /* MyLibraryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A5624E64140C30BF005BE598 /* MyLibraryViewController.m */; };
 		A5624E67140C30BF005BE598 /* MyLibraryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5624E65140C30BF005BE598 /* MyLibraryViewController.xib */; };
@@ -148,6 +149,7 @@
 		A55D93A4140E633300C1F1B3 /* ZipArchive.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ZipArchive.mm; sourceTree = "<group>"; };
 		A55D93B0140E7F5C00C1F1B3 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		A55D93B1140E7F5C00C1F1B3 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		A55D93B7140FAE0600C1F1B3 /* myLibBooks.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = myLibBooks.plist; sourceTree = "<group>"; };
 		A5624E61140C15C0005BE598 /* libraryButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = libraryButton.png; sourceTree = "<group>"; };
 		A5624E63140C30BF005BE598 /* MyLibraryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLibraryViewController.h; sourceTree = "<group>"; };
 		A5624E64140C30BF005BE598 /* MyLibraryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLibraryViewController.m; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 				A50B64211407C225007F6122 /* Utilities.m */,
 				A572B16C140BAE96003107F0 /* sparkProperties.plist */,
 				A572B16F140BAECA003107F0 /* sparkLib.plist */,
+				A55D93B7140FAE0600C1F1B3 /* myLibBooks.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -540,6 +543,7 @@
 				A5624E62140C15C0005BE598 /* libraryButton.png in Resources */,
 				A5624E67140C30BF005BE598 /* MyLibraryViewController.xib in Resources */,
 				A5624E6C140C344B005BE598 /* CellMyLibraryViewController.xib in Resources */,
+				A55D93B8140FAE0600C1F1B3 /* myLibBooks.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

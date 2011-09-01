@@ -23,7 +23,7 @@ int downloadCount =0;
 NSString * fileName ; 
 NSString * secondFileName ;
 float expectedContentLength;
-
+int currentRow;
 
 - (void)viewDidLoad
 {
@@ -349,7 +349,7 @@ float expectedContentLength;
  
         [[NSURLConnection alloc] initWithRequest:request1 delegate:self] ;
         HUD = [[MBProgressHUD showHUDAddedTo:self.view animated:YES] retain];
-        
+        currentRow = row;
     
     
     /*
@@ -474,6 +474,14 @@ float expectedContentLength;
     
     [downloadedFile release];
 //downloading =FALSE;
+    
+    [self checkAndCreatePList];
+    plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
+    NSMutableArray * myBooks = [[NSMutableArray alloc]init];        
+    myBooks = [plistDict valueForKey:@"myBooks"];
+    [myBooks addObject:[categories objectAtIndex:currentRow]];
+    [plistDict setValue:myBooks forKey:@"myBooks"];
+    [plistDict writeToFile:pListPath atomically: YES];
     
 }
 
