@@ -72,7 +72,7 @@
     
 	__block CGPoint contentOffset = CGPointZero; NSInteger page = [document.pageNumber integerValue];
     
-	[pageSet enumerateIndexesUsingBlock: // Enumerate page number set
+	[pageSet enumerateIndexesWithOptions:NSEnumerationReverse usingBlock: // Enumerate page number set
      ^(NSUInteger number, BOOL *stop)
      {
          NSNumber *key = [NSNumber numberWithInteger:number]; // # key
@@ -126,7 +126,7 @@
         
 		NSMutableDictionary *unusedViews = [[contentViews mutableCopy] autorelease];
         
-		for (NSInteger number = minValue; number <= maxValue; number++)
+		for (NSInteger number = maxValue; number >= minValue; number--)
 		{
 			NSNumber *key = [NSNumber numberWithInteger:number]; // # key
             
@@ -570,7 +570,7 @@
 		{
 			CGPoint contentOffset = theScrollView.contentOffset;
             
-			contentOffset.x -= theScrollView.bounds.size.width; // -= 1
+			contentOffset.x += theScrollView.bounds.size.width; // -= 1
             
 			[theScrollView setContentOffset:contentOffset animated:YES];
             
@@ -595,7 +595,7 @@
 		{
 			CGPoint contentOffset = theScrollView.contentOffset;
             
-			contentOffset.x += theScrollView.bounds.size.width; // += 1
+			contentOffset.x -= theScrollView.bounds.size.width; // += 1
             
 			[theScrollView setContentOffset:contentOffset animated:YES];
             
@@ -660,7 +660,6 @@
         
 		CGRect nextPageRect = viewRect;
 		nextPageRect.size.width = PAGING_AREA_WIDTH;
-		nextPageRect.origin.x = (viewRect.size.width - PAGING_AREA_WIDTH);
         
 		if (CGRectContainsPoint(nextPageRect, point)) // page++ area
 		{
@@ -669,6 +668,7 @@
         
 		CGRect prevPageRect = viewRect;
 		prevPageRect.size.width = PAGING_AREA_WIDTH;
+		prevPageRect.origin.x = (viewRect.size.width - PAGING_AREA_WIDTH);
         
 		if (CGRectContainsPoint(prevPageRect, point)) // page-- area
 		{
@@ -718,7 +718,6 @@
         
 		CGRect nextPageRect = viewRect;
 		nextPageRect.size.width = PAGING_AREA_WIDTH;
-		nextPageRect.origin.x = (viewRect.size.width - PAGING_AREA_WIDTH);
         
 		if (CGRectContainsPoint(nextPageRect, point)) // page++ area
 		{
@@ -727,6 +726,7 @@
         
 		CGRect prevPageRect = viewRect;
 		prevPageRect.size.width = PAGING_AREA_WIDTH;
+		prevPageRect.origin.x = (viewRect.size.width - PAGING_AREA_WIDTH);
         
 		if (CGRectContainsPoint(prevPageRect, point)) // page-- area
 		{
