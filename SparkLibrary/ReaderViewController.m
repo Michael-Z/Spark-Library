@@ -17,6 +17,7 @@
 #import "ReaderScrollView.h"
 #import "FontView.h"
 @implementation ReaderViewController
+@synthesize bookMarkDone;
 NSMutableDictionary* plistDict;
 
 #pragma mark Constants
@@ -55,6 +56,7 @@ NSMutableDictionary* plistDict;
 #ifdef DEBUGX
 	NSLog(@"%s", __FUNCTION__);
 #endif
+    
     
 	[self updateScrollViewContentSize]; // Update the content size
     
@@ -205,7 +207,20 @@ NSMutableDictionary* plistDict;
     
 	[self updateScrollViewContentSize]; // Set content size
     
-	[self showDocumentPage:[document.pageNumber integerValue]]; // Show
+    [self checkAndCreatePList];
+    plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
+    NSString * documentName;
+
+    documentName = [plistDict objectForKey:[NSString stringWithFormat:@"%@",document.fileName]];
+    
+    if(documentName !=nil){
+        NSString * savedPage = [plistDict objectForKey:[NSString stringWithFormat:@"%@",document.fileName]];
+        [self showDocumentPage:[savedPage integerValue]]; // Show        
+    }else{
+        [self showDocumentPage:[document.pageNumber integerValue]]; // Show       
+    }
+     
+
     
 	document.lastOpen = [NSDate date]; // Update last opened date
     
@@ -547,7 +562,9 @@ NSMutableDictionary* plistDict;
 #ifdef DEBUGX
 	NSLog(@"%s", __FUNCTION__);
 #endif
-    
+        if([self.view.subviews containsObject:bookMarkDone]){
+            [bookMarkDone removeFromSuperview];
+        }
 	if ([touch.view isMemberOfClass:[ReaderScrollView class]]) return YES;
     
 	return NO;
@@ -560,7 +577,9 @@ NSMutableDictionary* plistDict;
 #ifdef DEBUGX
 	NSLog(@"%s", __FUNCTION__);
 #endif
-    
+    if([self.view.subviews containsObject:bookMarkDone]){
+        [bookMarkDone removeFromSuperview];
+    }
 	if (theScrollView.tag == 0) // Scroll view did end
 	{
 		NSInteger page = [document.pageNumber integerValue];
@@ -585,7 +604,9 @@ NSMutableDictionary* plistDict;
 #ifdef DEBUGX
 	NSLog(@"%s", __FUNCTION__);
 #endif
-    
+     if([self.view.subviews containsObject:bookMarkDone]){
+        [bookMarkDone removeFromSuperview];
+     }
 	if (theScrollView.tag == 0) // Scroll view did end
 	{
 		NSInteger page = [document.pageNumber integerValue];
@@ -765,28 +786,38 @@ NSMutableDictionary* plistDict;
     [self checkAndCreatePList];
     plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
     
-    NSMutableArray *myBooks = [plistDict valueForKey:@"myBooks"];
-    if (!myBooks) {
-        myBooks = [[NSMutableArray alloc]init];
-    }
  //   [myBooks addObject:[categories objectAtIndex:currentRow]];
-    [plistDict setValue:myBooks forKey:@"myBooks"];
+    [plistDict setValue:document.pageNumber forKey:[NSString stringWithFormat:@"%@",document.fileName]];
     [plistDict writeToFile:pListPath atomically: YES];
-    [myBooks release];
-
+    bookMarkDone = [UIButton buttonWithType:UIButtonTypeCustom];
+    [bookMarkDone addTarget:self 
+                   action:@selector(backToLibrary)
+         forControlEvents:UIControlEventTouchDown];
+    UIImage *buttonImageNormal = [UIImage imageNamed:@"bookmarkDone.png"];
+    
+    UIImage *strechableButtonImageNormal = [buttonImageNormal stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+    
+    [bookMarkDone setBackgroundImage:strechableButtonImageNormal forState:UIControlStateNormal];
+    
+    bookMarkDone.frame = CGRectMake(self.view.bounds.size.width - 20.0, -100.0, 20.0, 100.0);
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:1.0];
+ 	bookMarkDone.frame = CGRectMake(self.view.bounds.size.width - 20.0, 0.0, 20.0, 100.0);
+ 	[UIView commitAnimations];
+    [self.view addSubview:bookMarkDone];
 }
 
 -(void)checkAndCreatePList{
 	BOOL success;
 	NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentDir = [documentPaths objectAtIndex:0];
- 	pListPath = [ documentDir stringByAppendingPathComponent:@"sparkLib.plist"];
+ 	pListPath = [ documentDir stringByAppendingPathComponent:@"sparkProperties.plist"];
   	NSFileManager *fileManager = [NSFileManager defaultManager];
 	success = [fileManager fileExistsAtPath:pListPath];
 	
 	if(success) return;
 	
-	NSString *pListPathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sparkLib.plist"];
+	NSString *pListPathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sparkProperties.plist"];
 	
 	[fileManager copyItemAtPath:pListPathFromApp toPath:pListPath error:nil];
 	

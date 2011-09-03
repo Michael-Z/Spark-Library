@@ -57,9 +57,12 @@
 
 	BOOL isVisible;
     NSString *pListPath;
+    IBOutlet UIButton *bookMarkDone;
+
 }
 -(void)checkAndCreatePList;
 @property (nonatomic, assign, readwrite) id <ReaderViewControllerDelegate> delegate;
+@property(nonatomic,retain) UIButton *bookMarkDone;
 
 - (id)initWithReaderDocument:(ReaderDocument *)object;
 
