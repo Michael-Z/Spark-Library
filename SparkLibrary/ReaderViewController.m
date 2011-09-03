@@ -171,10 +171,10 @@ NSMutableDictionary* plistDict;
         
 		if (maxPage >= PAGING_VIEWS)
 		{
-			if (page == maxPage)
+			if (page == minPage)
 				contentOffset.x = viewWidthX2;
 			else
-				if (page != minPage)
+				if (page != maxPage)
 					contentOffset.x = viewWidthX1;
 		}
 		else
