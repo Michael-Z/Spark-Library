@@ -286,7 +286,7 @@ NSMutableDictionary* plistDict;
     int row = indexPath.row;
     
     
-    readerController = [[[ReaderController alloc] init] autorelease];
+    readerController = [[ReaderController alloc] init];
     //   pdfViewController = [[[PDFViewController alloc] init] autorelease]; 
     NSObject<EPGLTransitionViewDelegate> *transition;
     transition = [[[Transition alloc] init] autorelease];
