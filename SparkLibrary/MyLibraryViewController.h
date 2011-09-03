@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "CellViewController.h"
 #import "PDFViewController.h"
-#import "ReaderController.h"
 #import "ReaderViewController.h"
 
 @interface MyLibraryViewController : UITableViewController <ReaderViewControllerDelegate>
@@ -18,13 +17,11 @@ NSString *pListPath;
 NSArray *categories;
 IBOutlet CellViewController * cellVC;
 PDFViewController *pdfViewController; 
-ReaderController * readerController;
 
 }
 
 @property (nonatomic, retain) NSArray *categories;
 @property (nonatomic,retain) PDFViewController * pdfViewController;
-@property (nonatomic,retain) ReaderController * readerController;
 
 -(void)getList;
 -(void)checkAndCreatePList;

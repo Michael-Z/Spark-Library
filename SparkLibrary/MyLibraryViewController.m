@@ -9,14 +9,12 @@
 #import "MyLibraryViewController.h"
 
 #import "CellMyLibraryViewController.h"
-#import "Transition.h"
 #import "MyLibraryViewController.h"
 
 @implementation MyLibraryViewController
 
 @synthesize categories;
 @synthesize pdfViewController;
-@synthesize readerController;
 NSMutableDictionary* plistDict;
 
 
@@ -278,31 +276,6 @@ NSMutableDictionary* plistDict;
     int row = indexPath.row;
     NSString *fileName = [[categories objectAtIndex:row]objectForKey:@"fileName"];
     [self showDocumentWithName:fileName];
-/*    
-    readerController = [[ReaderController alloc] init];
-    //   pdfViewController = [[[PDFViewController alloc] init] autorelease]; 
-    NSObject<EPGLTransitionViewDelegate> *transition;
-    transition = [[[Transition alloc] init] autorelease];
-    
-    
-    EPGLTransitionView *glview = [[[EPGLTransitionView alloc] 
-                                   initWithView:self.view
-                                   delegate:transition] autorelease];
-    
-    
-    [glview prepareTextureTo:readerController.view];
-    // If you are using an "IN" animation for the "next" view set appropriate 
-    // clear color (ie no alpha) 
-    [glview setClearColorRed:0.0
-                       green:0.0
-                        blue:0.0
-                       alpha:1.0];
-    
-    [glview startTransition];
-    
-    readerController.fileName=[[categories objectAtIndex:row]objectForKey:@"fileName"]; 
-    [self.navigationController presentModalViewController: readerController animated:YES];
-*/    
 }
 
 #define SAMPLE_DOCUMENT @"Document.pdf"
