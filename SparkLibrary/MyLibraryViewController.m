@@ -276,8 +276,9 @@ NSMutableDictionary* plistDict;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int row = indexPath.row;
-    
-    
+    NSString *fileName = [[categories objectAtIndex:row]objectForKey:@"fileName"];
+    [self showDocumentWithName:fileName];
+/*    
     readerController = [[ReaderController alloc] init];
     //   pdfViewController = [[[PDFViewController alloc] init] autorelease]; 
     NSObject<EPGLTransitionViewDelegate> *transition;
@@ -301,8 +302,82 @@ NSMutableDictionary* plistDict;
     
     readerController.fileName=[[categories objectAtIndex:row]objectForKey:@"fileName"]; 
     [self.navigationController presentModalViewController: readerController animated:YES];
-    
+*/    
 }
+
+#define SAMPLE_DOCUMENT @"Document.pdf"
+#define DEMO_VIEW_CONTROLLER_PUSH FALSE
+
+- (void) showDocumentWithName:(NSString *)fileName {
+#ifdef DEBUGX
+	NSLog(@"%s", __FUNCTION__);
+#endif
+    
+	ReaderDocument *document = [ReaderDocument unarchiveFromFileName:SAMPLE_DOCUMENT];
+    
+	if (document == nil) // Create a brand new ReaderDocument object the first time we run
+	{
+        NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES); 
+        NSString *documentsDirectoryPath = [searchPaths objectAtIndex:0]; 
+        NSString *path = [documentsDirectoryPath stringByAppendingPathComponent:[[NSString stringWithFormat:@"%@",fileName] stringByAppendingPathExtension:@"pdf"]];
+        
+        
+        NSLog(@"%@",path);
+        [self checkAndCreatePList];
+        NSMutableDictionary* plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
+        
+        [plistDict setValue: [NSString stringWithFormat:@"%@",fileName]  forKey:@"fileName"];
+        [plistDict writeToFile:pListPath atomically: YES];
+        
+        
+        
+        //		NSString *filePath = [[NSBundle mainBundle] pathForResource:path ofType:nil];
+        
+		document = [[[ReaderDocument alloc] initWithFilePath:path password:nil] autorelease];
+	}
+    
+	if (document != nil) // Must have a valid ReaderDocument object in order to proceed
+	{
+		ReaderViewController *readerViewController = [[ReaderViewController alloc] initWithReaderDocument:document];
+        
+		readerViewController.delegate = self; // Set the ReaderViewController delegate to self
+        
+#if (DEMO_VIEW_CONTROLLER_PUSH == TRUE)
+        
+		[self.navigationController pushViewController:readerViewController animated:YES];
+        
+#else // present in a modal view controller
+        
+		readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+		readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
+        
+		[self presentModalViewController:readerViewController animated:YES];
+        
+#endif // DEMO_VIEW_CONTROLLER_PUSH
+        
+		[readerViewController release]; // Release the ReaderViewController
+	}
+}
+
+#pragma mark ReaderViewControllerDelegate methods
+
+- (void)dismissReaderViewController:(ReaderViewController *)viewController
+{
+#ifdef DEBUGX
+	NSLog(@"%s", __FUNCTION__);
+#endif
+    
+#if (DEMO_VIEW_CONTROLLER_PUSH == TRUE)
+    
+	[self.navigationController popViewControllerAnimated:YES];
+    
+#else // dismiss the modal view controller
+    
+	[self dismissModalViewControllerAnimated:YES];
+    
+#endif // DEMO_VIEW_CONTROLLER_PUSH
+}
+
 
 
 

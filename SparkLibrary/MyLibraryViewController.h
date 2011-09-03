@@ -10,8 +10,9 @@
 #import "CellViewController.h"
 #import "PDFViewController.h"
 #import "ReaderController.h"
+#import "ReaderViewController.h"
 
-@interface MyLibraryViewController : UITableViewController
+@interface MyLibraryViewController : UITableViewController <ReaderViewControllerDelegate>
 {
 NSString *pListPath;
 NSArray *categories;
@@ -20,10 +21,14 @@ PDFViewController *pdfViewController;
 ReaderController * readerController;
 
 }
+
 @property (nonatomic, retain) NSArray *categories;
 @property (nonatomic,retain) PDFViewController * pdfViewController;
 @property (nonatomic,retain) ReaderController * readerController;
+
 -(void)getList;
 -(void)checkAndCreatePList;
+- (void) showDocumentWithName:(NSString *)fileName;
+
 
 @end
