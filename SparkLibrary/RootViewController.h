@@ -29,6 +29,6 @@
 -(void)getList;
 -(void)checkAndCreatePList;
 -(IBAction)myLibraryPage:(id)sender;
-- (void)startIconDownload:(NSString *)url forIndexPath:(NSIndexPath *)indexPath;
-- (void)appImageDidLoad:(NSIndexPath *)indexPath;
+-(IBAction)description:(id)sender;
+ 
 @end

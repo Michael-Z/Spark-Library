@@ -418,50 +418,9 @@ NSMutableDictionary* plistDict;
 	[super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-#ifdef DEBUGX
-	NSLog(@"%s (%d)", __FUNCTION__, interfaceOrientation);
-#endif
-    
-	return YES;
-}
+ 
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-#ifdef DEBUGX
-	NSLog(@"%s %@ (%d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), toInterfaceOrientation);
-#endif
-    
-	if (isVisible == NO) return; // iOS present modal WTF bodge
-    
-	if (printInteraction != nil) [printInteraction dismissAnimated:NO];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation duration:(NSTimeInterval)duration
-{
-#ifdef DEBUGX
-	NSLog(@"%s %@ (%d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), interfaceOrientation);
-#endif
-    
-	if (isVisible == NO) return; // iOS present modal WTF bodge
-    
-	[self updateScrollViewContentViews]; // Update content views
-    
-	lastAppearSize = CGSizeZero; // Reset view size tracking
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-#ifdef DEBUGX
-	NSLog(@"%s %@ (%d to %d)", __FUNCTION__, NSStringFromCGRect(self.view.bounds), fromInterfaceOrientation, self.interfaceOrientation);
-#endif
-    
-	//if (isVisible == NO) return; // iOS present modal WTF bodge
-    
-	//if (fromInterfaceOrientation == self.interfaceOrientation) return;
-}
-
+   
 - (void)didReceiveMemoryWarning
 {
 #ifdef DEBUGX

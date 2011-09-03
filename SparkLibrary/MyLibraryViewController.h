@@ -11,6 +11,8 @@
 #import "PDFViewController.h"
 #import "ReaderViewController.h"
 
+
+
 @interface MyLibraryViewController : UITableViewController <ReaderViewControllerDelegate>
 {
 NSString *pListPath;
@@ -19,7 +21,7 @@ IBOutlet CellViewController * cellVC;
 PDFViewController *pdfViewController; 
 
 }
-
+ 
 @property (nonatomic, retain) NSArray *categories;
 @property (nonatomic,retain) PDFViewController * pdfViewController;
 
@@ -28,4 +30,8 @@ PDFViewController *pdfViewController;
 - (void) showDocumentWithName:(NSString *)fileName;
 
 
+@end
+
+@protocol MyLibraryViewControllerDelegate
+- (void)myLibraryViewControllerDidFinish:(MyLibraryViewController *)controller;
 @end

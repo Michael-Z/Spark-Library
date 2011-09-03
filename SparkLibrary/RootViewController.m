@@ -151,8 +151,7 @@ int currentRow;
 -(IBAction)myLibraryPage:(id)sender{
     UIViewController *viewController;
 
-			viewController = [[[MyLibraryViewController alloc] init] autorelease];
-
+			 viewController = [[MyLibraryViewController alloc] init] ;
         NSObject<EPGLTransitionViewDelegate> *transition;
     	transition = [[[Transition alloc] init] autorelease];
     
@@ -300,7 +299,7 @@ int currentRow;
     
     
     
-    UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoDark];
+ /*   UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoDark];
     button.frame = CGRectMake(20,50,30,30);
    // [button setImage:[UIImage imageNamed:@"Reader-Email.png"] forState:UIControlStateNormal];
 
@@ -308,7 +307,7 @@ int currentRow;
     [button addTarget:self action:@selector(description:) forControlEvents:UIControlEventTouchUpInside];
     button.backgroundColor = [UIColor clearColor];
     [cell addSubview: button];
-    
+    */
     return cell;
 }
 
@@ -353,12 +352,18 @@ int currentRow;
 }
 */
 
--(void)description:(id)sender{
+-(IBAction)description:(id)sender{
     UIButton *button = (UIButton*) sender;
     NSLog(@"%@",[[categories objectAtIndex:button.tag]objectForKey:@"description"]);
     CGSize viewSize = self.view.bounds.size;
     DescriptionViewController *descView = [[DescriptionViewController alloc] initWithNibName:@"DescriptionViewController" bundle:nil];
-        
+    CGRect viewFrame = descView.view.frame;
+    CGRect frame = [[UIScreen mainScreen] bounds];
+    viewFrame.size.height=frame.size.height;
+    viewFrame.size.width=frame.size.width;
+    
+    descView.view.frame =viewFrame;
+    
     descView.view.center = CGPointMake(viewSize.width/2.0f , viewSize.height /2.0f);
     [self.view addSubview:[descView view]]; 
     descView.descTextView.text = [[categories objectAtIndex:button.tag]objectForKey:@"description"];
