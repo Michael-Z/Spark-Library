@@ -25,7 +25,10 @@
 @property (nonatomic, retain) NSArray *categories;
 @property (nonatomic,retain) PDFViewController * pdfViewController;
 @property (nonatomic,retain) ReaderController * readerController;
+
 -(void)getList;
 -(void)checkAndCreatePList;
 -(IBAction)myLibraryPage:(id)sender;
+- (void)startIconDownload:(NSString *)url forIndexPath:(NSIndexPath *)indexPath;
+- (void)appImageDidLoad:(NSIndexPath *)indexPath;
 @end

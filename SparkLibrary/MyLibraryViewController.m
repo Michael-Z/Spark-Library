@@ -43,6 +43,7 @@ NSMutableDictionary* plistDict;
 
 - (void)viewDidLoad
 {
+    self.navigationController.navigationBarHidden = FALSE;
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 920.0, 44.0)];
     //here for v, width= navBar width and height=navBar height
     
@@ -59,21 +60,12 @@ NSMutableDictionary* plistDict;
     
     
     //navigationbar items
-    UIButton * rightButtonItem = [[UIButton buttonWithType:UIButtonTypeInfoLight] retain];
-	rightButtonItem.frame = CGRectMake(0.0, 0.0, 84.0, 30.0);
-	rightButtonItem.backgroundColor = [UIColor clearColor];
-    [rightButtonItem setImage: [UIImage imageNamed:@"libraryButton.png"] forState:UIControlStateNormal];
-	[rightButtonItem addTarget:self action:@selector(infoButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-	UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightButtonItem];
-	self.navigationItem.rightBarButtonItem = rightButton;
-	[rightButtonItem release];
-	[rightButton release];
-    
-    
+ 
+     
     UIButton * leftButtonItem = [[UIButton buttonWithType:UIButtonTypeInfoLight] retain];
 	leftButtonItem.frame = CGRectMake(0.0, 0.0, 52.5, 30.0);
 	leftButtonItem.backgroundColor = [UIColor clearColor];
-    [leftButtonItem setImage: [UIImage imageNamed:@"aboutUsButton.png"] forState:UIControlStateNormal];
+    [leftButtonItem setImage: [UIImage imageNamed:@"backBarButton.png"] forState:UIControlStateNormal];
 	[leftButtonItem addTarget:self action:@selector(infoButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:leftButtonItem];
 	self.navigationItem.leftBarButtonItem = leftButton;

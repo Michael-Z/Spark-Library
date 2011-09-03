@@ -12,6 +12,7 @@
 #import "Transition.h"
 #import "MyLibraryViewController.h"
 #import "ZipArchive.h"
+#import "DescriptionViewController.h"
 
 @implementation RootViewController
 @synthesize categories;
@@ -221,6 +222,8 @@ int currentRow;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL success;
     int row = indexPath.row;
     NSInteger sectionRows = [tableView numberOfRowsInSection:[indexPath section]];
     CellViewController *cell = ((CellViewController *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier]);
@@ -280,15 +283,31 @@ int currentRow;
     cell.nameLabel.text = [[categories objectAtIndex:row]objectForKey:@"name"];
     cell.priceLabel.text =[[categories objectAtIndex:row]objectForKey:@"price"]; 
     cell.noOfPages.text =[[categories objectAtIndex:row]objectForKey:@"noOfPages"];     
+    
+    NSString* filePath = [documentDir stringByAppendingPathComponent:[[categories objectAtIndex:row]objectForKey:@"imageName"]];
+    
+    success = [fileManager fileExistsAtPath:filePath];
+    if(!success){
     NSURL* pListURL = [NSURL URLWithString: [NSString stringWithFormat:@"http://php.thedarkdimension.com/sparkLib/%@",[[categories objectAtIndex:row]objectForKey:@"imageName"]]];
     NSData* pListData = [NSData dataWithContentsOfURL: pListURL];
-    NSString* filePath = [documentDir stringByAppendingPathComponent:[[categories objectAtIndex:row]objectForKey:@"imageName"]];
     [pListData writeToFile: filePath atomically: NO];
-
+    }
     NSString *imagePath = [documentDir stringByAppendingPathComponent:[[categories objectAtIndex:row]objectForKey:@"imageName"]];
     NSLog(@"%@",imagePath);
     cell.bookCover.image = [UIImage imageWithContentsOfFile:imagePath];
     // Configure the cell.
+    
+    
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoDark];
+    button.frame = CGRectMake(20,50,30,30);
+   // [button setImage:[UIImage imageNamed:@"Reader-Email.png"] forState:UIControlStateNormal];
+
+    button.tag = row;
+    [button addTarget:self action:@selector(description:) forControlEvents:UIControlEventTouchUpInside];
+    button.backgroundColor = [UIColor clearColor];
+    [cell addSubview: button];
+    
     return cell;
 }
 
@@ -333,6 +352,17 @@ int currentRow;
 }
 */
 
+-(void)description:(id)sender{
+    UIButton *button = (UIButton*) sender;
+    NSLog(@"%@",[[categories objectAtIndex:button.tag]objectForKey:@"description"]);
+    CGSize viewSize = self.view.bounds.size;
+    DescriptionViewController *descView = [[DescriptionViewController alloc] initWithNibName:@"DescriptionViewController" bundle:nil];
+        
+    descView.view.center = CGPointMake(viewSize.width/2.0f , viewSize.height /2.0f);
+    [self.view addSubview:[descView view]]; 
+    descView.descTextView.text = [[categories objectAtIndex:button.tag]objectForKey:@"description"];
+    
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int row = indexPath.row;
@@ -477,18 +507,22 @@ int currentRow;
     
     [self checkAndCreatePList];
     plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
-    NSMutableArray * myBooks = [[NSMutableArray alloc]init];        
-    myBooks = [plistDict valueForKey:@"myBooks"];
+    
+    NSMutableArray *myBooks = [plistDict valueForKey:@"myBooks"];
+    if (!myBooks) {
+        myBooks = [[NSMutableArray alloc]init];
+    }
     [myBooks addObject:[categories objectAtIndex:currentRow]];
     [plistDict setValue:myBooks forKey:@"myBooks"];
     [plistDict writeToFile:pListPath atomically: YES];
-    
+    [myBooks release];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 	[HUD hide:YES];
 	[connection release];
-}
+
+ }
 
 
 @end

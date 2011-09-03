@@ -24,6 +24,7 @@
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar printButton:(UIBarButtonItem *)button;
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar emailButton:(UIBarButtonItem *)button;
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar fontButton:(UIBarButtonItem *)button;
+- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar bookmarkButton:(UIBarButtonItem *)button;
 
 @end
 

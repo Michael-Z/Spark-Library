@@ -10,6 +10,8 @@
 
 @implementation DescriptionViewController
 
+@synthesize descTextView;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,6 +48,11 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view removeFromSuperview];
 }
 
 @end

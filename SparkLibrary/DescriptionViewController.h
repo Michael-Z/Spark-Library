@@ -9,5 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface DescriptionViewController : UIViewController
-
+{
+    IBOutlet UITextView * descTextView;
+}
+@property (nonatomic,retain) UITextView * descTextView;
 @end

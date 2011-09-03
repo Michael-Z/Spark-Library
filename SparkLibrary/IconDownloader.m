@@ -126,12 +126,12 @@
 		UIGraphicsBeginImageContext(itemSize);
 		CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
 		[image drawInRect:imageRect];
-		self.appRecord.appIcon = UIGraphicsGetImageFromCurrentImageContext();
+		self.appRecord.bookIcon = UIGraphicsGetImageFromCurrentImageContext();
 		UIGraphicsEndImageContext();
     }
     else
     {
-        self.appRecord.appIcon = image;
+        self.appRecord.bookIcon = image;
     }
     
     self.activeDownload = nil;

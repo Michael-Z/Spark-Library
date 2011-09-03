@@ -57,7 +57,7 @@
 
 @interface IconDownloader : NSObject
 {
-    AppRecord *appRecord;
+        AppRecord *appRecord;
     NSIndexPath *indexPathInTableView;
     id <IconDownloaderDelegate> delegate;
     

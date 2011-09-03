@@ -96,7 +96,12 @@
         
         
         //end big font
+      //bookmark icon
+        UIBarButtonItem *bookmarkButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"bookmark.png"]
+                                                                          style:UIBarButtonItemStyleBordered target:self action:@selector(bookmarkTapped:)];
         
+        [toolbarItems addObject:bookmarkButton]; [bookmarkButton release]; buttonCount++; titleWidth -= PRINT_BUTTON_WIDTH;
+        //end of bookmark icon
         
         
         
@@ -204,6 +209,16 @@
 #endif
     
 	[delegate tappedInToolbar:self fontButton:button];
+}
+
+
+- (void)bookmarkTapped:(UIBarButtonItem *)button
+{
+#ifdef DEBUGX
+	NSLog(@"%s", __FUNCTION__);
+#endif
+    
+	[delegate tappedInToolbar:self bookmarkButton:button];
 }
 
 

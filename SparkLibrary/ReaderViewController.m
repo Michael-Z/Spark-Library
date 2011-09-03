@@ -17,6 +17,7 @@
 #import "ReaderScrollView.h"
 #import "FontView.h"
 @implementation ReaderViewController
+NSMutableDictionary* plistDict;
 
 #pragma mark Constants
 
@@ -757,6 +758,39 @@
     FontView *fontView = [[FontView alloc] initWithNibName:@"FontView" bundle:nil];
     fontView.view.center = CGPointMake(viewSize.width/2.0f , viewSize.height /2.0f);
     [self.view addSubview:[fontView view]]; 
+}
+
+- (void)tappedInToolbar:(ReaderMainToolbar *)toolbar bookmarkButton:(UIBarButtonItem *)button
+{
+    [self checkAndCreatePList];
+    plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
+    
+    NSMutableArray *myBooks = [plistDict valueForKey:@"myBooks"];
+    if (!myBooks) {
+        myBooks = [[NSMutableArray alloc]init];
+    }
+ //   [myBooks addObject:[categories objectAtIndex:currentRow]];
+    [plistDict setValue:myBooks forKey:@"myBooks"];
+    [plistDict writeToFile:pListPath atomically: YES];
+    [myBooks release];
+
+}
+
+-(void)checkAndCreatePList{
+	BOOL success;
+	NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentDir = [documentPaths objectAtIndex:0];
+ 	pListPath = [ documentDir stringByAppendingPathComponent:@"sparkLib.plist"];
+  	NSFileManager *fileManager = [NSFileManager defaultManager];
+	success = [fileManager fileExistsAtPath:pListPath];
+	
+	if(success) return;
+	
+	NSString *pListPathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sparkLib.plist"];
+	
+	[fileManager copyItemAtPath:pListPathFromApp toPath:pListPath error:nil];
+	
+	[fileManager release];
 }
 ////////
 

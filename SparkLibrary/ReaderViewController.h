@@ -56,8 +56,9 @@
 	NSDate *lastHideTime;
 
 	BOOL isVisible;
+    NSString *pListPath;
 }
-
+-(void)checkAndCreatePList;
 @property (nonatomic, assign, readwrite) id <ReaderViewControllerDelegate> delegate;
 
 - (id)initWithReaderDocument:(ReaderDocument *)object;
