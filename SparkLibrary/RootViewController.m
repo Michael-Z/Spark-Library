@@ -157,7 +157,7 @@ int currentRow;
     
     
     EPGLTransitionView *glview = [[[EPGLTransitionView alloc] 
-                                   initWithView:self.view
+                                   initWithView:self.navigationController.view
                                    delegate:transition] autorelease];
     
  
@@ -171,7 +171,7 @@ int currentRow;
     
     [glview startTransition];
     
-    
+
 
     	[self.navigationController pushViewController:viewController animated:YES];
 }
