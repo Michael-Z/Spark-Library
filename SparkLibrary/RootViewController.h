@@ -29,6 +29,8 @@
 -(void)getList;
 -(void)checkAndCreatePList;
 -(IBAction)myLibraryPage:(id)sender;
+-(IBAction)aboutUsPage:(id)sender;
 -(IBAction)description:(id)sender;
- 
+-(void)removeImage;
+
 @end

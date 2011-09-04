@@ -7,12 +7,14 @@
 //
 
 #import "RootViewController.h"
-
+#import "SplashViewController.h"
 #import "CellViewController.h"
 #import "Transition.h"
 #import "MyLibraryViewController.h"
 #import "ZipArchive.h"
 #import "DescriptionViewController.h"
+#import "AboutUsViewController.h"
+
 
 @implementation RootViewController
 @synthesize categories;
@@ -26,8 +28,23 @@ NSString * secondFileName ;
 float expectedContentLength;
 int currentRow;
 
+
+
+-(void)removeImage{
+    [[self parentViewController] dismissModalViewControllerAnimated:YES];    
+}
+
 - (void)viewDidLoad
 {
+    SplashViewController *splash = [[SplashViewController alloc]
+                                    initWithNibName:@"SplashViewController" bundle:[NSBundle mainBundle]];
+    
+ 	[self.navigationController presentModalViewController:splash animated:NO ];
+    
+    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(removeImage) userInfo:nil repeats:NO];
+    
+    [splash release]; 
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent]; 
      UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 920.0, 44.0)];
     //here for v, width= navBar width and height=navBar height
@@ -153,6 +170,35 @@ int currentRow;
 
     	[self.navigationController pushViewController:viewController animated:YES];
 }
+
+-(IBAction)aboutUsPage:(id)sender{
+    UIViewController *viewController;
+    
+    viewController = [[AboutUsViewController alloc] init] ;
+    NSObject<EPGLTransitionViewDelegate> *transition;
+    transition = [[[Transition alloc] init] autorelease];
+    
+    
+    EPGLTransitionView *glview = [[[EPGLTransitionView alloc] 
+                                   initWithView:self.navigationController.view
+                                   delegate:transition] autorelease];
+    
+    
+    [glview prepareTextureTo:viewController.view];
+    // If you are using an "IN" animation for the "next" view set appropriate 
+    // clear color (ie no alpha) 
+    [glview setClearColorRed:0.0
+                       green:0.0
+                        blue:0.0
+                       alpha:1.0];
+    
+    [glview startTransition];
+    
+    
+    
+    [self.navigationController pushViewController:viewController animated:YES];
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     
@@ -177,7 +223,7 @@ int currentRow;
 	leftButtonItem.frame = CGRectMake(0.0, 0.0, 52.5, 30.0);
 	leftButtonItem.backgroundColor = [UIColor clearColor];
     [leftButtonItem setImage: [UIImage imageNamed:@"aboutUsButton.png"] forState:UIControlStateNormal];
-	[leftButtonItem addTarget:self action:@selector(infoButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	[leftButtonItem addTarget:self action:@selector(aboutUsPage:) forControlEvents:UIControlEventTouchUpInside];
 	UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:leftButtonItem];
 	self.navigationItem.leftBarButtonItem = leftButton;
 	[leftButtonItem release];
@@ -208,6 +254,9 @@ int currentRow;
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if([self.categories count] == 0 ){
+        return 8;
+    }
     return 1;
 }
 
@@ -229,6 +278,10 @@ int currentRow;
     int row = indexPath.row;
     NSInteger sectionRows = [tableView numberOfRowsInSection:[indexPath section]];
     CellViewController *cell = ((CellViewController *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier]);
+    
+    UIColor *emptyColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"middleRow.png"]];
+    tableView.backgroundColor = emptyColor;
+    
     if (cell == nil) {
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"CellViewController" owner:self options:nil];
         

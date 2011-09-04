@@ -7,9 +7,10 @@
 //
 
 #import "MyLibraryViewController.h"
-
+#import "RootViewController.h"
 #import "CellMyLibraryViewController.h"
 #import "MyLibraryViewController.h"
+#import "Transition.h"
 
 @implementation MyLibraryViewController
 
@@ -183,6 +184,30 @@ NSMutableDictionary* plistDict;
 }
 
 -(void) goBackToRootViewController {
+    UIViewController *viewController;
+    
+    viewController = [[[RootViewController alloc] init] autorelease] ;
+
+    NSObject<EPGLTransitionViewDelegate> *transition;
+    transition = [[[Transition alloc] init] autorelease];
+    
+    
+    EPGLTransitionView *glview = [[[EPGLTransitionView alloc] 
+                                   initWithView:self.navigationController.view
+                                   delegate:transition] autorelease];
+    
+    
+    [glview prepareTextureTo:viewController.view];
+    // If you are using an "IN" animation for the "next" view set appropriate 
+    // clear color (ie no alpha) 
+    [glview setClearColorRed:0.0
+                       green:0.0
+                        blue:0.0
+                       alpha:1.0];
+    
+    [glview startTransition];
+    
+
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -199,7 +224,16 @@ NSMutableDictionary* plistDict;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if([self.categories count] == 0 ){
+        	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        return 8;
+            }else{
+              return 4;
+            }
+        
+    }
     return [self.categories count];
+    
 }
 
 // Customize the appearance of table view cells.
@@ -209,6 +243,10 @@ NSMutableDictionary* plistDict;
     int row = indexPath.row;
     NSInteger sectionRows = [tableView numberOfRowsInSection:[indexPath section]];
     CellMyLibraryViewController *cell = ((CellMyLibraryViewController *)[self.tableView dequeueReusableCellWithIdentifier:CellIdentifier]);
+    
+    UIColor *emptyColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"middleRow.png"]];
+    tableView.backgroundColor = emptyColor;
+
     if (cell == nil) {
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"CellMyLibraryViewController" owner:self options:nil];
         
@@ -262,7 +300,9 @@ NSMutableDictionary* plistDict;
     //    cell.textLabel.text = [[categories objectAtIndex:row]objectForKey:@"name"];
     cell.nameLabel.text = [[categories objectAtIndex:row]objectForKey:@"name"];
      cell.noOfPages.text =[[categories objectAtIndex:row]objectForKey:@"noOfPages"];     
-    
+    if([self.categories count] == 0 ){
+        cell.pagesText.hidden = TRUE;
+    }
     
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentDir = [documentPaths objectAtIndex:0];
@@ -271,6 +311,7 @@ NSMutableDictionary* plistDict;
     NSString *imagePath = [documentDir stringByAppendingPathComponent:[[categories objectAtIndex:row]objectForKey:@"imageName"]];
     NSLog(@"%@",imagePath);
     cell.bookCover.image = [UIImage imageWithContentsOfFile:imagePath];
+  
     // Configure the cell.
     return cell;
 }

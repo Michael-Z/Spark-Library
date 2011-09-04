@@ -9,7 +9,7 @@
 #import "CellViewController.h"
 
 @implementation CellViewController
-@synthesize nameLabel,priceLabel,noOfPages,bookCover;
+@synthesize nameLabel,priceLabel,noOfPages,bookCover,pagesText;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
