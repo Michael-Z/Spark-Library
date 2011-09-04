@@ -42,14 +42,14 @@ NSMutableDictionary* plistDict;
 
 - (void)viewDidLoad
 {
-    self.navigationController.navigationBarHidden = FALSE;
+/*    self.navigationController.navigationBarHidden = FALSE;
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 920.0, 44.0)];
     //here for v, width= navBar width and height=navBar height
     
     [view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"navBarTop.png"]]];
     [self.navigationController.navigationBar addSubview:view];
     [view release];
-     
+*/     
     [self checkAndCreatePList];
     
     plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
@@ -61,15 +61,6 @@ NSMutableDictionary* plistDict;
     //navigationbar items
  
      
-    UIButton * leftButtonItem = [[UIButton buttonWithType:UIButtonTypeInfoLight] retain];
-	leftButtonItem.frame = CGRectMake(0.0, 0.0, 52.5, 30.0);
-	leftButtonItem.backgroundColor = [UIColor clearColor];
-    [leftButtonItem setImage: [UIImage imageNamed:@"backBarButton.png"] forState:UIControlStateNormal];
-	[leftButtonItem addTarget:self action:@selector(infoButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-	UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:leftButtonItem];
-	self.navigationItem.leftBarButtonItem = leftButton;
-	[leftButtonItem release];
-	[leftButton release];
     
     
     [super viewDidLoad];
@@ -91,6 +82,16 @@ NSMutableDictionary* plistDict;
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    UIButton * leftButtonItem = [[UIButton buttonWithType:UIButtonTypeInfoLight] retain];
+	leftButtonItem.frame = CGRectMake(0.0, 0.0, 52.5, 30.0);
+	leftButtonItem.backgroundColor = [UIColor clearColor];
+    [leftButtonItem setImage: [UIImage imageNamed:@"backBarButton.png"] forState:UIControlStateNormal];
+	[leftButtonItem addTarget:self action:@selector(goBackToRootViewController) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:leftButtonItem];
+	self.navigationItem.leftBarButtonItem = leftButton;
+	[leftButtonItem release];
+	[leftButton release];
+
     [super viewDidAppear:animated];
 }
 
@@ -181,7 +182,9 @@ NSMutableDictionary* plistDict;
 	[fileManager release];
 }
 
-
+-(void) goBackToRootViewController {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 

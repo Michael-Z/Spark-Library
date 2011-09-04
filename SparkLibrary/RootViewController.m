@@ -45,28 +45,6 @@ int currentRow;
     
 
     
-    //navigationbar items
-    UIButton * rightButtonItem = [[UIButton buttonWithType:UIButtonTypeInfoLight] retain];
-	rightButtonItem.frame = CGRectMake(0.0, 0.0, 84.0, 30.0);
-	rightButtonItem.backgroundColor = [UIColor clearColor];
-    [rightButtonItem setImage: [UIImage imageNamed:@"libraryButton.png"] forState:UIControlStateNormal];
-	[rightButtonItem addTarget:self action:@selector(myLibraryPage:) forControlEvents:UIControlEventTouchUpInside];
-	UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightButtonItem];
-	self.navigationItem.rightBarButtonItem = rightButton;
-	[rightButtonItem release];
-	[rightButton release];
-
-
-    UIButton * leftButtonItem = [[UIButton buttonWithType:UIButtonTypeInfoLight] retain];
-	leftButtonItem.frame = CGRectMake(0.0, 0.0, 52.5, 30.0);
-	leftButtonItem.backgroundColor = [UIColor clearColor];
-    [leftButtonItem setImage: [UIImage imageNamed:@"aboutUsButton.png"] forState:UIControlStateNormal];
-	[leftButtonItem addTarget:self action:@selector(infoButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-	UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:leftButtonItem];
-	self.navigationItem.leftBarButtonItem = leftButton;
-	[leftButtonItem release];
-	[leftButton release];
-
     
     [super viewDidLoad];
 }
@@ -177,11 +155,35 @@ int currentRow;
 }
 - (void)viewWillAppear:(BOOL)animated
 {
+    
     [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    //navigationbar items
+    UIButton * rightButtonItem = [[UIButton buttonWithType:UIButtonTypeInfoLight] retain];
+	rightButtonItem.frame = CGRectMake(0.0, 0.0, 84.0, 30.0);
+	rightButtonItem.backgroundColor = [UIColor clearColor];
+    [rightButtonItem setImage: [UIImage imageNamed:@"libraryButton.png"] forState:UIControlStateNormal];
+	[rightButtonItem addTarget:self action:@selector(myLibraryPage:) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem *rightButton = [[UIBarButtonItem alloc] initWithCustomView:rightButtonItem];
+	self.navigationItem.rightBarButtonItem = rightButton;
+	[rightButtonItem release];
+	[rightButton release];
+    
+    
+    UIButton * leftButtonItem = [[UIButton buttonWithType:UIButtonTypeInfoLight] retain];
+	leftButtonItem.frame = CGRectMake(0.0, 0.0, 52.5, 30.0);
+	leftButtonItem.backgroundColor = [UIColor clearColor];
+    [leftButtonItem setImage: [UIImage imageNamed:@"aboutUsButton.png"] forState:UIControlStateNormal];
+	[leftButtonItem addTarget:self action:@selector(infoButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem *leftButton = [[UIBarButtonItem alloc] initWithCustomView:leftButtonItem];
+	self.navigationItem.leftBarButtonItem = leftButton;
+	[leftButtonItem release];
+	[leftButton release];
+    
+
     [super viewDidAppear:animated];
 }
 
