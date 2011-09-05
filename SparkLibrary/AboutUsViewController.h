@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MFMailComposeViewController.h> 
+#import <MessageUI/MessageUI.h>
 
-@interface AboutUsViewController : UIViewController
+
+@interface AboutUsViewController : UIViewController<MFMailComposeViewControllerDelegate>
 {
     IBOutlet UITextView * aboutusTextView;
 }
 
 @property(nonatomic,retain) UITextView * aboutusTextView;
-
+-(IBAction)sendMail:(id)sender;
+-(void)importProductsTable;
 @end

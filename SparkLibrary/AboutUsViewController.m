@@ -9,8 +9,8 @@
 #import "AboutUsViewController.h"
 #import "Transition.h"
 #import "RootViewController.h"
-
-
+#import "TheDarkDimension.h"
+#import "OurProducts.h"
 @implementation AboutUsViewController
 
 @synthesize aboutusTextView;
@@ -18,6 +18,7 @@
 
 
 -(void)viewDidAppear:(BOOL)animated{
+    [self importProductsTable];
     UIButton * leftButtonItem = [[UIButton buttonWithType:UIButtonTypeInfoLight] retain];
 	leftButtonItem.frame = CGRectMake(0.0, 0.0, 52.5, 30.0);
 	leftButtonItem.backgroundColor = [UIColor clearColor];
@@ -99,5 +100,67 @@
 
 
 
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+	switch (result) {
+		case MessageComposeResultCancelled:
+		 
+			break;
+		case MessageComposeResultFailed:
+		 
+ 			break;
+		case MessageComposeResultSent:
+             
+			break;
+		default:
+			break;
+	}
+	
+	[self dismissModalViewControllerAnimated:YES];
+}
 
+
+
+-(IBAction)sendMail:(id)sender{
+	MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+	controller.mailComposeDelegate = self;
+	[controller setSubject:@"مقترحات لمكتبة سبارك"];
+	[self presentModalViewController:controller animated:YES];
+	[controller release];
+	
+}
+- (void)mailComposeController:(MFMailComposeViewController*)controller  
+          didFinishWithResult:(MFMailComposeResult)result 
+                        error:(NSError*)error;
+{
+	if (result == MFMailComposeResultSent) {
+
+		NSLog(@"It's away!");
+		
+	}
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)importProductsTable{
+    //import table from web for previous apps
+    NSString* docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    NSURL* pListURL = [NSURL URLWithString: @"http://www.thedarkdimension.com/apps/table"];
+    NSData* pListData = [NSData dataWithContentsOfURL: pListURL];
+    NSString* filePath = [docsDir stringByAppendingPathComponent:@"productlist.plist"];
+    [pListData writeToFile: filePath atomically: NO];
+}
+-(IBAction)darkDimensionWebSiteLunching:(id)sender{
+    UIViewController *viewController;
+    
+    viewController = [[TheDarkDimension alloc] init] ;
+    [self.navigationController presentModalViewController:viewController animated:YES];
+}
+
+
+-(IBAction)ourProduct:(id)sender{
+    UIViewController *viewController;
+    
+    viewController = [[OurProducts alloc] init] ;
+    [self.navigationController presentModalViewController:viewController animated:YES];
+}
 @end
