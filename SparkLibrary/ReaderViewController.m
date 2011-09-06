@@ -16,8 +16,11 @@
 #import "ReaderViewController.h"
 #import "ReaderScrollView.h"
 #import "FontView.h"
+#import "MyLibraryViewController.h"
+
 @implementation ReaderViewController
 @synthesize bookMarkDone;
+
 NSMutableDictionary* plistDict;
 
 #pragma mark Constants
@@ -736,6 +739,8 @@ NSMutableDictionary* plistDict;
 {
     CGSize viewSize = self.view.bounds.size;
     FontView *fontView = [[FontView alloc] initWithNibName:@"FontView" bundle:nil];
+    fontView.myLibraryViewController = (MyLibraryViewController *) delegate;
+    fontView.readerController = self;
     fontView.view.center = CGPointMake(viewSize.width/2.0f , viewSize.height /2.0f);
     [self.view addSubview:[fontView view]]; 
 }

@@ -9,14 +9,24 @@
 #import "FontView.h"
 #import "ReaderController.h"
 #import "ReaderMainToolbar.h"
+#import "ReaderViewController.h"
+
 @implementation FontView
 
 
-
+@synthesize myLibraryViewController, readerController;
 
 
 -(IBAction)getPDF1:(id)sender
 {
+    [self checkAndCreatePList];
+    NSMutableDictionary* plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
+    
+    NSString * fileName =  [[plistDict valueForKey:@"fileName"] stringByAppendingString:@"_2"];
+    
+    NSLog(@"%@",fileName);
+    
+    [myLibraryViewController dismissReaderViewController:readerController andShowDocumentWithName:@"dark.matter"];
 
 }
 
@@ -30,15 +40,8 @@
  
     NSLog(@"%@",fileName);
     
-     ReaderController *readerController =  [[[ReaderController alloc] init] autorelease];;
-    readerController.fileName = fileName;
-    //[readerController handleSingleTap:nil];
-   // FontView *fontView = [[FontView alloc] initWithNibName:@"FontView" bundle:nil];
- //    [fontView.view removeFromSuperview];
-    ReaderMainToolbar * rmToolbar = [[[ReaderMainToolbar alloc ] init ]autorelease];
-    [rmToolbar doneButtonTapped:nil];
- [[readerController parentViewController] dismissModalViewControllerAnimated:YES];    
- }
+    [myLibraryViewController dismissReaderViewController:readerController andShowDocumentWithName:@"dark.matter_2"];
+}
 
  
 

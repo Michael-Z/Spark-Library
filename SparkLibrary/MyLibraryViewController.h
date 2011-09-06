@@ -25,9 +25,10 @@ PDFViewController *pdfViewController;
 @property (nonatomic, retain) NSArray *categories;
 @property (nonatomic,retain) PDFViewController * pdfViewController;
 
--(void)getList;
--(void)checkAndCreatePList;
+- (void)getList;
+- (void)checkAndCreatePList;
 - (void) showDocumentWithName:(NSString *)fileName;
+- (void) dismissReaderViewController:(ReaderViewController *)viewController andShowDocumentWithName:(NSString *)fileName;
 
 
 @end

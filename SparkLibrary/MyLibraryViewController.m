@@ -377,6 +377,13 @@ NSMutableDictionary* plistDict;
 	}
 }
 
+- (void) dismissReaderViewController:(ReaderViewController *)viewController andShowDocumentWithName:(NSString *)fileName {
+    [self performSelector:@selector(dismissReaderViewController:) withObject:viewController];
+    [self performSelector:@selector(showDocumentWithName:) withObject:fileName afterDelay:0.5];
+    [self dismissReaderViewController:viewController];
+    [self showDocumentWithName:fileName];
+}
+
 #pragma mark ReaderViewControllerDelegate methods
 
 - (void)dismissReaderViewController:(ReaderViewController *)viewController

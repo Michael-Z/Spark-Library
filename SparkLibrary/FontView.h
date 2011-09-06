@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyLibraryViewController.h"
 
 /*@protocol ReaderMainToolbarDelegate <NSObject>
 
@@ -16,11 +17,21 @@
  
 @end
 */
+@class ReaderViewController;
+
 @interface FontView : UIViewController
 {
     NSString *pListPath;
+    MyLibraryViewController *myLibraryViewController;
+    ReaderViewController *readerController;
 }
+
+@property(nonatomic, assign) MyLibraryViewController *myLibraryViewController;
+@property(nonatomic, assign) ReaderViewController *readerController;
+
+-(IBAction)getPDF1:(id)sender;
 -(IBAction)getPDF2:(id)sender;
 -(void)checkAndCreatePList;
+
 @end
 
