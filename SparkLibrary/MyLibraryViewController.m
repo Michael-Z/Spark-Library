@@ -368,7 +368,7 @@ NSMutableDictionary* plistDict;
         
 		readerViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 		readerViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-        
+        readerViewController.myLibraryViewController = self;
 		[self presentModalViewController:readerViewController animated:YES];
         
 #endif // DEMO_VIEW_CONTROLLER_PUSH

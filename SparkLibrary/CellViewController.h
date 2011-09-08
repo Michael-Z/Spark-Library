@@ -15,7 +15,9 @@
     IBOutlet UILabel *noOfPages;
     IBOutlet UIImageView *bookCover;
     IBOutlet UIImageView *pagesText;
+    IBOutlet UIButton * descButton;
 }
+@property (nonatomic,retain) UIButton * descButton;
 @property (nonatomic,retain) UILabel * nameLabel;
 @property (nonatomic,retain) UILabel * priceLabel;
 @property (nonatomic,retain) UILabel *noOfPages;

@@ -7,7 +7,6 @@
 //
 
 #import "RootViewController.h"
-#import "SplashViewController.h"
 #import "CellViewController.h"
 #import "Transition.h"
 #import "MyLibraryViewController.h"
@@ -29,21 +28,8 @@ float expectedContentLength;
 int currentRow;
 
 
-
--(void)removeImage{
-    [[self parentViewController] dismissModalViewControllerAnimated:YES];    
-}
-
 - (void)viewDidLoad
 {
-    SplashViewController *splash = [[SplashViewController alloc]
-                                    initWithNibName:@"SplashViewController" bundle:[NSBundle mainBundle]];
-    
- 	[self.navigationController presentModalViewController:splash animated:NO ];
-    
-    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(removeImage) userInfo:nil repeats:NO];
-    
-    [splash release]; 
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent]; 
      UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 920.0, 44.0)];
@@ -351,18 +337,8 @@ int currentRow;
     NSLog(@"%@",imagePath);
     cell.bookCover.image = [UIImage imageWithContentsOfFile:imagePath];
     // Configure the cell.
-    
-    
-    
- /*   UIButton *button = [UIButton buttonWithType:UIButtonTypeInfoDark];
-    button.frame = CGRectMake(20,50,30,30);
-   // [button setImage:[UIImage imageNamed:@"Reader-Email.png"] forState:UIControlStateNormal];
-
-    button.tag = row;
-    [button addTarget:self action:@selector(description:) forControlEvents:UIControlEventTouchUpInside];
-    button.backgroundColor = [UIColor clearColor];
-    [cell addSubview: button];
-    */
+ 
+    cell.descButton.tag = row;
     return cell;
 }
 

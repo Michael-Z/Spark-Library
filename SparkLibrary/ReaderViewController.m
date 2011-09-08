@@ -13,15 +13,14 @@
 //
 
 #import "ReaderConstants.h"
-#import "ReaderViewController.h"
 #import "ReaderScrollView.h"
-#import "FontView.h"
 #import "MyLibraryViewController.h"
 
 @implementation ReaderViewController
 @synthesize bookMarkDone;
 
 NSMutableDictionary* plistDict;
+
 
 #pragma mark Constants
 
@@ -34,6 +33,7 @@ NSMutableDictionary* plistDict;
 #pragma mark Properties
 
 @synthesize delegate;
+@synthesize myLibraryViewController;
 
 #pragma mark Support methods
 
@@ -215,6 +215,12 @@ NSMutableDictionary* plistDict;
     NSString * documentName;
 
     documentName = [plistDict objectForKey:[NSString stringWithFormat:@"%@",document.fileName]];
+   
+    NSMutableDictionary* plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
+    NSString * currentFilename = [document.fileName stringByReplacingOccurrencesOfString:@".pdf" withString:@""];
+    [plistDict setValue: [NSString stringWithFormat:@"%@",currentFilename]  forKey:@"fileName"];
+    [plistDict writeToFile:pListPath atomically: YES];
+    
     
     if(documentName !=nil){
         NSString * savedPage = [plistDict objectForKey:[NSString stringWithFormat:@"%@",document.fileName]];
@@ -737,12 +743,18 @@ NSMutableDictionary* plistDict;
 /////////////////
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar fontButton:(UIBarButtonItem *)button
 {
-    CGSize viewSize = self.view.bounds.size;
-    FontView *fontView = [[FontView alloc] initWithNibName:@"FontView" bundle:nil];
-    fontView.myLibraryViewController = (MyLibraryViewController *) delegate;
-    fontView.readerController = self;
-    fontView.view.center = CGPointMake(viewSize.width/2.0f , viewSize.height /2.0f);
-    [self.view addSubview:[fontView view]]; 
+    [self checkAndCreatePList];
+    
+    NSMutableDictionary* plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
+    NSString * fileName = @"";
+    NSString * existFileName = [plistDict valueForKey:@"fileName"];
+    if([existFileName rangeOfString:@"_2"].location == NSNotFound){
+        fileName =  [[plistDict valueForKey:@"fileName"] stringByAppendingString:@"_2"];
+    }else{
+         fileName =  [[plistDict valueForKey:@"fileName"] stringByReplacingOccurrencesOfString:@"_2" withString:@""];
+    }
+    
+    [myLibraryViewController dismissReaderViewController:self andShowDocumentWithName:fileName];
 }
 
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar bookmarkButton:(UIBarButtonItem *)button
@@ -750,7 +762,6 @@ NSMutableDictionary* plistDict;
     [self checkAndCreatePList];
     plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
     
- //   [myBooks addObject:[categories objectAtIndex:currentRow]];
     [plistDict setValue:document.pageNumber forKey:[NSString stringWithFormat:@"%@",document.fileName]];
     [plistDict writeToFile:pListPath atomically: YES];
     bookMarkDone = [UIButton buttonWithType:UIButtonTypeCustom];
