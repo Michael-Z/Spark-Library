@@ -10,7 +10,7 @@
 
 @implementation CellMyLibraryViewController
 
-@synthesize nameLabel,noOfPages,bookCover,pagesText;
+@synthesize nameLabel,noOfPages,bookCover,pagesText,authorName;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

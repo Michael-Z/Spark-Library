@@ -20,10 +20,7 @@
 
 CGPDFDocumentRef CGPDFDocumentCreateX(CFURLRef theURL, NSString *password)
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	CGPDFDocumentRef thePDFDocRef = NULL;
 
 	if (theURL != NULL) // Check for non-NULL CFURLRef
@@ -48,9 +45,7 @@ CGPDFDocumentRef CGPDFDocumentCreateX(CFURLRef theURL, NSString *password)
 
 						if (CGPDFDocumentUnlockWithPassword(thePDFDocRef, text) == FALSE) // Log failure
 						{
-							#ifdef DEBUG
-								NSLog(@"CGPDFDocumentCreateX: Unable to unlock [%@] with [%@]", theURL, password);
-							#endif
+							
 						}
 					}
 				}
@@ -64,9 +59,7 @@ CGPDFDocumentRef CGPDFDocumentCreateX(CFURLRef theURL, NSString *password)
 	}
 	else // Log an error diagnostic
 	{
-		#ifdef DEBUG
-			NSLog(@"CGPDFDocumentCreateX: theURL == NULL");
-		#endif
+		 
 	}
 
 	return thePDFDocRef;
@@ -78,9 +71,7 @@ CGPDFDocumentRef CGPDFDocumentCreateX(CFURLRef theURL, NSString *password)
 
 BOOL CGPDFDocumentNeedsPassword(CFURLRef theURL, NSString *password)
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+ 
 
 	BOOL needPassword = NO; // Default flag
 
@@ -119,9 +110,7 @@ BOOL CGPDFDocumentNeedsPassword(CFURLRef theURL, NSString *password)
 	}
 	else // Log an error diagnostic
 	{
-		#ifdef DEBUG
-			NSLog(@"CGPDFDocumentNeedsPassword: theURL == NULL");
-		#endif
+		 
 	}
 
 	return needPassword;

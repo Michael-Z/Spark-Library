@@ -17,10 +17,10 @@
 
 @implementation RootViewController
 @synthesize categories;
-@synthesize pdfViewController;
 @synthesize readerController;
 NSMutableDictionary* plistDict;
 NSMutableData * downloadedFile;
+NSMutableArray *myBooks;
 int downloadCount =0;
 NSString * fileName ; 
 NSString * secondFileName ;
@@ -46,16 +46,15 @@ int currentRow;
     
     self.categories = [plistDict objectForKey:@"Categories"];
     
-
-    
-    
-    [super viewDidLoad];
+    myBooks = [plistDict valueForKey:@"myBooks"];
+    [categories removeObjectsInArray:myBooks];
+      [super viewDidLoad];
 }
 
 -(void)getList{
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentDir = [documentPaths objectAtIndex:0];
-    NSURL* pListURL = [NSURL URLWithString: [NSString stringWithFormat:@"http://php.thedarkdimension.com/sparkLib/books.csv"]];
+    NSURL* pListURL = [NSURL URLWithString: [NSString stringWithFormat:@"http://php.spark-books.com/sparkLib/books.csv"]];
     NSData* pListData = [NSData dataWithContentsOfURL: pListURL];
     NSString* downloadedFilePath = [documentDir stringByAppendingPathComponent:@"books.csv"];
     [pListData writeToFile: downloadedFilePath atomically: NO];
@@ -187,7 +186,7 @@ int currentRow;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    
+     
     [super viewWillAppear:animated];
 }
 
@@ -215,7 +214,7 @@ int currentRow;
 	[leftButtonItem release];
 	[leftButton release];
     
-
+      [categories removeObjectsInArray:myBooks];
     [super viewDidAppear:animated];
 }
 
@@ -240,9 +239,7 @@ int currentRow;
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if([self.categories count] == 0 ){
-        return 8;
-    }
+    
     return 1;
 }
 
@@ -252,12 +249,16 @@ int currentRow;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if([self.categories count] == 0 ){
+        return 8;
+    }
     return [self.categories count];
 }
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+   
     static NSString *CellIdentifier = @"Cell";
     NSFileManager *fileManager = [NSFileManager defaultManager];
     BOOL success;
@@ -268,7 +269,7 @@ int currentRow;
     UIColor *emptyColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"middleRow.png"]];
     tableView.backgroundColor = emptyColor;
     
-    if (cell == nil) {
+    if (cell == nil ) {
         NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:@"CellViewController" owner:self options:nil];
         
         for (id currentObject in topLevelObjects){
@@ -319,26 +320,39 @@ int currentRow;
 
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentDir = [documentPaths objectAtIndex:0];
+    if ([categories count]) {
     
-//    cell.textLabel.text = [[categories objectAtIndex:row]objectForKey:@"name"];
+    
+
     cell.nameLabel.text = [[categories objectAtIndex:row]objectForKey:@"name"];
     cell.priceLabel.text =[[categories objectAtIndex:row]objectForKey:@"price"]; 
     cell.noOfPages.text =[[categories objectAtIndex:row]objectForKey:@"noOfPages"];     
-    
+    cell.authorName.text=[[categories objectAtIndex:row]objectForKey:@"author"];     
     NSString* filePath = [documentDir stringByAppendingPathComponent:[[categories objectAtIndex:row]objectForKey:@"imageName"]];
     
     success = [fileManager fileExistsAtPath:filePath];
     if(!success){
-    NSURL* pListURL = [NSURL URLWithString: [NSString stringWithFormat:@"http://php.thedarkdimension.com/sparkLib/%@",[[categories objectAtIndex:row]objectForKey:@"imageName"]]];
+    NSURL* pListURL = [NSURL URLWithString: [NSString stringWithFormat:@"http://php.spark-books.com/sparkLib/%@",[[categories objectAtIndex:row]objectForKey:@"imageName"]]];
     NSData* pListData = [NSData dataWithContentsOfURL: pListURL];
     [pListData writeToFile: filePath atomically: NO];
     }
     NSString *imagePath = [documentDir stringByAppendingPathComponent:[[categories objectAtIndex:row]objectForKey:@"imageName"]];
-    NSLog(@"%@",imagePath);
+     
     cell.bookCover.image = [UIImage imageWithContentsOfFile:imagePath];
     // Configure the cell.
  
     cell.descButton.tag = row;
+    cell.buyButton.tag = row;
+    tableView.allowsSelection = NO;
+
+    }
+    if([self.categories count] == 0 ){
+        cell.pagesText.hidden = TRUE;
+        cell.nameLabel.hidden = TRUE;
+        cell.noOfPages.hidden = TRUE;
+        cell.authorName.hidden = TRUE;
+        cell.userInteractionEnabled=FALSE;
+    }
     return cell;
 }
 
@@ -385,7 +399,7 @@ int currentRow;
 
 -(IBAction)description:(id)sender{
     UIButton *button = (UIButton*) sender;
-    NSLog(@"%@",[[categories objectAtIndex:button.tag]objectForKey:@"description"]);
+    int row=button.tag;
     CGSize viewSize = self.view.bounds.size;
     DescriptionViewController *descView = [[DescriptionViewController alloc] initWithNibName:@"DescriptionViewController" bundle:nil];
     CGRect viewFrame = descView.view.frame;
@@ -397,55 +411,26 @@ int currentRow;
     
     descView.view.center = CGPointMake(viewSize.width/2.0f , viewSize.height /2.0f);
     [self.view addSubview:[descView view]]; 
-    descView.descTextView.text = [[categories objectAtIndex:button.tag]objectForKey:@"description"];
+    descView.descTextView.text = [[categories objectAtIndex:row]objectForKey:@"description"];
     
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    int row = indexPath.row;
- 
+
+-(IBAction)buyBook:(id)sender{
+
+    UIButton *button = (UIButton*) sender;
+    int row = button.tag;
     fileName = [[categories objectAtIndex:row]objectForKey:@"fileName"]; 
     secondFileName = [NSString stringWithFormat:@"%@_2",fileName];
     
-     NSString * urlString = [NSString stringWithFormat:@"http://php.thedarkdimension.com/sparkLib/%@.zip",fileName];
-
-    NSLog(@"%@",urlString);
-        
-        NSURLRequest *request1 = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0 ];
-
- 
-        [[NSURLConnection alloc] initWithRequest:request1 delegate:self] ;
-        HUD = [[MBProgressHUD showHUDAddedTo:self.view animated:YES] retain];
-        currentRow = row;
+    NSString * urlString = [NSString stringWithFormat:@"http://php.spark-books.com/sparkLib/%@.zip",fileName];
+    
+    NSURLRequest *request1 = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0 ];
     
     
-    /*
-    readerController = [[[ReaderController alloc] init] autorelease];
- //   pdfViewController = [[[PDFViewController alloc] init] autorelease]; 
-    NSObject<EPGLTransitionViewDelegate> *transition;
-    transition = [[[Transition alloc] init] autorelease];
+    [[NSURLConnection alloc] initWithRequest:request1 delegate:self] ;
+    HUD = [[MBProgressHUD showHUDAddedTo:self.view animated:YES] retain];
+    currentRow = row;
     
-    
-    EPGLTransitionView *glview = [[[EPGLTransitionView alloc] 
-                                   initWithView:self.view
-                                   delegate:transition] autorelease];
-    
-    
-    [glview prepareTextureTo:readerController.view];
-    // If you are using an "IN" animation for the "next" view set appropriate 
-    // clear color (ie no alpha) 
-    [glview setClearColorRed:0.0
-                       green:0.0
-                        blue:0.0
-                       alpha:1.0];
-    
-    [glview startTransition];
-
-    readerController.fileName=[[categories objectAtIndex:row]objectForKey:@"fileName"]; 
-    [self.navigationController presentModalViewController: readerController animated:YES];
-     */
-   
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -492,7 +477,6 @@ int currentRow;
     float value = soundFileContentLength / expectedContentLength;
     HUD.progress = value;
     int valuePercent = value/1*100;
-    NSLog(@"%d",valuePercent);
     HUD.labelText = [NSString stringWithFormat:@"%d %% Please Wait",valuePercent];
     [downloadedFile appendData:data];
 }
@@ -506,20 +490,10 @@ int currentRow;
     
  
         filePath = [docsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.zip",fileName]];
-  
-    
-        NSLog(@"%@",filePath);
+
         [downloadedFile writeToFile:filePath atomically:YES];
     
-    
- //   progressBar.hidden= TRUE;
- //   percentage.hidden=TRUE;
- //   percentageSign.hidden=TRUE;
- //   waitLabel.hidden = TRUE;
-    
-    // receivedData is declared as a method instance elsewhere
-    NSLog(@"finish loading");
-   // [FlurryAPI logEvent:@"finish downloading"];	
+     
     HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]] autorelease];
     HUD.mode = MBProgressHUDModeCustomView;
 	[HUD hide:YES afterDelay:2];
@@ -545,7 +519,7 @@ int currentRow;
     [self checkAndCreatePList];
     plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
     
-    NSMutableArray *myBooks = [plistDict valueForKey:@"myBooks"];
+    myBooks = [plistDict valueForKey:@"myBooks"];
     if (!myBooks) {
         myBooks = [[NSMutableArray alloc]init];
     }
@@ -553,6 +527,37 @@ int currentRow;
     [plistDict setValue:myBooks forKey:@"myBooks"];
     [plistDict writeToFile:pListPath atomically: YES];
     [myBooks release];
+
+    //go to book
+    MyLibraryViewController * mylibraryVC = [[MyLibraryViewController alloc] init];
+    NSObject<EPGLTransitionViewDelegate> *transition;
+    transition = [[[Transition alloc] init] autorelease];
+    
+    
+    EPGLTransitionView *glview = [[[EPGLTransitionView alloc] 
+                                   initWithView:self.navigationController.view
+                                   delegate:transition] autorelease];
+    
+    
+    [glview prepareTextureTo:mylibraryVC.view];
+    // If you are using an "IN" animation for the "next" view set appropriate 
+    // clear color (ie no alpha) 
+    [glview setClearColorRed:0.0
+                       green:0.0
+                        blue:0.0
+                       alpha:1.0];
+    
+    [glview startTransition];
+    
+    
+    
+    [self.navigationController pushViewController:mylibraryVC animated:YES];
+    
+    NSString *fileName = [[categories objectAtIndex:currentRow]objectForKey:@"fileName"];
+    NSLog(@"%@",fileName);
+    [mylibraryVC showDocumentWithName:fileName];
+    [categories removeObjectAtIndex:currentRow];
+    
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {

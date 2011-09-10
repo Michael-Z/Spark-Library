@@ -37,19 +37,12 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
-	return [self initWithFrame:frame title:nil];
+ 	return [self initWithFrame:frame title:nil];
 }
 
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	if ((self = [super initWithFrame:frame]))
 	{
 		self.translucent = YES;
@@ -122,7 +115,7 @@
 		theTitleLabel.adjustsFontSizeToFitWidth = YES;
 		theTitleLabel.minimumFontSize = 14.0f;
 
-		[self addSubview:theTitleLabel];
+	//	[self addSubview:theTitleLabel];
 	}
 
 	return self;
@@ -130,10 +123,7 @@
 
 - (void)dealloc
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	[theTitleLabel release], theTitleLabel = nil;
 
 	[super dealloc];
@@ -141,19 +131,13 @@
 
 - (void)setToolbarTitle:(NSString *)title
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	theTitleLabel.text = title;
 }
 
 - (void)hideToolbar
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	if (self.hidden == NO)
 	{
 		[UIView animateWithDuration:0.25 delay:0.0
@@ -172,10 +156,7 @@
 
 - (void)showToolbar
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	if (self.hidden == YES)
 	{
 		[UIView animateWithDuration:0.25 delay:0.0
@@ -194,48 +175,34 @@
 
 - (void)doneButtonTapped:(UIBarButtonItem *)button
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	[delegate tappedInToolbar:self doneButton:button];
 }
 
 
 - (void)fontButtonTapped:(UIBarButtonItem *)button
-{
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-    
+{ 
 	[delegate tappedInToolbar:self fontButton:button];
 }
 
 
 - (void)bookmarkTapped:(UIBarButtonItem *)button
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-    
+ 
 	[delegate tappedInToolbar:self bookmarkButton:button];
 }
 
 
 - (void)printButtonTapped:(UIBarButtonItem *)button
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
 
 	[delegate tappedInToolbar:self printButton:button];
 }
 
 - (void)emailButtonTapped:(UIBarButtonItem *)button
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
 
 	[delegate tappedInToolbar:self emailButton:button];
 }

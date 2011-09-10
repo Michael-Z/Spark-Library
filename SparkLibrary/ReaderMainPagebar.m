@@ -34,19 +34,12 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	return [self initWithFrame:frame document:nil];
 }
 
 - (id)initWithFrame:(CGRect)frame document:(ReaderDocument *)object
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
 	assert(object != nil); // Validate
 
 	if ((self = [super initWithFrame:frame]))
@@ -121,10 +114,7 @@
 
 - (void)dealloc
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	[thePageSlider release], thePageSlider = nil;
 
 	[pageNumberLabel release], pageNumberLabel = nil;
@@ -138,10 +128,7 @@
 
 - (void)updatePageNumberText:(NSInteger)pageNumber
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	NSInteger pageCount = [document.pageCount integerValue];
 
 	NSString *format = NSLocalizedString(@"%d of %d", @"format");
@@ -153,10 +140,7 @@
 
 - (void)updatePageNumberDisplay
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	NSInteger page = [document.pageNumber integerValue];
 
 	[self updatePageNumberText:page]; // Update text
@@ -166,11 +150,7 @@
 
 - (void)hidePagebar
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
-	if (self.hidden == NO)
+ 	if (self.hidden == NO)
 	{
 		[UIView animateWithDuration:0.25 delay:0.0
 			options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction
@@ -188,10 +168,7 @@
 
 - (void)showPagebar
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	if (self.hidden == YES)
 	{
 		[UIView animateWithDuration:0.25 delay:0.0
@@ -210,11 +187,7 @@
 
 - (void)pageSliderTouchDown:(UISlider *)slider
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
-	NSInteger pageNumber = slider.value; // Get page slider value
+ 	NSInteger pageNumber = slider.value; // Get page slider value
 
 	if (pageNumber != [document.pageNumber integerValue]) // Only if different
 	{
@@ -226,10 +199,7 @@
 
 - (void)pageSliderValueChanged:(UISlider *)slider
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	NSInteger pageNumber = slider.value; // Get page slider value
 
 	if (pageNumber != lastPageTrack) // Only if the page has changed
@@ -242,10 +212,7 @@
 
 - (void)pageSliderTouchUp:(UISlider *)slider
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	NSInteger pageNumber = slider.value; // Get page slider value
 
 	if (pageNumber != lastPageTrack) // Only if the page has changed

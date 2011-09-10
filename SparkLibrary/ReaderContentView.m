@@ -61,10 +61,7 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 
 - (id)initWithFrame:(CGRect)frame fileURL:(NSURL *)fileURL page:(NSUInteger)page password:(NSString *)phrase
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	if ((self = [super initWithFrame:frame]))
 	{
 		self.autoresizesSubviews = YES;
@@ -132,9 +129,6 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 
 - (void)dealloc
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	[theScrollView removeObserver:self forKeyPath:@"frame"];
 
@@ -149,9 +143,6 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	if ((object == theScrollView) && [keyPath isEqualToString:@"frame"])
 	{
@@ -182,9 +173,6 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 
 - (void)layoutSubviews
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	CGRect viewFrame = theContainerView.frame;
 	CGSize boundsSize = theScrollView.bounds.size;
@@ -205,18 +193,12 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 
 - (id)singleTap:(UITapGestureRecognizer *)recognizer
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	return [theContentView singleTap:recognizer];
 }
 
 - (void)zoomIncrement
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	CGFloat zoomScale = theScrollView.zoomScale;
 
@@ -238,9 +220,6 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 
 - (void)zoomDecrement
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	CGFloat zoomScale = theScrollView.zoomScale;
 
@@ -262,9 +241,6 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 
 - (void)zoomReset
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	if (theScrollView.zoomScale > theScrollView.minimumZoomScale)
 	{
@@ -276,9 +252,6 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 
 - (void)scrollViewTouchesBegan:(UIScrollView *)scrollView touches:(NSSet *)touches
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	[delegate scrollViewTouchesBegan:scrollView touches:touches];
 }

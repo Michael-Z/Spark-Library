@@ -29,9 +29,6 @@
 
 + (CFTimeInterval)fadeDuration
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	return 0.0; // No fading wanted
 }
@@ -40,9 +37,6 @@
 
 - (id)init
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	if ((self = [super init]))
 	{
@@ -72,9 +66,6 @@
 
 - (void)dealloc
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	[super dealloc];
 }

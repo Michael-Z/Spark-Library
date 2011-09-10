@@ -26,9 +26,6 @@
 
 + (Class)layerClass
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	return [ReaderContentTile class];
 }
@@ -37,11 +34,7 @@
 
 - (void)highlightPageLinks
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
-	if (_links.count > 0) // Add highlight views over all links
+ 	if (_links.count > 0) // Add highlight views over all links
 	{
 		UIColor *hilite = [UIColor colorWithRed:0.0f green:0.0f blue:1.0f alpha:0.15f];
 
@@ -63,9 +56,7 @@
 
 - (ReaderDocumentLink *)linkFromAnnotation:(CGPDFDictionaryRef)annotationDictionary
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
 
 	ReaderDocumentLink *documentLink = nil; // Document link object
 
@@ -126,9 +117,7 @@
 
 - (void)buildAnnotationLinksList
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+ 
 
 	_links = [NSMutableArray new]; // Links list array
 
@@ -166,9 +155,7 @@
 
 - (CGPDFArrayRef)findDestinationWithName:(const char *)destinationName inDestsTree:(CGPDFDictionaryRef)node
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+ 
 
 	CGPDFArrayRef destinationArray = NULL;
 
@@ -248,11 +235,7 @@
 }
 
 - (id)findLinkTarget:(CGPDFDictionaryRef)annotationDictionary
-{
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+{ 
 	id linkTarget = nil; // Link target object
 
 	CGPDFArrayRef destArray = NULL; CGPDFStringRef destName = NULL;
@@ -358,9 +341,6 @@
 
 - (id)singleTap:(UITapGestureRecognizer *)recognizer
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	id result = nil; // Tap result object
 
@@ -384,9 +364,6 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	UIView *view = nil; // View
 
@@ -414,9 +391,6 @@
 
 - (id)initWithURL:(NSURL *)fileURL page:(NSInteger)page password:(NSString *)phrase
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	CGRect viewRect = CGRectZero; // View rect
 
@@ -498,10 +472,7 @@
 
 - (void)dealloc
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	[_links release], _links = nil;
 
 	@synchronized(self) // Block any other threads
@@ -518,23 +489,13 @@
 	[super dealloc];
 }
 
-/*
-- (void)layoutSubviews
-{
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-}
-*/
+ 
 
 #pragma mark CATiledLayer delegate methods
 
 - (void)drawLayer:(CATiledLayer *)layer inContext:(CGContextRef)context
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	CGPDFPageRef drawPDFPageRef = NULL;
 
 	CGPDFDocumentRef drawPDFDocRef = NULL;
@@ -577,10 +538,7 @@
 
 + (id)withRect:(CGRect)linkRect dictionary:(CGPDFDictionaryRef)linkDictionary
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	return [[[ReaderDocumentLink alloc] initWithRect:linkRect dictionary:linkDictionary] autorelease];
 }
 
@@ -588,10 +546,7 @@
 
 - (id)initWithRect:(CGRect)linkRect dictionary:(CGPDFDictionaryRef)linkDictionary
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	if ((self = [super init]))
 	{
 		_dictionary = linkDictionary;
@@ -604,10 +559,7 @@
 
 - (void)dealloc
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	[super dealloc];
 }
 

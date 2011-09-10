@@ -8,13 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A50B64121407C12D007F6122 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A50B64101407C12D007F6122 /* MainWindow-iPad.xib */; };
-		A50B64161407C164007F6122 /* PDFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A50B64151407C164007F6122 /* PDFViewController.m */; };
-		A50B641D1407C175007F6122 /* LeavesCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A50B64181407C175007F6122 /* LeavesCache.m */; };
-		A50B641E1407C175007F6122 /* LeavesView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50B641A1407C175007F6122 /* LeavesView.m */; };
-		A50B641F1407C175007F6122 /* LeavesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A50B641C1407C175007F6122 /* LeavesViewController.m */; };
-		A50B64221407C225007F6122 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = A50B64211407C225007F6122 /* Utilities.m */; };
 		A50B64241407C48C007F6122 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50B64231407C48C007F6122 /* QuartzCore.framework */; };
-		A50B64291407C632007F6122 /* fekhElSunaI.pdf in Resources */ = {isa = PBXBuildFile; fileRef = A50B64281407C632007F6122 /* fekhElSunaI.pdf */; };
 		A50B64351407C80D007F6122 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50B642A1407C80C007F6122 /* AddressBook.framework */; };
 		A50B64361407C80D007F6122 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50B642B1407C80C007F6122 /* AudioToolbox.framework */; };
 		A50B64371407C80D007F6122 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A50B642C1407C80C007F6122 /* AVFoundation.framework */; };
@@ -41,6 +35,8 @@
 		A530701D140A57D4008AB1CC /* topRow.png in Resources */ = {isa = PBXBuildFile; fileRef = A5307017140A57D4008AB1CC /* topRow.png */; };
 		A533D79914196C7D0056CD20 /* descriptionBG.png in Resources */ = {isa = PBXBuildFile; fileRef = A533D79814196C7C0056CD20 /* descriptionBG.png */; };
 		A533D79B141971BD0056CD20 /* descriptionBG2.png in Resources */ = {isa = PBXBuildFile; fileRef = A533D79A141971BD0056CD20 /* descriptionBG2.png */; };
+		A545F847141B5BB000F544AA /* buyButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A545F846141B5BB000F544AA /* buyButton.png */; };
+		A545F849141B6D5500F544AA /* 37x-Checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = A545F848141B6D5500F544AA /* 37x-Checkmark.png */; };
 		A546BD7C1409AC1A0035D7E4 /* Transition.m in Sources */ = {isa = PBXBuildFile; fileRef = A546BD791409AC1A0035D7E4 /* Transition.m */; };
 		A546BD7D1409AC1A0035D7E4 /* EPGLTransitionView.m in Sources */ = {isa = PBXBuildFile; fileRef = A546BD7B1409AC1A0035D7E4 /* EPGLTransitionView.m */; };
 		A546BD7F1409ADCD0035D7E4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A546BD7E1409ADCD0035D7E4 /* OpenGLES.framework */; };
@@ -100,8 +96,6 @@
 		A5A1577514122D73001BD4C5 /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = A5A1577414122D72001BD4C5 /* bookmark.png */; };
 		A5AB7FF014196A3400092B8B /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = A5AB7FEF14196A3400092B8B /* 114.png */; };
 		A5CD7EF81410F9E500747C24 /* backBarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A5CD7EF71410F9E500747C24 /* backBarButton.png */; };
-		A5CD7F021411126900747C24 /* IconDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CD7F011411126900747C24 /* IconDownloader.m */; };
-		A5CD7F051411183200747C24 /* AppRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = A5CD7F041411183100747C24 /* AppRecord.m */; };
 		A5EDC08B13FE7DF900B37A0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5EDC08A13FE7DF900B37A0D /* UIKit.framework */; };
 		A5EDC08D13FE7DF900B37A0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5EDC08C13FE7DF900B37A0D /* Foundation.framework */; };
 		A5EDC08F13FE7DF900B37A0D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5EDC08E13FE7DF900B37A0D /* CoreGraphics.framework */; };
@@ -115,18 +109,7 @@
 
 /* Begin PBXFileReference section */
 		A50B64111407C12D007F6122 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
-		A50B64141407C164007F6122 /* PDFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFViewController.h; sourceTree = "<group>"; };
-		A50B64151407C164007F6122 /* PDFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFViewController.m; sourceTree = "<group>"; };
-		A50B64171407C175007F6122 /* LeavesCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeavesCache.h; sourceTree = "<group>"; };
-		A50B64181407C175007F6122 /* LeavesCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeavesCache.m; sourceTree = "<group>"; };
-		A50B64191407C175007F6122 /* LeavesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeavesView.h; sourceTree = "<group>"; };
-		A50B641A1407C175007F6122 /* LeavesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeavesView.m; sourceTree = "<group>"; };
-		A50B641B1407C175007F6122 /* LeavesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeavesViewController.h; sourceTree = "<group>"; };
-		A50B641C1407C175007F6122 /* LeavesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeavesViewController.m; sourceTree = "<group>"; };
-		A50B64201407C225007F6122 /* Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
-		A50B64211407C225007F6122 /* Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
 		A50B64231407C48C007F6122 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		A50B64281407C632007F6122 /* fekhElSunaI.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = fekhElSunaI.pdf; sourceTree = "<group>"; };
 		A50B642A1407C80C007F6122 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		A50B642B1407C80C007F6122 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		A50B642C1407C80C007F6122 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -154,6 +137,8 @@
 		A5307017140A57D4008AB1CC /* topRow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = topRow.png; sourceTree = "<group>"; };
 		A533D79814196C7C0056CD20 /* descriptionBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = descriptionBG.png; sourceTree = "<group>"; };
 		A533D79A141971BD0056CD20 /* descriptionBG2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = descriptionBG2.png; sourceTree = "<group>"; };
+		A545F846141B5BB000F544AA /* buyButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buyButton.png; sourceTree = "<group>"; };
+		A545F848141B6D5500F544AA /* 37x-Checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "37x-Checkmark.png"; sourceTree = "<group>"; };
 		A546BD781409AC1A0035D7E4 /* Transition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Transition.h; sourceTree = "<group>"; };
 		A546BD791409AC1A0035D7E4 /* Transition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Transition.m; sourceTree = "<group>"; };
 		A546BD7A1409AC1A0035D7E4 /* EPGLTransitionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EPGLTransitionView.h; sourceTree = "<group>"; };
@@ -239,10 +224,6 @@
 		A5A1577414122D72001BD4C5 /* bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark.png; sourceTree = "<group>"; };
 		A5AB7FEF14196A3400092B8B /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 114.png; path = ../114.png; sourceTree = "<group>"; };
 		A5CD7EF71410F9E500747C24 /* backBarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backBarButton.png; sourceTree = "<group>"; };
-		A5CD7F001411126900747C24 /* IconDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconDownloader.h; sourceTree = "<group>"; };
-		A5CD7F011411126900747C24 /* IconDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconDownloader.m; sourceTree = "<group>"; };
-		A5CD7F031411183100747C24 /* AppRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppRecord.h; sourceTree = "<group>"; };
-		A5CD7F041411183100747C24 /* AppRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppRecord.m; sourceTree = "<group>"; };
 		A5EDC08613FE7DF900B37A0D /* SparkLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SparkLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5EDC08A13FE7DF900B37A0D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A5EDC08C13FE7DF900B37A0D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -294,25 +275,13 @@
 			name = iPad;
 			sourceTree = "<group>";
 		};
-		A50B64131407C140007F6122 /* Leaves */ = {
-			isa = PBXGroup;
-			children = (
-				A50B64171407C175007F6122 /* LeavesCache.h */,
-				A50B64181407C175007F6122 /* LeavesCache.m */,
-				A50B64191407C175007F6122 /* LeavesView.h */,
-				A50B641A1407C175007F6122 /* LeavesView.m */,
-				A50B641B1407C175007F6122 /* LeavesViewController.h */,
-				A50B641C1407C175007F6122 /* LeavesViewController.m */,
-			);
-			name = Leaves;
-			sourceTree = "<group>";
-		};
 		A50B64251407C5A6007F6122 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				A5AB7FEF14196A3400092B8B /* 114.png */,
 				A562FD8E141969E7000D3B5A /* 57.png */,
 				A562FD86141968AB000D3B5A /* Default@2x.png */,
+				A545F846141B5BB000F544AA /* buyButton.png */,
 				A562FD8414196873000D3B5A /* Default.png */,
 				A562FD89141969BF000D3B5A /* 114.png */,
 				A5810ECF141253C200A1CBC1 /* bookmarkDone.png */,
@@ -346,6 +315,7 @@
 				A511B9AA1414235B00F5676A /* aboutUsMainImage.png */,
 				A533D79814196C7C0056CD20 /* descriptionBG.png */,
 				A533D79A141971BD0056CD20 /* descriptionBG2.png */,
+				A545F848141B6D5500F544AA /* 37x-Checkmark.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -423,17 +393,6 @@
 			name = "Pdf Reader";
 			sourceTree = "<group>";
 		};
-		A5CD7EFF1411124F00747C24 /* CoverDownloader */ = {
-			isa = PBXGroup;
-			children = (
-				A5CD7F001411126900747C24 /* IconDownloader.h */,
-				A5CD7F011411126900747C24 /* IconDownloader.m */,
-				A5CD7F031411183100747C24 /* AppRecord.h */,
-				A5CD7F041411183100747C24 /* AppRecord.m */,
-			);
-			name = CoverDownloader;
-			sourceTree = "<group>";
-		};
 		A5EDC07B13FE7DF800B37A0D = {
 			isa = PBXGroup;
 			children = (
@@ -477,13 +436,11 @@
 		A5EDC09013FE7DF900B37A0D /* SparkLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				A5CD7EFF1411124F00747C24 /* CoverDownloader */,
 				A55D93AF140E7F4900C1F1B3 /* ProgressHUD */,
 				A55D9398140E633300C1F1B3 /* ZipArchive */,
 				A5637870140AEFEA008F34A1 /* Pdf Reader */,
 				A546BD761409AC080035D7E4 /* FlipTransision */,
 				A50B64251407C5A6007F6122 /* Resources */,
-				A50B64131407C140007F6122 /* Leaves */,
 				A50B640F1407C129007F6122 /* iPad */,
 				A596B6F7141577A800AD606F /* TheDarkDimension.h */,
 				A596B6F8141577A900AD606F /* TheDarkDimension.m */,
@@ -514,8 +471,6 @@
 				A558C18F140978B0008ED2E3 /* CellViewController.xib */,
 				A563788F140AF129008F34A1 /* ReaderController.h */,
 				A5637890140AF129008F34A1 /* ReaderController.m */,
-				A50B64141407C164007F6122 /* PDFViewController.h */,
-				A50B64151407C164007F6122 /* PDFViewController.m */,
 				A5EDC09113FE7DF900B37A0D /* Supporting Files */,
 			);
 			path = SparkLibrary;
@@ -525,13 +480,10 @@
 			isa = PBXGroup;
 			children = (
 				A5637892140AF6D1008F34A1 /* Localizable.strings */,
-				A50B64281407C632007F6122 /* fekhElSunaI.pdf */,
 				A5EDC09213FE7DF900B37A0D /* SparkLibrary-Info.plist */,
 				A5EDC09313FE7DF900B37A0D /* InfoPlist.strings */,
 				A5EDC09613FE7DF900B37A0D /* main.m */,
 				A5EDC09813FE7DF900B37A0D /* SparkLibrary-Prefix.pch */,
-				A50B64201407C225007F6122 /* Utilities.h */,
-				A50B64211407C225007F6122 /* Utilities.m */,
 				A572B16C140BAE96003107F0 /* sparkProperties.plist */,
 				A572B16F140BAECA003107F0 /* sparkLib.plist */,
 				A55D93B7140FAE0600C1F1B3 /* myLibBooks.plist */,
@@ -593,7 +545,6 @@
 				A5EDC09E13FE7DF900B37A0D /* MainWindow.xib in Resources */,
 				A5EDC0A413FE7DF900B37A0D /* RootViewController.xib in Resources */,
 				A50B64121407C12D007F6122 /* MainWindow-iPad.xib in Resources */,
-				A50B64291407C632007F6122 /* fekhElSunaI.pdf in Resources */,
 				A558C190140978B0008ED2E3 /* CellViewController.xib in Resources */,
 				A546BD8F1409C14C0035D7E4 /* table.png in Resources */,
 				A5307018140A57D4008AB1CC /* aboutUsButton.png in Resources */,
@@ -641,6 +592,8 @@
 				A5AB7FF014196A3400092B8B /* 114.png in Resources */,
 				A533D79914196C7D0056CD20 /* descriptionBG.png in Resources */,
 				A533D79B141971BD0056CD20 /* descriptionBG2.png in Resources */,
+				A545F847141B5BB000F544AA /* buyButton.png in Resources */,
+				A545F849141B6D5500F544AA /* 37x-Checkmark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -654,11 +607,6 @@
 				A5EDC09713FE7DF900B37A0D /* main.m in Sources */,
 				A5EDC09B13FE7DF900B37A0D /* SparkLibraryAppDelegate.m in Sources */,
 				A5EDC0A113FE7DF900B37A0D /* RootViewController.m in Sources */,
-				A50B64161407C164007F6122 /* PDFViewController.m in Sources */,
-				A50B641D1407C175007F6122 /* LeavesCache.m in Sources */,
-				A50B641E1407C175007F6122 /* LeavesView.m in Sources */,
-				A50B641F1407C175007F6122 /* LeavesViewController.m in Sources */,
-				A50B64221407C225007F6122 /* Utilities.m in Sources */,
 				A558C19314098846008ED2E3 /* CellViewController.m in Sources */,
 				A546BD7C1409AC1A0035D7E4 /* Transition.m in Sources */,
 				A546BD7D1409AC1A0035D7E4 /* EPGLTransitionView.m in Sources */,
@@ -681,8 +629,6 @@
 				A55D93A8140E633300C1F1B3 /* zip.c in Sources */,
 				A55D93A9140E633300C1F1B3 /* ZipArchive.mm in Sources */,
 				A55D93B2140E7F5C00C1F1B3 /* MBProgressHUD.m in Sources */,
-				A5CD7F021411126900747C24 /* IconDownloader.m in Sources */,
-				A5CD7F051411183200747C24 /* AppRecord.m in Sources */,
 				A5A1577014115153001BD4C5 /* DescriptionViewController.m in Sources */,
 				A511B9A814141F2500F5676A /* AboutUsViewController.m in Sources */,
 				A596B6FA141577A900AD606F /* TheDarkDimension.m in Sources */,

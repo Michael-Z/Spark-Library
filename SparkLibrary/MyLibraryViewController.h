@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CellViewController.h"
-#import "PDFViewController.h"
 #import "ReaderViewController.h"
 
 
@@ -18,12 +17,10 @@
 NSString *pListPath;
 NSArray *categories;
 IBOutlet CellViewController * cellVC;
-PDFViewController *pdfViewController; 
 
 }
  
 @property (nonatomic, retain) NSArray *categories;
-@property (nonatomic,retain) PDFViewController * pdfViewController;
 
 - (void)getList;
 - (void)checkAndCreatePList;

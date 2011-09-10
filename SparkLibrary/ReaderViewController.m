@@ -39,9 +39,7 @@ NSMutableDictionary* plistDict;
 
 - (void)updateScrollViewContentSize
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
     
 	NSInteger count = [document.pageCount integerValue];
     
@@ -56,10 +54,7 @@ NSMutableDictionary* plistDict;
 
 - (void)updateScrollViewContentViews
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-    
+
     
 	[self updateScrollViewContentSize]; // Update the content size
     
@@ -99,10 +94,7 @@ NSMutableDictionary* plistDict;
 
 - (void)showDocumentPage:(NSInteger)page
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-    
+
 	if (page != currentPage) // Only if different
 	{
 		NSInteger minValue; NSInteger maxValue;
@@ -204,10 +196,7 @@ NSMutableDictionary* plistDict;
 
 - (void)showDocument:(id)object
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-    
+
 	[self updateScrollViewContentSize]; // Set content size
     
     [self checkAndCreatePList];
@@ -240,9 +229,7 @@ NSMutableDictionary* plistDict;
 
 - (id)initWithReaderDocument:(ReaderDocument *)object
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
     
 	id reader = nil; // ReaderViewController object
     
@@ -265,22 +252,9 @@ NSMutableDictionary* plistDict;
 	return reader;
 }
 
-/*
- - (void)loadView
- {
- #ifdef DEBUGX
- NSLog(@"%s", __FUNCTION__);
- #endif
  
- // Implement loadView to create a view hierarchy programmatically, without using a nib.
- }
- */
-
 - (void)viewDidLoad
 {
-#ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
-#endif
     
 	[super viewDidLoad];
     
@@ -349,9 +323,7 @@ NSMutableDictionary* plistDict;
 
 - (void)viewWillAppear:(BOOL)animated
 {
-#ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
-#endif
+
     
 	[super viewWillAppear:animated];
     
@@ -368,10 +340,7 @@ NSMutableDictionary* plistDict;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-#ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
-#endif
-    
+ 
 	[super viewDidAppear:animated];
     
 	if (CGSizeEqualToSize(theScrollView.contentSize, CGSizeZero)) // First time
@@ -388,10 +357,7 @@ NSMutableDictionary* plistDict;
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-#ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
-#endif
-    
+
 	[super viewWillDisappear:animated];
     
 	lastAppearSize = self.view.bounds.size; // Track view size
@@ -405,19 +371,13 @@ NSMutableDictionary* plistDict;
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-#ifdef DEBUGX
-	NSLog(@"%s %@", __FUNCTION__, NSStringFromCGRect(self.view.bounds));
-#endif
-    
+
 	[super viewDidDisappear:animated];
 }
 
 - (void)viewDidUnload
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-    
+
 	[mainToolbar release], mainToolbar = nil; [mainPagebar release], mainPagebar = nil;
     
 	[theScrollView release], theScrollView = nil; [contentViews release], contentViews = nil;
@@ -432,18 +392,13 @@ NSMutableDictionary* plistDict;
    
 - (void)didReceiveMemoryWarning
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-    
+
 	[super didReceiveMemoryWarning];
 }
 
 - (void)dealloc
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
     
 	NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     
@@ -464,10 +419,7 @@ NSMutableDictionary* plistDict;
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-    
+
 	__block NSInteger page = 0;
     
 	CGFloat contentOffsetX = scrollView.contentOffset.x;
@@ -489,10 +441,7 @@ NSMutableDictionary* plistDict;
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-    
+
 	[self showDocumentPage:theScrollView.tag]; // Show page
     
 	theScrollView.tag = 0; // Clear page number tag
@@ -500,10 +449,7 @@ NSMutableDictionary* plistDict;
 
 - (void)scrollViewTouchesBegan:(UIScrollView *)scrollView touches:(NSSet *)touches
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-    
+
 	if ((mainToolbar.hidden == NO) || (mainPagebar.hidden == NO))
 	{
 		if (touches.count == 1) // Single touches only
@@ -527,9 +473,6 @@ NSMutableDictionary* plistDict;
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)recognizer shouldReceiveTouch:(UITouch *)touch
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
         if([self.view.subviews containsObject:bookMarkDone]){
             [bookMarkDone removeFromSuperview];
         }
@@ -542,9 +485,7 @@ NSMutableDictionary* plistDict;
 
 - (void)decrementPageNumber
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
     if([self.view.subviews containsObject:bookMarkDone]){
         [bookMarkDone removeFromSuperview];
     }
@@ -569,9 +510,7 @@ NSMutableDictionary* plistDict;
 
 - (void)incrementPageNumber
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
      if([self.view.subviews containsObject:bookMarkDone]){
         [bookMarkDone removeFromSuperview];
      }
@@ -596,10 +535,7 @@ NSMutableDictionary* plistDict;
 
 - (void)handleSingleTap:(UITapGestureRecognizer *)recognizer
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-    
+
 	if (recognizer.state == UIGestureRecognizerStateRecognized)
 	{
 		CGRect viewRect = recognizer.view.bounds; // View bounds
@@ -670,9 +606,6 @@ NSMutableDictionary* plistDict;
 
 - (void)handleDoubleTap:(UITapGestureRecognizer *)recognizer
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
     
 	if (recognizer.state == UIGestureRecognizerStateRecognized)
 	{
@@ -729,9 +662,6 @@ NSMutableDictionary* plistDict;
 
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar doneButton:(UIBarButtonItem *)button
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
     
 	[document saveReaderDocument]; // Save any ReaderDocument object changes
     
@@ -804,11 +734,7 @@ NSMutableDictionary* plistDict;
 
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar printButton:(UIBarButtonItem *)button
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-    
-#if (READER_ENABLE_PRINT == TRUE) // Option
+ #if (READER_ENABLE_PRINT == TRUE) // Option
     
 	Class printInteractionController = NSClassFromString(@"UIPrintInteractionController");
     
@@ -846,9 +772,7 @@ NSMutableDictionary* plistDict;
 
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar emailButton:(UIBarButtonItem *)button
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
     
 #if (READER_ENABLE_MAIL == TRUE) // Option
     
@@ -898,9 +822,7 @@ NSMutableDictionary* plistDict;
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
     
 #ifdef DEBUG
 	if ((result == MFMailComposeResultFailed) && (error != NULL)) NSLog(@"%@", error);
@@ -913,10 +835,7 @@ NSMutableDictionary* plistDict;
 
 - (void)pagebar:(ReaderMainPagebar *)pagebar gotoPage:(NSInteger)page
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-    
+
 	[self showDocumentPage:page]; // Show the page
 }
 
@@ -924,9 +843,7 @@ NSMutableDictionary* plistDict;
 
 - (void)saveReaderDocument:(NSNotification *)notification
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
     
 	[document saveReaderDocument]; // Save any ReaderDocument object changes
 }

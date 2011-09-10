@@ -32,9 +32,6 @@
 
 + (NSString *)documentsPath
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	NSArray *documentsPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 
@@ -43,9 +40,6 @@
 
 + (NSString *)applicationPath
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	NSArray *documentsPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 
@@ -54,9 +48,6 @@
 
 + (NSString *)relativeFilePath:(NSString *)fullFilePath
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	assert(fullFilePath != nil); // Ensure that the full file path is not nil
 
@@ -71,9 +62,6 @@
 
 + (NSString *)archiveFilePath:(NSString *)filename
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	assert(filename != nil); // Ensure that the archive file name is not nil
 
@@ -86,10 +74,6 @@
 
 + (ReaderDocument *)unarchiveFromFileName:(NSString *)filename
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
 	ReaderDocument *document = nil;
 
 	NSString *archiveFilePath = [ReaderDocument archiveFilePath:filename];
@@ -100,9 +84,7 @@
 	}
 	@catch (NSException *exception) // Exception handling (just in case O_o)
 	{
-		#ifdef DEBUG
-			NSLog(@"%s Caught %@: %@", __FUNCTION__, [exception name], [exception reason]);
-		#endif
+
 	}
 
 	return document;
@@ -110,10 +92,7 @@
 
 + (BOOL)isPDF:(NSString *)filePath
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
+ 
 	BOOL state = NO;
 
 	if (filePath != nil) // Must have a file path
@@ -146,11 +125,7 @@
 
 - (id)initWithFilePath:(NSString *)fullFilePath password:(NSString *)phrase
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
-	id object = nil;
+ 	id object = nil;
 
 	if ([ReaderDocument isPDF:fullFilePath] == YES) // File must exist
 	{
@@ -198,9 +173,7 @@
 
 - (void)dealloc
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
 
 	[_fileURL release], _fileURL = nil;
 
@@ -223,18 +196,14 @@
 
 - (NSString *)fileName
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
 
 	return [_fileName lastPathComponent];
 }
 
 - (NSURL *)fileURL
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
 
 	if (_fileURL == nil) // Create and keep the file URL the first time it is requested
 	{
@@ -248,9 +217,7 @@
 
 - (BOOL)archiveWithFileName:(NSString *)filename
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
 
 	NSString *archiveFilePath = [ReaderDocument archiveFilePath:filename];
 
@@ -259,9 +226,7 @@
 
 - (void)saveReaderDocument
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+
 
 	[self archiveWithFileName:[self fileName]];
 }
@@ -270,11 +235,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
-
-	[encoder encodeObject:_fileName forKey:@"FileName"];
+ 	[encoder encodeObject:_fileName forKey:@"FileName"];
 
 	[encoder encodeObject:_fileDate forKey:@"FileDate"];
 
@@ -289,9 +250,6 @@
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
 
 	if ((self = [super init])) // Initialize superclass
 	{

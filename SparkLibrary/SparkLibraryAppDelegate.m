@@ -13,13 +13,10 @@
 
 @synthesize window = _window;
 @synthesize navigationController = _navigationController;
-@synthesize pdfViewController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UIViewController *rootViewController = [[[PDFViewController alloc] init] autorelease];
-	viewController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
-
-    // Override point for customization after application launch.
+     // Override point for customization after application launch.
     // Add the navigation controller's view to the window and display.
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];

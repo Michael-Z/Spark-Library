@@ -12,9 +12,12 @@
 {
     IBOutlet UILabel *nameLabel;
     IBOutlet UILabel *noOfPages;
+    IBOutlet UILabel *authorName;
     IBOutlet UIImageView *bookCover;
     IBOutlet UIImageView *pagesText;
 }
+
+@property (nonatomic,retain) UILabel *authorName;
 @property (nonatomic,retain) UILabel * nameLabel;
 @property (nonatomic,retain) UILabel *noOfPages;
 @property (nonatomic,retain) UIImageView *bookCover;

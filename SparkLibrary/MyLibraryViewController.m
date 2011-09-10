@@ -15,7 +15,6 @@
 @implementation MyLibraryViewController
 
 @synthesize categories;
-@synthesize pdfViewController;
 
 NSMutableDictionary* plistDict;
 
@@ -295,23 +294,28 @@ NSMutableDictionary* plistDict;
     cell.backgroundView = imageView;
     cell.selectedBackgroundView = selectedImageView;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    if([self.categories count]){
     
     //    cell.textLabel.text = [[categories objectAtIndex:row]objectForKey:@"name"];
     cell.nameLabel.text = [[categories objectAtIndex:row]objectForKey:@"name"];
      cell.noOfPages.text =[[categories objectAtIndex:row]objectForKey:@"noOfPages"];     
-    if([self.categories count] == 0 ){
-        cell.pagesText.hidden = TRUE;
-    }
+
     
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentDir = [documentPaths objectAtIndex:0];
     
     
     NSString *imagePath = [documentDir stringByAppendingPathComponent:[[categories objectAtIndex:row]objectForKey:@"imageName"]];
-    NSLog(@"%@",imagePath);
+    
     cell.bookCover.image = [UIImage imageWithContentsOfFile:imagePath];
-  
+    }
+    if([self.categories count] == 0 ){
+        cell.pagesText.hidden = TRUE;
+        cell.nameLabel.hidden = TRUE;
+        cell.noOfPages.hidden = TRUE;
+        cell.authorName.hidden = TRUE;
+        cell.userInteractionEnabled=FALSE;
+    }
     // Configure the cell.
     return cell;
 }
@@ -327,9 +331,7 @@ NSMutableDictionary* plistDict;
 #define DEMO_VIEW_CONTROLLER_PUSH FALSE
 
 - (void) showDocumentWithName:(NSString *)fileName {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+ 
     
 	ReaderDocument *document = [ReaderDocument unarchiveFromFileName:SAMPLE_DOCUMENT];
     
@@ -340,7 +342,7 @@ NSMutableDictionary* plistDict;
         NSString *path = [documentsDirectoryPath stringByAppendingPathComponent:[[NSString stringWithFormat:@"%@",fileName] stringByAppendingPathExtension:@"pdf"]];
         
         
-        NSLog(@"%@",path);
+        
         [self checkAndCreatePList];
         NSMutableDictionary* plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
         
@@ -388,9 +390,7 @@ NSMutableDictionary* plistDict;
 
 - (void)dismissReaderViewController:(ReaderViewController *)viewController
 {
-#ifdef DEBUGX
-	NSLog(@"%s", __FUNCTION__);
-#endif
+ 
     
 #if (DEMO_VIEW_CONTROLLER_PUSH == TRUE)
     

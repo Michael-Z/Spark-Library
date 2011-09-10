@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "CellViewController.h"
-#import "PDFViewController.h"
 #import "ReaderController.h"
 #import "MBProgressHUD.h"
 
@@ -16,14 +15,12 @@
 {
     MBProgressHUD *HUD;
     NSString *pListPath;
-   	NSArray *categories;
+   	NSMutableArray *categories;
     IBOutlet CellViewController * cellVC;
-    PDFViewController *pdfViewController; 
     ReaderController * readerController;
-
+    
 }
-@property (nonatomic, retain) NSArray *categories;
-@property (nonatomic,retain) PDFViewController * pdfViewController;
+@property (nonatomic, retain) NSMutableArray *categories;
 @property (nonatomic,retain) ReaderController * readerController;
 
 -(void)getList;
@@ -31,6 +28,6 @@
 -(IBAction)myLibraryPage:(id)sender;
 -(IBAction)aboutUsPage:(id)sender;
 -(IBAction)description:(id)sender;
--(void)removeImage;
+
 
 @end
