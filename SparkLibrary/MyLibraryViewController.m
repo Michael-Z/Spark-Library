@@ -218,7 +218,11 @@ NSMutableDictionary* plistDict;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 125;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        return 225;
+    }else{
+        return 125;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -298,9 +302,26 @@ NSMutableDictionary* plistDict;
     
     //    cell.textLabel.text = [[categories objectAtIndex:row]objectForKey:@"name"];
     cell.nameLabel.text = [[categories objectAtIndex:row]objectForKey:@"name"];
-     cell.noOfPages.text =[[categories objectAtIndex:row]objectForKey:@"noOfPages"];     
-
+    cell.noOfPages.text =[[categories objectAtIndex:row]objectForKey:@"noOfPages"];     
+    cell.authorName.text =[[categories objectAtIndex:row]objectForKey:@"author"];     
     
+             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+                 cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];
+
+                 cell.noOfPages.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];
+
+                 cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
+
+             }else{
+                 cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
+                 
+                 cell.noOfPages.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
+                 
+                 cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+
+             }
+        
+
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentDir = [documentPaths objectAtIndex:0];
     

@@ -22,7 +22,7 @@
 }
 @property (nonatomic, retain) NSMutableArray *categories;
 @property (nonatomic,retain) ReaderController * readerController;
-
+-(void)alertMessage;
 -(void)getList;
 -(void)checkAndCreatePList;
 -(IBAction)myLibraryPage:(id)sender;

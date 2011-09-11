@@ -24,7 +24,6 @@
 		A50D3F40140A5EBD002C84EF /* selectedMiddleRow.png in Resources */ = {isa = PBXBuildFile; fileRef = A50D3F3D140A5EBD002C84EF /* selectedMiddleRow.png */; };
 		A50D3F41140A5EBD002C84EF /* selectedTopRow.png in Resources */ = {isa = PBXBuildFile; fileRef = A50D3F3E140A5EBD002C84EF /* selectedTopRow.png */; };
 		A50D3F44140A633B002C84EF /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = A50D3F42140A633B002C84EF /* background.png */; };
-		A50D3F45140A633B002C84EF /* page.png in Resources */ = {isa = PBXBuildFile; fileRef = A50D3F43140A633B002C84EF /* page.png */; };
 		A511B9A814141F2500F5676A /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A511B9A614141F2400F5676A /* AboutUsViewController.m */; };
 		A511B9A914141F2500F5676A /* AboutUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A511B9A714141F2500F5676A /* AboutUsViewController.xib */; };
 		A511B9AB1414235B00F5676A /* aboutUsMainImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A511B9AA1414235B00F5676A /* aboutUsMainImage.png */; };
@@ -95,6 +94,8 @@
 		A5A1577314115BDA001BD4C5 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = A5A1577214115BDA001BD4C5 /* close.png */; };
 		A5A1577514122D73001BD4C5 /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = A5A1577414122D72001BD4C5 /* bookmark.png */; };
 		A5AB7FF014196A3400092B8B /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = A5AB7FEF14196A3400092B8B /* 114.png */; };
+		A5C0CE28141CFB850011DF57 /* pageNoText.png in Resources */ = {isa = PBXBuildFile; fileRef = A5C0CE26141CFB840011DF57 /* pageNoText.png */; };
+		A5C0CE29141CFB850011DF57 /* priceText.png in Resources */ = {isa = PBXBuildFile; fileRef = A5C0CE27141CFB840011DF57 /* priceText.png */; };
 		A5CD7EF81410F9E500747C24 /* backBarButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A5CD7EF71410F9E500747C24 /* backBarButton.png */; };
 		A5EDC08B13FE7DF900B37A0D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5EDC08A13FE7DF900B37A0D /* UIKit.framework */; };
 		A5EDC08D13FE7DF900B37A0D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5EDC08C13FE7DF900B37A0D /* Foundation.framework */; };
@@ -125,7 +126,6 @@
 		A50D3F3D140A5EBD002C84EF /* selectedMiddleRow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedMiddleRow.png; sourceTree = "<group>"; };
 		A50D3F3E140A5EBD002C84EF /* selectedTopRow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = selectedTopRow.png; sourceTree = "<group>"; };
 		A50D3F42140A633B002C84EF /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
-		A50D3F43140A633B002C84EF /* page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page.png; sourceTree = "<group>"; };
 		A511B9A514141F2400F5676A /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
 		A511B9A614141F2400F5676A /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
 		A511B9A714141F2500F5676A /* AboutUsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsViewController.xib; sourceTree = "<group>"; };
@@ -223,6 +223,8 @@
 		A5A1577214115BDA001BD4C5 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
 		A5A1577414122D72001BD4C5 /* bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark.png; sourceTree = "<group>"; };
 		A5AB7FEF14196A3400092B8B /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 114.png; path = ../114.png; sourceTree = "<group>"; };
+		A5C0CE26141CFB840011DF57 /* pageNoText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pageNoText.png; sourceTree = "<group>"; };
+		A5C0CE27141CFB840011DF57 /* priceText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = priceText.png; sourceTree = "<group>"; };
 		A5CD7EF71410F9E500747C24 /* backBarButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backBarButton.png; sourceTree = "<group>"; };
 		A5EDC08613FE7DF900B37A0D /* SparkLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SparkLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5EDC08A13FE7DF900B37A0D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -302,7 +304,6 @@
 				A50D3F3D140A5EBD002C84EF /* selectedMiddleRow.png */,
 				A50D3F3E140A5EBD002C84EF /* selectedTopRow.png */,
 				A50D3F42140A633B002C84EF /* background.png */,
-				A50D3F43140A633B002C84EF /* page.png */,
 				A5637894140AF6DE008F34A1 /* AppIcon-057.png */,
 				A5637895140AF6DE008F34A1 /* AppIcon-072.png */,
 				A5637896140AF6DE008F34A1 /* AppIcon-114.png */,
@@ -316,6 +317,8 @@
 				A533D79814196C7C0056CD20 /* descriptionBG.png */,
 				A533D79A141971BD0056CD20 /* descriptionBG2.png */,
 				A545F848141B6D5500F544AA /* 37x-Checkmark.png */,
+				A5C0CE26141CFB840011DF57 /* pageNoText.png */,
+				A5C0CE27141CFB840011DF57 /* priceText.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -556,7 +559,6 @@
 				A50D3F40140A5EBD002C84EF /* selectedMiddleRow.png in Resources */,
 				A50D3F41140A5EBD002C84EF /* selectedTopRow.png in Resources */,
 				A50D3F44140A633B002C84EF /* background.png in Resources */,
-				A50D3F45140A633B002C84EF /* page.png in Resources */,
 				A5637893140AF6D1008F34A1 /* Localizable.strings in Resources */,
 				A563789C140AF6DE008F34A1 /* AppIcon-057.png in Resources */,
 				A563789D140AF6DE008F34A1 /* AppIcon-072.png in Resources */,
@@ -594,6 +596,8 @@
 				A533D79B141971BD0056CD20 /* descriptionBG2.png in Resources */,
 				A545F847141B5BB000F544AA /* buyButton.png in Resources */,
 				A545F849141B6D5500F544AA /* 37x-Checkmark.png in Resources */,
+				A5C0CE28141CFB850011DF57 /* pageNoText.png in Resources */,
+				A5C0CE29141CFB850011DF57 /* priceText.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

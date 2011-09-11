@@ -26,8 +26,8 @@ NSString * fileName ;
 NSString * secondFileName ;
 float expectedContentLength;
 int currentRow;
-
-
+NSIndexPath * currentIndexPath;
+bool downloading=FALSE;
 - (void)viewDidLoad
 {
     
@@ -129,8 +129,8 @@ int currentRow;
 	[fileManager release];
 }
 -(IBAction)myLibraryPage:(id)sender{
+    if(!downloading){
     UIViewController *viewController;
-
 			 viewController = [[MyLibraryViewController alloc] init] ;
         NSObject<EPGLTransitionViewDelegate> *transition;
     	transition = [[[Transition alloc] init] autorelease];
@@ -154,9 +154,13 @@ int currentRow;
 
 
     	[self.navigationController pushViewController:viewController animated:YES];
+    }else{
+        [self alertMessage]; 
+    }
 }
 
 -(IBAction)aboutUsPage:(id)sender{
+        if(!downloading){
     UIViewController *viewController;
     
     viewController = [[AboutUsViewController alloc] init] ;
@@ -180,8 +184,11 @@ int currentRow;
     [glview startTransition];
     
     
-    
-    [self.navigationController pushViewController:viewController animated:YES];
+
+        [self.navigationController pushViewController:viewController animated:YES];
+    }else{
+        [self alertMessage];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -244,7 +251,11 @@ int currentRow;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 125;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+        return 225;
+    }else{
+        return 125;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -328,6 +339,25 @@ int currentRow;
     cell.priceLabel.text =[[categories objectAtIndex:row]objectForKey:@"price"]; 
     cell.noOfPages.text =[[categories objectAtIndex:row]objectForKey:@"noOfPages"];     
     cell.authorName.text=[[categories objectAtIndex:row]objectForKey:@"author"];     
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+            cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];
+            
+            cell.noOfPages.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];
+            
+            cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
+            cell.dollarSign.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];
+            cell.priceLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];            
+        }else{
+            cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
+            
+            cell.noOfPages.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
+            
+            cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+            cell.dollarSign.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
+            cell.priceLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];            
+
+            
+        }
     NSString* filePath = [documentDir stringByAppendingPathComponent:[[categories objectAtIndex:row]objectForKey:@"imageName"]];
     
     success = [fileManager fileExistsAtPath:filePath];
@@ -351,6 +381,10 @@ int currentRow;
         cell.nameLabel.hidden = TRUE;
         cell.noOfPages.hidden = TRUE;
         cell.authorName.hidden = TRUE;
+        cell.dollarSign.hidden = TRUE;
+        cell.priceText.hidden = TRUE;
+        cell.descButton.hidden=TRUE;
+        cell.buyButton.hidden=TRUE;
         cell.userInteractionEnabled=FALSE;
     }
     return cell;
@@ -416,7 +450,7 @@ int currentRow;
 }
 
 -(IBAction)buyBook:(id)sender{
-
+    if(!downloading){
     UIButton *button = (UIButton*) sender;
     int row = button.tag;
     fileName = [[categories objectAtIndex:row]objectForKey:@"fileName"]; 
@@ -430,9 +464,16 @@ int currentRow;
     [[NSURLConnection alloc] initWithRequest:request1 delegate:self] ;
     HUD = [[MBProgressHUD showHUDAddedTo:self.view animated:YES] retain];
     currentRow = row;
+    }else{
+        [self alertMessage];
+    }
     
 }
-
+-(void)alertMessage{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"تنبيه" message: @"إنتظر حتى ينتهي التحميل من فضلك" delegate: self cancelButtonTitle:@"حسنًا" otherButtonTitles: nil];
+    [alert show];
+    [alert release];
+}
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -469,6 +510,7 @@ int currentRow;
     expectedContentLength = [response expectedContentLength];
     downloadedFile = [[NSMutableData data] retain];
     HUD.mode = MBProgressHUDModeDeterminate;
+    downloading=TRUE;
 }
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     
@@ -477,7 +519,7 @@ int currentRow;
     float value = soundFileContentLength / expectedContentLength;
     HUD.progress = value;
     int valuePercent = value/1*100;
-    HUD.labelText = [NSString stringWithFormat:@"%d %% Please Wait",valuePercent];
+    HUD.labelText = [NSString stringWithFormat:@"%d %% برجاء الإنتظار",valuePercent];
     [downloadedFile appendData:data];
 }
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -494,7 +536,9 @@ int currentRow;
         [downloadedFile writeToFile:filePath atomically:YES];
     
      
-    HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]] autorelease];
+    HUD.customView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]] 
+                      autorelease];
+     HUD.labelText = [NSString stringWithFormat:@"تم"];
     HUD.mode = MBProgressHUDModeCustomView;
 	[HUD hide:YES afterDelay:2];
     // release the connection, and the data object
@@ -514,7 +558,7 @@ int currentRow;
     [connection release];
     
     [downloadedFile release];
-//downloading =FALSE;
+    downloading =FALSE;
     
     [self checkAndCreatePList];
     plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
@@ -557,7 +601,7 @@ int currentRow;
     NSLog(@"%@",fileName);
     [mylibraryVC showDocumentWithName:fileName];
     [categories removeObjectAtIndex:currentRow];
-    
+    [self.tableView reloadData];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
