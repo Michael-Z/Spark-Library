@@ -99,6 +99,12 @@
 		[thePageSlider addTarget:self action:@selector(pageSliderTouchUp:) forControlEvents:UIControlEventTouchUpInside];
 #define degreesToRadians(x) (M_PI * x / 180.0)
         thePageSlider.transform = CGAffineTransformRotate(thePageSlider.transform, degreesToRadians(180));
+        UIImage *stetchLeftTrack = [[UIImage imageNamed:@"max.png"] stretchableImageWithLeftCapWidth:10.0 topCapHeight:0.0];
+ 
+        [thePageSlider setMinimumTrackImage:stetchLeftTrack forState:UIControlStateNormal];
+        thePageSlider.backgroundColor = [UIColor clearColor];
+        [thePageSlider setThumbImage: [UIImage imageNamed:@"book.png"] forState:UIControlStateNormal];
+
 
 		[self addSubview:thePageSlider];
 

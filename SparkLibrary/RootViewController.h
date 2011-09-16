@@ -18,6 +18,7 @@
    	NSMutableArray *categories;
     IBOutlet CellViewController * cellVC;
     ReaderController * readerController;
+    UIBackgroundTaskIdentifier bgTask;
     
 }
 @property (nonatomic, retain) NSMutableArray *categories;

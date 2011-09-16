@@ -451,6 +451,14 @@ bool downloading=FALSE;
 
 -(IBAction)buyBook:(id)sender{
     if(!downloading){
+        
+        UIApplication *app = [UIApplication sharedApplication];
+        
+        bgTask = [app beginBackgroundTaskWithExpirationHandler:^{ 
+            [app endBackgroundTask:bgTask]; 
+            bgTask = UIBackgroundTaskInvalid;
+        }];
+        
     UIButton *button = (UIButton*) sender;
     int row = button.tag;
     fileName = [[categories objectAtIndex:row]objectForKey:@"fileName"]; 
@@ -602,6 +610,15 @@ bool downloading=FALSE;
     [mylibraryVC showDocumentWithName:fileName];
     [categories removeObjectAtIndex:currentRow];
     [self.tableView reloadData];
+    
+    
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    if (bgTask != UIBackgroundTaskInvalid) {
+        [app endBackgroundTask:bgTask]; 
+        bgTask = UIBackgroundTaskInvalid;
+    }
+    
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
