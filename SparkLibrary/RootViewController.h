@@ -10,8 +10,9 @@
 #import "CellViewController.h"
 #import "ReaderController.h"
 #import "MBProgressHUD.h"
+#import <StoreKit/StoreKit.h>
 
-@interface RootViewController : UITableViewController <MBProgressHUDDelegate>
+@interface RootViewController : UITableViewController <MBProgressHUDDelegate,SKRequestDelegate>
 {
     MBProgressHUD *HUD;
     NSString *pListPath;

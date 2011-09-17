@@ -107,12 +107,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "SparkLibrary/RootViewController.m"
-         timestampString = "337640174.92807"
+         timestampString = "337942808.733429"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "488"
-         endingLineNumber = "488"
-         landmarkName = "-didReceiveMemoryWarning"
+         startingLineNumber = "497"
+         endingLineNumber = "497"
+         landmarkName = "-alertMessage"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -205,20 +205,6 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "SparkLibrary/RootViewController.m"
-         timestampString = "337640174.92807"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "463"
-         endingLineNumber = "463"
-         landmarkName = "-buyBook:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "SparkLibrary/RootViewController.m"
          timestampString = "337472681.902628"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
@@ -267,6 +253,20 @@
          startingLineNumber = "192"
          endingLineNumber = "192"
          landmarkName = "-aboutUsPage:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "SparkLibrary/RootViewController.m"
+         timestampString = "337943962.724861"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "453"
+         endingLineNumber = "453"
+         landmarkName = "-buyBook:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

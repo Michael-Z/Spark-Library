@@ -7,7 +7,7 @@
 //
 
 #import "SparkLibraryAppDelegate.h"
-
+#import "MKStoreManager.h"
 
 @implementation SparkLibraryAppDelegate
 
@@ -16,6 +16,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [MKStoreManager sharedManager];
     [[UIApplication sharedApplication]
      registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                          UIRemoteNotificationTypeSound |
@@ -88,7 +89,7 @@
 	// Build URL String for Registration
 	// !!! CHANGE "www.mywebsite.com" TO YOUR WEBSITE. Leave out the http://
 	// !!! SAMPLE: "secure.awesomeapp.com"
-	NSString *host = @"www.mywebsite.com";
+	NSString *host = @"www.aboyousif.net/spark/";
 	
 	// !!! CHANGE "/apns.php?" TO THE PATH TO WHERE apns.php IS INSTALLED 
 	// !!! ( MUST START WITH / AND END WITH ? ). 

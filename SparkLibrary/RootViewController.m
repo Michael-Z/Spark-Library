@@ -13,7 +13,7 @@
 #import "ZipArchive.h"
 #import "DescriptionViewController.h"
 #import "AboutUsViewController.h"
-
+#import "MKStoreManager.h"
 
 @implementation RootViewController
 @synthesize categories;
@@ -451,27 +451,41 @@ bool downloading=FALSE;
 
 -(IBAction)buyBook:(id)sender{
     if(!downloading){
+        UIButton *button = (UIButton*) sender;
+        int row = button.tag;        
         
-        UIApplication *app = [UIApplication sharedApplication];
+        if( ![MKStoreManager isFeaturePurchased:[[categories objectAtIndex:row]objectForKey:@"inAppKey"]]){
+                
+           [[MKStoreManager sharedManager] buyFeature:[[categories objectAtIndex:row]objectForKey:@"inAppKey"]
+                onComplete:^(NSString* purchasedFeature) {
+                    NSLog(@"Purchased: %@", purchasedFeature); 
+                    UIApplication *app = [UIApplication sharedApplication];
+                    
+                    bgTask = [app beginBackgroundTaskWithExpirationHandler:^{ 
+                        [app endBackgroundTask:bgTask]; 
+                        bgTask = UIBackgroundTaskInvalid;
+                    }];
+                    
+                    
+                    fileName = [[categories objectAtIndex:row]objectForKey:@"fileName"]; 
+                    secondFileName = [NSString stringWithFormat:@"%@_2",fileName];
+                    
+                    NSString * urlString = [NSString stringWithFormat:@"http://php.spark-books.com/sparkLib/%@.zip",fileName];
+                    
+                    NSURLRequest *request1 = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0 ];
+                    
+                    
+                    [[NSURLConnection alloc] initWithRequest:request1 delegate:self] ;
+                    HUD = [[MBProgressHUD showHUDAddedTo:self.view animated:YES] retain];
+                    currentRow = row;
+                } 
+                onCancelled:^ {
+                    NSLog(@"User Cancelled Transaction"); 
+                }
+            ];
+        }
         
-        bgTask = [app beginBackgroundTaskWithExpirationHandler:^{ 
-            [app endBackgroundTask:bgTask]; 
-            bgTask = UIBackgroundTaskInvalid;
-        }];
-        
-    UIButton *button = (UIButton*) sender;
-    int row = button.tag;
-    fileName = [[categories objectAtIndex:row]objectForKey:@"fileName"]; 
-    secondFileName = [NSString stringWithFormat:@"%@_2",fileName];
-    
-    NSString * urlString = [NSString stringWithFormat:@"http://php.spark-books.com/sparkLib/%@.zip",fileName];
-    
-    NSURLRequest *request1 = [NSURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0 ];
-    
-    
-    [[NSURLConnection alloc] initWithRequest:request1 delegate:self] ;
-    HUD = [[MBProgressHUD showHUDAddedTo:self.view animated:YES] retain];
-    currentRow = row;
+       
     }else{
         [self alertMessage];
     }
