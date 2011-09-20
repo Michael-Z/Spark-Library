@@ -8,7 +8,9 @@
 
 #import "SparkLibraryAppDelegate.h"
 #import "MKStoreManager.h"
-
+@interface SparkLibraryAppDelegate()
+-(void)getProducts;
+@end
 @implementation SparkLibraryAppDelegate
 
 @synthesize window = _window;
@@ -24,11 +26,18 @@
     
     application.applicationIconBadgeNumber = 0;
 
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+   [notificationCenter addObserver:self selector:@selector(getProducts) name:kProductFetchedNotification object:nil];
+    
+    
      // Override point for customization after application launch.
     // Add the navigation controller's view to the window and display.
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
+}
+-(void)getProducts{
+    NSLog(@"11%@",[[MKStoreManager sharedManager]  pricesDictionary ]);
 }
 
 
@@ -89,7 +98,7 @@
 	// Build URL String for Registration
 	// !!! CHANGE "www.mywebsite.com" TO YOUR WEBSITE. Leave out the http://
 	// !!! SAMPLE: "secure.awesomeapp.com"
-	NSString *host = @"www.aboyousif.net/spark/";
+	NSString *host = @"php.spark-books.com";
 	
 	// !!! CHANGE "/apns.php?" TO THE PATH TO WHERE apns.php IS INSTALLED 
 	// !!! ( MUST START WITH / AND END WITH ? ). 

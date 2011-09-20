@@ -11,6 +11,7 @@
 #import "ReaderController.h"
 #import "MBProgressHUD.h"
 #import <StoreKit/StoreKit.h>
+ 
 
 @interface RootViewController : UITableViewController <MBProgressHUDDelegate,SKRequestDelegate>
 {
@@ -20,10 +21,12 @@
     IBOutlet CellViewController * cellVC;
     ReaderController * readerController;
     UIBackgroundTaskIdentifier bgTask;
-    
+
 }
 @property (nonatomic, retain) NSMutableArray *categories;
 @property (nonatomic,retain) ReaderController * readerController;
+
+
 -(void)alertMessage;
 -(void)getList;
 -(void)checkAndCreatePList;

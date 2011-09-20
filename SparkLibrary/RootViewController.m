@@ -14,10 +14,12 @@
 #import "DescriptionViewController.h"
 #import "AboutUsViewController.h"
 #import "MKStoreManager.h"
-
+ 
 @implementation RootViewController
 @synthesize categories;
 @synthesize readerController;
+
+
 NSMutableDictionary* plistDict;
 NSMutableData * downloadedFile;
 NSMutableArray *myBooks;
@@ -28,6 +30,7 @@ float expectedContentLength;
 int currentRow;
 NSIndexPath * currentIndexPath;
 bool downloading=FALSE;
+
 - (void)viewDidLoad
 {
     
@@ -59,12 +62,16 @@ bool downloading=FALSE;
     NSString* downloadedFilePath = [documentDir stringByAppendingPathComponent:@"books.csv"];
     [pListData writeToFile: downloadedFilePath atomically: NO];
 
+  
+    NSString* filePath = [documentDir stringByAppendingPathComponent:[NSString stringWithFormat:@"books.csv"]];
     
-    
-    NSString* docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSString* filePath = [docsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"books.csv"]];
-
+  	NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL success = [fileManager fileExistsAtPath:filePath];
+    if (success) {
+        
+    }
 	NSString *fileContents = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+        
 	NSMutableArray *rows = [[NSArray alloc] initWithArray:[fileContents componentsSeparatedByString:@"\n"]];
     
         NSMutableArray * AllBooksList = [[NSMutableArray alloc]init];        
@@ -99,10 +106,12 @@ bool downloading=FALSE;
                 [booksList setValue:[NSString stringWithFormat:@"%@", fileName]  forKey:@"fileName"];
                 [booksList setValue:[NSString stringWithFormat:@"%@", noOfPages]  forKey:@"noOfPages"];
             [AllBooksList addObject:booksList];
-  
+NSLog(@"%@",        [[MKStoreManager sharedManager]pricesDictionary ]);
         [plistDict setValue:AllBooksList forKey:@"Categories"];
         
     
+ 
+        
         [plistDict writeToFile:pListPath atomically: YES];
 
         [data release];
@@ -130,6 +139,7 @@ bool downloading=FALSE;
 }
 -(IBAction)myLibraryPage:(id)sender{
     if(!downloading){
+ 
     UIViewController *viewController;
 			 viewController = [[MyLibraryViewController alloc] init] ;
         NSObject<EPGLTransitionViewDelegate> *transition;
@@ -332,8 +342,7 @@ bool downloading=FALSE;
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentDir = [documentPaths objectAtIndex:0];
     if ([categories count]) {
-    
-    
+       
 
     cell.nameLabel.text = [[categories objectAtIndex:row]objectForKey:@"name"];
     cell.priceLabel.text =[[categories objectAtIndex:row]objectForKey:@"price"]; 
@@ -620,7 +629,7 @@ bool downloading=FALSE;
     [self.navigationController pushViewController:mylibraryVC animated:YES];
     
     NSString *fileName = [[categories objectAtIndex:currentRow]objectForKey:@"fileName"];
-    NSLog(@"%@",fileName);
+    
     [mylibraryVC showDocumentWithName:fileName];
     [categories removeObjectAtIndex:currentRow];
     [self.tableView reloadData];
@@ -641,5 +650,7 @@ bool downloading=FALSE;
 
  }
 
+
+ 
 
 @end
