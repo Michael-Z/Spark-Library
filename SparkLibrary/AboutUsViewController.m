@@ -125,6 +125,9 @@
 	MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
 	controller.mailComposeDelegate = self;
 	[controller setSubject:@"مقترحات لمكتبة سبارك"];
+    NSMutableArray * emails = [[NSMutableArray alloc] init];
+    [emails addObject:@"emadhegab@gmail.com,"];
+    [controller setToRecipients:emails];
 	[self presentModalViewController:controller animated:YES];
 	[controller release];
 	

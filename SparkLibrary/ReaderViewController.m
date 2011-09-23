@@ -18,6 +18,7 @@
 
 @implementation ReaderViewController
 @synthesize bookMarkDone;
+bool enlargeFont = FALSE;
 
 NSMutableDictionary* plistDict;
 
@@ -198,25 +199,28 @@ NSMutableDictionary* plistDict;
 {
 
 	[self updateScrollViewContentSize]; // Set content size
-    
+    NSString * currentFilename ;
+    currentFilename = [document.fileName stringByReplacingOccurrencesOfString:@".pdf" withString:@""];
     [self checkAndCreatePList];
+    if(!enlargeFont){
+
     plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
     NSString * documentName;
 
-    documentName = [plistDict objectForKey:[NSString stringWithFormat:@"%@",document.fileName]];
-   
-    NSMutableDictionary* plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
-    NSString * currentFilename = [document.fileName stringByReplacingOccurrencesOfString:@".pdf" withString:@""];
+    documentName = [plistDict objectForKey:@"fileName"];
+    if(documentName!=nil){
+     currentFilename = [documentName stringByReplacingOccurrencesOfString:@".pdf" withString:@""];             
+    } 
+    }
     [plistDict setValue: [NSString stringWithFormat:@"%@",currentFilename]  forKey:@"fileName"];
     [plistDict writeToFile:pListPath atomically: YES];
     
-    
-    if(documentName !=nil){
         NSString * savedPage = [plistDict objectForKey:[NSString stringWithFormat:@"%@",document.fileName]];
-        [self showDocumentPage:[savedPage integerValue]]; // Show        
-    }else{
-        [self showDocumentPage:[document.pageNumber integerValue]]; // Show       
+    if(savedPage ==nil){
+        savedPage=@"1";
     }
+        [self showDocumentPage:[savedPage integerValue]]; // Show        
+    
      
 
     
@@ -674,7 +678,7 @@ NSMutableDictionary* plistDict;
 - (void)tappedInToolbar:(ReaderMainToolbar *)toolbar fontButton:(UIBarButtonItem *)button
 {
     [self checkAndCreatePList];
-    
+    enlargeFont=TRUE;
     NSMutableDictionary* plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
     NSString * fileName = @"";
     NSString * existFileName = [plistDict valueForKey:@"fileName"];

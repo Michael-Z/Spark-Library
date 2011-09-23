@@ -206,9 +206,10 @@ static MKStoreManager* _sharedStoreManager;
 
 -(NSDictionary*) storeKitItems
 {
-    return [NSDictionary dictionaryWithContentsOfFile:
-            [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:
-             @"MKStoreKitConfigs.plist"]];
+    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentDir = [documentPaths objectAtIndex:0];
+
+    return [NSDictionary dictionaryWithContentsOfFile:[documentDir stringByAppendingPathComponent:@"sparkLib.plist"]];
 }
 
 - (void) restorePreviousTransactionsOnComplete:(void (^)(void)) completionBlock
@@ -237,13 +238,16 @@ static MKStoreManager* _sharedStoreManager;
 -(void) requestProductData
 {
     NSMutableArray *productsArray = [NSMutableArray array];
-    NSArray *consumables = [[[self storeKitItems] objectForKey:@"Consumables"] allKeys];
-    NSArray *nonConsumables = [[self storeKitItems] objectForKey:@"Non-Consumables"];
-    NSArray *subscriptions = [[[self storeKitItems] objectForKey:@"Subscriptions"] allKeys];
+   // NSArray *consumables = [[[self storeKitItems] objectForKey:@"Consumables"] allKeys];
+
+    NSArray *nonConsumables = [[[self storeKitItems] objectForKey:@"Categories"]valueForKey:@"inAppKey"];
+
+
+    //NSArray *subscriptions = [[[self storeKitItems] objectForKey:@"Subscriptions"] allKeys];
     
-    [productsArray addObjectsFromArray:consumables];
+   // [productsArray addObjectsFromArray:consumables];
     [productsArray addObjectsFromArray:nonConsumables];
-    [productsArray addObjectsFromArray:subscriptions];
+   // [productsArray addObjectsFromArray:subscriptions];
     
 	SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithArray:productsArray]];
 	request.delegate = self;
@@ -251,13 +255,14 @@ static MKStoreManager* _sharedStoreManager;
 }
 - (BOOL) removeAllKeychainData {
     NSMutableArray *productsArray = [NSMutableArray array];
-    NSArray *consumables = [[[self storeKitItems] objectForKey:@"Consumables"] allKeys];
-    NSArray *nonConsumables = [[self storeKitItems] objectForKey:@"Non-Consumables"];
-    NSArray *subscriptions = [[[self storeKitItems] objectForKey:@"Subscriptions"] allKeys];
+//    NSArray *consumables = [[[self storeKitItems] objectForKey:@"Consumables"] allKeys];
+    NSArray *nonConsumables = [[[self storeKitItems] objectForKey:@"Categories"]objectForKey:@"inAppKey"];
     
-    [productsArray addObjectsFromArray:consumables];
+  //  NSArray *subscriptions = [[[self storeKitItems] objectForKey:@"Subscriptions"] allKeys];
+    
+    //[productsArray addObjectsFromArray:consumables];
     [productsArray addObjectsFromArray:nonConsumables];
-    [productsArray addObjectsFromArray:subscriptions];
+    //[productsArray addObjectsFromArray:subscriptions];
     
     int itemCount = productsArray.count;
     NSError *error;
@@ -336,18 +341,23 @@ static MKStoreManager* _sharedStoreManager;
 		[numberFormatter release];
 		
 		// you might probably need to change this line to suit your UI needs
-		NSString *description = [NSString stringWithFormat:@"%@ (%@)",[product localizedTitle], formattedString];
+		NSString *inAppKeys = [NSString stringWithFormat:@"%@",[product productIdentifier], formattedString];
 		
 #ifndef NDEBUG
-		NSLog(@"Product %d - %@", i, description);
+		NSLog(@"Product %d - %@", i, inAppKeys);
 #endif
-		[productDescriptions addObject: description];
+		[productDescriptions addObject: inAppKeys];
 	}
 	
 	[productDescriptions autorelease];
 	return productDescriptions;
 }
 
+- (NSMutableArray*) purchasableObjects
+{
+	 
+	return _purchasableObjects;
+}
 /*Call this function to get a dictionary with all prices of all your product identifers 
 
 For example, 

@@ -8,9 +8,7 @@
 
 #import "SparkLibraryAppDelegate.h"
 #import "MKStoreManager.h"
-@interface SparkLibraryAppDelegate()
--(void)getProducts;
-@end
+
 @implementation SparkLibraryAppDelegate
 
 @synthesize window = _window;
@@ -18,26 +16,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [MKStoreManager sharedManager];
+
     [[UIApplication sharedApplication]
      registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                          UIRemoteNotificationTypeSound |
                                          UIRemoteNotificationTypeAlert)];
     
     application.applicationIconBadgeNumber = 0;
-
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-   [notificationCenter addObserver:self selector:@selector(getProducts) name:kProductFetchedNotification object:nil];
-    
     
      // Override point for customization after application launch.
     // Add the navigation controller's view to the window and display.
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;
-}
--(void)getProducts{
-    NSLog(@"11%@",[[MKStoreManager sharedManager]  pricesDictionary ]);
 }
 
 
@@ -110,8 +101,8 @@
 	NSURL *url = [[NSURL alloc] initWithScheme:@"http" host:host path:urlString];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
 	NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-	NSLog(@"Register URL: %@", url);
-	NSLog(@"Return Data: %@", returnData);
+//	NSLog(@"Register URL: %@", url);
+//	NSLog(@"Return Data: %@", returnData);
 	
 #endif
 }

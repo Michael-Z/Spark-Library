@@ -18,8 +18,9 @@
 @implementation RootViewController
 @synthesize categories;
 @synthesize readerController;
+@synthesize awView;
 
-
+NSMutableArray * inAppKeys;
 NSMutableDictionary* plistDict;
 NSMutableData * downloadedFile;
 NSMutableArray *myBooks;
@@ -30,30 +31,62 @@ float expectedContentLength;
 int currentRow;
 NSIndexPath * currentIndexPath;
 bool downloading=FALSE;
+bool loadingData = FALSE;
 
 - (void)viewDidLoad
 {
-    
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent]; 
+     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent]; 
      UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 920.0, 44.0)];
     //here for v, width= navBar width and height=navBar height
     
     [view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"navBarTop.png"]]];
     [self.navigationController.navigationBar addSubview:view];
     [view release];
-    [self getList];
     
+    [self getList];
     [self checkAndCreatePList];
- 
+    [MKStoreManager sharedManager];
     plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
     
     self.categories = [plistDict objectForKey:@"Categories"];
-    
+
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(getProducts) name:kProductFetchedNotification object:nil];
+
     myBooks = [plistDict valueForKey:@"myBooks"];
-    [categories removeObjectsInArray:myBooks];
+    
+    [categories  removeObjectsInArray:myBooks];
+   
+    
+    
+	 
       [super viewDidLoad];
 }
+-(void)getProducts{
 
+    inAppKeys = [[MKStoreManager sharedManager]  purchasableObjectsDescription ];
+    NSMutableArray * unremovableArray = [[NSMutableArray alloc] init];   
+    for(int i = 0; i<[inAppKeys count]; i++){
+        for (int j=0; j< [categories count]; j++) {
+            NSString * inAppKey =  [[categories objectAtIndex:j] valueForKey:@"inAppKey"];
+            if([inAppKey isEqualToString: [inAppKeys objectAtIndex:i]]){
+            [unremovableArray addObject:[categories objectAtIndex:j]];
+            }
+        }  
+    }
+ 
+  
+    categories = [[NSMutableArray alloc] init];
+    [categories addObjectsFromArray:unremovableArray];
+    NSLog(@"%@",categories);
+    [self.tableView reloadData];
+
+    [self endOfGetData];
+}
+-(void)endOfGetData{
+    sleep(5);
+    loadingData = FALSE;
+}
 -(void)getList{
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentDir = [documentPaths objectAtIndex:0];
@@ -89,24 +122,24 @@ bool downloading=FALSE;
  
             NSMutableDictionary * booksList = [NSMutableDictionary dictionary];        
         NSString * name = [[data objectAtIndex:0] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-        NSString * author = [[data objectAtIndex:1] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        NSString * author = [[data objectAtIndex:1] stringByReplacingOccurrencesOfString:@"\"" withString:@""];        
         NSString * price = [[data objectAtIndex:2] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-        NSString * description = [[data objectAtIndex:3] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+         NSString * description = [[data objectAtIndex:3] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
         NSString * imageName = [[data objectAtIndex:4] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
         NSString * inAppKey = [[data objectAtIndex:5] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
         NSString * fileName = [[data objectAtIndex:6] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
         NSString * noOfPages = [[data objectAtIndex:7] stringByReplacingOccurrencesOfString:@"\"" withString:@""];  
                 [booksList setValue:[NSString stringWithFormat:@"%@", name]  forKey:@"name"];
-
                 [booksList setValue:[NSString stringWithFormat:@"%@", author]  forKey:@"author"];
                 [booksList setValue:[NSString stringWithFormat:@"%@", price]  forKey:@"price"];
                 [booksList setValue:[NSString stringWithFormat:@"%@", description]  forKey:@"description"];
                 [booksList setValue:[NSString stringWithFormat:@"%@", imageName]  forKey:@"imageName"];
-                [booksList setValue:[NSString stringWithFormat:@"%@", inAppKey]  forKey:@"inAppKey"];
+                [booksList setValue:[NSString stringWithFormat:@"%@", inAppKey] forKey: @"inAppKey"];
                 [booksList setValue:[NSString stringWithFormat:@"%@", fileName]  forKey:@"fileName"];
                 [booksList setValue:[NSString stringWithFormat:@"%@", noOfPages]  forKey:@"noOfPages"];
+        
             [AllBooksList addObject:booksList];
-NSLog(@"%@",        [[MKStoreManager sharedManager]pricesDictionary ]);
+
         [plistDict setValue:AllBooksList forKey:@"Categories"];
         
     
@@ -209,6 +242,19 @@ NSLog(@"%@",        [[MKStoreManager sharedManager]pricesDictionary ]);
 
 - (void)viewDidAppear:(BOOL)animated
 {
+    loadingData = TRUE;
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+	[self.navigationController.view addSubview:HUD];
+	
+	HUD.dimBackground = YES;
+	
+	// Regiser for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
+	
+    // Show the HUD while the provided method executes in a new thread
+    [HUD showWhileExecuting:@selector(endOfGetData) onTarget:self withObject:nil animated:YES];
+    
+    
     //navigationbar items
     UIButton * rightButtonItem = [[UIButton buttonWithType:UIButtonTypeInfoLight] retain];
 	rightButtonItem.frame = CGRectMake(0.0, 0.0, 84.0, 30.0);
@@ -232,6 +278,22 @@ NSLog(@"%@",        [[MKStoreManager sharedManager]pricesDictionary ]);
 	[leftButton release];
     
       [categories removeObjectsInArray:myBooks];
+ 
+    
+    //ads
+    awView = [AdWhirlView requestAdWhirlViewWithDelegate:self]; 
+	
+	awView.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin;
+	[self.view addSubview:awView];
+	
+	CGSize adSize = [awView actualAdSize];
+	CGRect newFrame = awView.frame;
+	newFrame.size.height = adSize.height;
+	newFrame.size.width = adSize.width;
+	newFrame.origin.x = (self.view.bounds.size.width - adSize.width)/2;
+	newFrame.origin.y = (self.view.bounds.size.height - adSize.height/2) -21;
+	awView.frame = newFrame;
+    //make view for ipad
     [super viewDidAppear:animated];
 }
 
@@ -256,8 +318,8 @@ NSLog(@"%@",        [[MKStoreManager sharedManager]pricesDictionary ]);
 // Customize the number of sections in the table view.
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    
-    return 1;
+        return 1;
+     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -385,7 +447,7 @@ NSLog(@"%@",        [[MKStoreManager sharedManager]pricesDictionary ]);
     tableView.allowsSelection = NO;
 
     }
-    if([self.categories count] == 0 ){
+    if([self.categories count] == 0 || loadingData){
         cell.pagesText.hidden = TRUE;
         cell.nameLabel.hidden = TRUE;
         cell.noOfPages.hidden = TRUE;
@@ -394,6 +456,8 @@ NSLog(@"%@",        [[MKStoreManager sharedManager]pricesDictionary ]);
         cell.priceText.hidden = TRUE;
         cell.descButton.hidden=TRUE;
         cell.buyButton.hidden=TRUE;
+        cell.bookCover.hidden=TRUE;
+        cell.priceLabel.hidden=TRUE;
         cell.userInteractionEnabled=FALSE;
     }
     return cell;
@@ -463,7 +527,7 @@ NSLog(@"%@",        [[MKStoreManager sharedManager]pricesDictionary ]);
         UIButton *button = (UIButton*) sender;
         int row = button.tag;        
         
-        if( ![MKStoreManager isFeaturePurchased:[[categories objectAtIndex:row]objectForKey:@"inAppKey"]]){
+      
                 
            [[MKStoreManager sharedManager] buyFeature:[[categories objectAtIndex:row]objectForKey:@"inAppKey"]
                 onComplete:^(NSString* purchasedFeature) {
@@ -492,7 +556,7 @@ NSLog(@"%@",        [[MKStoreManager sharedManager]pricesDictionary ]);
                     NSLog(@"User Cancelled Transaction"); 
                 }
             ];
-        }
+         
         
        
     }else{
@@ -651,6 +715,18 @@ NSLog(@"%@",        [[MKStoreManager sharedManager]pricesDictionary ]);
  }
 
 
+#pragma mark -
+#pragma mark AdWhirlDelegate methods
+-(NSString *)adWhirlApplicationKey{
+	return @"8a71b8a4c3484b31b7866f019d7461ba";
+}
+-(UIViewController *) viewControllerForPresentingModalView{
+	
+	return self;
+	
+}
+
+ 
  
 
 @end

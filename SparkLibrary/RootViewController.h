@@ -11,10 +11,14 @@
 #import "ReaderController.h"
 #import "MBProgressHUD.h"
 #import <StoreKit/StoreKit.h>
- 
+#import "AdWhirlView.h"
+#import "AdWhirlDelegateProtocol.h"
 
-@interface RootViewController : UITableViewController <MBProgressHUDDelegate,SKRequestDelegate>
+
+@interface RootViewController : UITableViewController <MBProgressHUDDelegate,SKRequestDelegate,AdWhirlDelegate>
 {
+    
+  	AdWhirlView *awView;
     MBProgressHUD *HUD;
     NSString *pListPath;
    	NSMutableArray *categories;
@@ -22,11 +26,14 @@
     ReaderController * readerController;
     UIBackgroundTaskIdentifier bgTask;
 
+    
 }
+-(void)endOfGetData;
+@property(nonatomic	,retain) AdWhirlView *awView;
 @property (nonatomic, retain) NSMutableArray *categories;
 @property (nonatomic,retain) ReaderController * readerController;
 
-
+-(void)getProducts;
 -(void)alertMessage;
 -(void)getList;
 -(void)checkAndCreatePList;

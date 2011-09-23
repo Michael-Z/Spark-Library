@@ -17,6 +17,7 @@
 @synthesize categories;
 
 NSMutableDictionary* plistDict;
+NSMutableDictionary* plistDocDict;
 
 
 
@@ -335,6 +336,7 @@ NSMutableDictionary* plistDict;
         cell.nameLabel.hidden = TRUE;
         cell.noOfPages.hidden = TRUE;
         cell.authorName.hidden = TRUE;
+        cell.bookCover.hidden=TRUE;
         cell.userInteractionEnabled=FALSE;
     }
     // Configure the cell.
@@ -344,10 +346,32 @@ NSMutableDictionary* plistDict;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     int row = indexPath.row;
-    NSString *fileName = [[categories objectAtIndex:row]objectForKey:@"fileName"];
+    [self checkAndCreateFileNamePList];
+    NSString *fileName;
+    plistDocDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListDocPath];
+    fileName = [plistDocDict objectForKey:@"fileName"];
+    if(fileName==nil){
+        fileName = [[categories objectAtIndex:row]objectForKey:@"fileName"];
+    }
     [self showDocumentWithName:fileName];
 }
 
+-(void)checkAndCreateFileNamePList{
+	BOOL success;
+	NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentDir = [documentPaths objectAtIndex:0];
+ 	pListDocPath = [ documentDir stringByAppendingPathComponent:@"sparkProperties.plist"];
+  	NSFileManager *fileManager = [NSFileManager defaultManager];
+	success = [fileManager fileExistsAtPath:pListDocPath];
+	
+	if(success) return;
+	
+	NSString *pListPathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sparkProperties.plist"];
+	
+	[fileManager copyItemAtPath:pListPathFromApp toPath:pListDocPath error:nil];
+	
+	[fileManager release];
+}
 #define SAMPLE_DOCUMENT @"Document.pdf"
 #define DEMO_VIEW_CONTROLLER_PUSH FALSE
 

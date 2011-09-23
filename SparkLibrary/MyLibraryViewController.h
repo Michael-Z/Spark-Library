@@ -15,6 +15,7 @@
 @interface MyLibraryViewController : UITableViewController <ReaderViewControllerDelegate>
 {
 NSString *pListPath;
+NSString *pListDocPath;
 NSArray *categories;
 IBOutlet CellViewController * cellVC;
 
@@ -26,7 +27,7 @@ IBOutlet CellViewController * cellVC;
 - (void)checkAndCreatePList;
 - (void) showDocumentWithName:(NSString *)fileName;
 - (void) dismissReaderViewController:(ReaderViewController *)viewController andShowDocumentWithName:(NSString *)fileName;
-
+-(void)checkAndCreateFileNamePList;
 
 @end
 

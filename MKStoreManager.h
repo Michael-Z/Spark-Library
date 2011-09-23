@@ -61,7 +61,7 @@
 //returns a dictionary with all prices for identifiers
 - (NSMutableDictionary *)pricesDictionary;
 - (NSMutableArray*) purchasableObjectsDescription;
-
+- (NSMutableArray*) purchasableObjects;
 // use this method to invoke a purchase
 - (void) buyFeature:(NSString*) featureId
          onComplete:(void (^)(NSString*)) completionBlock         
