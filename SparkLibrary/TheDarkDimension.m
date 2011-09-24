@@ -32,7 +32,7 @@
 #pragma mark - View lifecycle
 
 -(void)viewDidAppear:(BOOL)animated{
-     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.thedarkdimension.com"]]];
+     [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://eg.linkedin.com/pub/mohamed-hegab/24/225/195"]]];
 }
 - (void)viewDidLoad
 {

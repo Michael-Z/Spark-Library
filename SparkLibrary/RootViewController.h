@@ -35,11 +35,11 @@
 
 -(void)getProducts;
 -(void)alertMessage;
--(void)getList;
+
 -(void)checkAndCreatePList;
 -(IBAction)myLibraryPage:(id)sender;
 -(IBAction)aboutUsPage:(id)sender;
 -(IBAction)description:(id)sender;
 
-
+-(CellViewController*)setCellHidden:(CellViewController*)cell;
 @end

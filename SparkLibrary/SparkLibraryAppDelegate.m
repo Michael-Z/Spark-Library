@@ -13,10 +13,12 @@
 
 @synthesize window = _window;
 @synthesize navigationController = _navigationController;
+NSMutableDictionary* plistDict;
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
+    [self getList];
     [[UIApplication sharedApplication]
      registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                          UIRemoteNotificationTypeSound |
@@ -187,6 +189,91 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+-(void)getList{
+    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentDir = [documentPaths objectAtIndex:0];
+    NSURL* pListURL = [NSURL URLWithString: [NSString stringWithFormat:@"http://php.spark-books.com/sparkLib/books.csv"]];
+    NSData* pListData = [NSData dataWithContentsOfURL: pListURL];
+    NSString* downloadedFilePath = [documentDir stringByAppendingPathComponent:@"books.csv"];
+    [pListData writeToFile: downloadedFilePath atomically: NO];
+    
+    
+    NSString* filePath = [documentDir stringByAppendingPathComponent:[NSString stringWithFormat:@"books.csv"]];
+    
+  	NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL success = [fileManager fileExistsAtPath:filePath];
+    if (success) {
+        
+    }
+	NSString *fileContents = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    
+	NSMutableArray *rows = [[NSArray alloc] initWithArray:[fileContents componentsSeparatedByString:@"\n"]];
+    
+    NSMutableArray * AllBooksList = [[NSMutableArray alloc]init];        
+    for(int i=0 ; i < rows.count-1 ; i++){
+        NSString * row = [rows objectAtIndex:i];
+        
+        NSArray * data = [[NSArray alloc] initWithArray:[row componentsSeparatedByString:@","]];
+        
+        
+        [self checkAndCreatePList];
+        plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
+        //read plist
+        
+        
+        
+        NSMutableDictionary * booksList = [NSMutableDictionary dictionary];        
+        NSString * name = [[data objectAtIndex:0] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        NSString * author = [[data objectAtIndex:1] stringByReplacingOccurrencesOfString:@"\"" withString:@""];        
+        NSString * price = [[data objectAtIndex:2] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        NSString * description = [[data objectAtIndex:3] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        NSString * imageName = [[data objectAtIndex:4] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        NSString * inAppKey = [[data objectAtIndex:5] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        NSString * fileName = [[data objectAtIndex:6] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
+        NSString * noOfPages = [[data objectAtIndex:7] stringByReplacingOccurrencesOfString:@"\"" withString:@""];  
+        [booksList setValue:[NSString stringWithFormat:@"%@", name]  forKey:@"name"];
+        [booksList setValue:[NSString stringWithFormat:@"%@", author]  forKey:@"author"];
+        [booksList setValue:[NSString stringWithFormat:@"%@", price]  forKey:@"price"];
+        [booksList setValue:[NSString stringWithFormat:@"%@", description]  forKey:@"description"];
+        [booksList setValue:[NSString stringWithFormat:@"%@", imageName]  forKey:@"imageName"];
+        [booksList setValue:[NSString stringWithFormat:@"%@", inAppKey] forKey: @"inAppKey"];
+        [booksList setValue:[NSString stringWithFormat:@"%@", fileName]  forKey:@"fileName"];
+        [booksList setValue:[NSString stringWithFormat:@"%@", noOfPages]  forKey:@"noOfPages"];
+        
+        [AllBooksList addObject:booksList];
+        
+        [plistDict setValue:AllBooksList forKey:@"Categories"];
+        
+        
+        
+        
+        [plistDict writeToFile:pListPath atomically: YES];
+        
+        [data release];
+        
+        booksList = nil;
+        row=nil;
+    }
+    [MKStoreManager sharedManager];
+}
+
+
+-(void)checkAndCreatePList{
+	BOOL success;
+	NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentDir = [documentPaths objectAtIndex:0];
+ 	pListPath = [ documentDir stringByAppendingPathComponent:@"sparkLib.plist"];
+  	NSFileManager *fileManager = [NSFileManager defaultManager];
+	success = [fileManager fileExistsAtPath:pListPath];
+	
+	if(success) return;
+	
+	NSString *pListPathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sparkLib.plist"];
+	
+	[fileManager copyItemAtPath:pListPathFromApp toPath:pListPath error:nil];
+	
+	[fileManager release];
 }
 
 - (void)dealloc

@@ -26,7 +26,7 @@
 		A50D3F44140A633B002C84EF /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = A50D3F42140A633B002C84EF /* background.png */; };
 		A511B9A814141F2500F5676A /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A511B9A614141F2400F5676A /* AboutUsViewController.m */; };
 		A511B9A914141F2500F5676A /* AboutUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A511B9A714141F2500F5676A /* AboutUsViewController.xib */; };
-		A511B9AB1414235B00F5676A /* aboutUsMainImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A511B9AA1414235B00F5676A /* aboutUsMainImage.png */; };
+		A5146060142DD64F000FBB9D /* aboutUsMainImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A514605F142DD64F000FBB9D /* aboutUsMainImage.png */; };
 		A51BE8C814248D70004B0C23 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A51BE8B914248D70004B0C23 /* JSONKit.m */; };
 		A51BE8C914248D70004B0C23 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A51BE8BB14248D70004B0C23 /* NSData+Base64.m */; };
 		A51BE8CA14248D70004B0C23 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A51BE8BD14248D70004B0C23 /* SFHFKeychainUtils.m */; };
@@ -168,7 +168,7 @@
 		A511B9A514141F2400F5676A /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
 		A511B9A614141F2400F5676A /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
 		A511B9A714141F2500F5676A /* AboutUsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsViewController.xib; sourceTree = "<group>"; };
-		A511B9AA1414235B00F5676A /* aboutUsMainImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutUsMainImage.png; sourceTree = "<group>"; };
+		A514605F142DD64F000FBB9D /* aboutUsMainImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutUsMainImage.png; sourceTree = "<group>"; };
 		A51BE8B814248D70004B0C23 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		A51BE8B914248D70004B0C23 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		A51BE8BA14248D70004B0C23 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
@@ -431,7 +431,7 @@
 				A50D3F3E140A5EBD002C84EF /* selectedTopRow.png */,
 				A50D3F42140A633B002C84EF /* background.png */,
 				A5A1577214115BDA001BD4C5 /* close.png */,
-				A511B9AA1414235B00F5676A /* aboutUsMainImage.png */,
+				A514605F142DD64F000FBB9D /* aboutUsMainImage.png */,
 				A533D79814196C7C0056CD20 /* descriptionBG.png */,
 				A533D79A141971BD0056CD20 /* descriptionBG2.png */,
 				A545F848141B6D5500F544AA /* 37x-Checkmark.png */,
@@ -696,7 +696,6 @@
 		A5EDC07B13FE7DF800B37A0D = {
 			isa = PBXGroup;
 			children = (
-				A59B2D1B142BD91000577D09 /* iAd.framework */,
 				A5EDC09013FE7DF900B37A0D /* SparkLibrary */,
 				A5EDC08913FE7DF900B37A0D /* Frameworks */,
 				A5EDC08713FE7DF900B37A0D /* Products */,
@@ -714,6 +713,7 @@
 		A5EDC08913FE7DF900B37A0D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A59B2D1B142BD91000577D09 /* iAd.framework */,
 				A51BE8D214248EBF004B0C23 /* StoreKit.framework */,
 				A51BE8D014248DC5004B0C23 /* Security.framework */,
 				A546BD7E1409ADCD0035D7E4 /* OpenGLES.framework */,
@@ -874,7 +874,6 @@
 				A5A1577514122D73001BD4C5 /* bookmark.png in Resources */,
 				A5810ED0141253C200A1CBC1 /* bookmarkDone.png in Resources */,
 				A511B9A914141F2500F5676A /* AboutUsViewController.xib in Resources */,
-				A511B9AB1414235B00F5676A /* aboutUsMainImage.png in Resources */,
 				A596B6FB141577A900AD606F /* TheDarkDimension.xib in Resources */,
 				A596B703141580B000AD606F /* OurProducts.xib in Resources */,
 				A562FD8514196873000D3B5A /* Default.png in Resources */,
@@ -898,6 +897,7 @@
 				A5BE3E5B1426869800A2FCF3 /* pageNoText.png in Resources */,
 				A5BE3E5C1426869800A2FCF3 /* priceText.png in Resources */,
 				A59B2D0C142BD89300577D09 /* AdWhirlWebBrowser.xib in Resources */,
+				A5146060142DD64F000FBB9D /* aboutUsMainImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

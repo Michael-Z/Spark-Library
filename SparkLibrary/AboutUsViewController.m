@@ -76,7 +76,7 @@
     UIViewController *viewController;
     
     viewController = [[[RootViewController alloc] init] autorelease] ;
-    
+ /*   
     NSObject<EPGLTransitionViewDelegate> *transition;
     transition = [[[Transition alloc] init] autorelease];
     
@@ -95,6 +95,7 @@
                        alpha:1.0];
     
     [glview startTransition];
+  */
     [self.navigationController popViewControllerAnimated:YES];
 }
 

@@ -35,6 +35,19 @@ bool loadingData = FALSE;
 
 - (void)viewDidLoad
 {
+    loadingData = TRUE;
+    
+    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
+	[self.navigationController.view addSubview:HUD];
+	
+	HUD.dimBackground = YES;
+	
+	// Regiser for HUD callbacks so we can remove it from the window at the right time
+    HUD.delegate = self;
+	
+    // Show the HUD while the provided method executes in a new thread
+    [HUD showWhileExecuting:@selector(endOfGetData) onTarget:self withObject:nil animated:YES];
+    
      [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackTranslucent]; 
      UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 920.0, 44.0)];
     //here for v, width= navBar width and height=navBar height
@@ -42,24 +55,19 @@ bool loadingData = FALSE;
     [view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"navBarTop.png"]]];
     [self.navigationController.navigationBar addSubview:view];
     [view release];
+     
     
-    [self getList];
     [self checkAndCreatePList];
-    [MKStoreManager sharedManager];
+
     plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
     
     self.categories = [plistDict objectForKey:@"Categories"];
+   
 
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter addObserver:self selector:@selector(getProducts) name:kProductFetchedNotification object:nil];
-
     myBooks = [plistDict valueForKey:@"myBooks"];
-    
     [categories  removeObjectsInArray:myBooks];
-   
-    
-    
-	 
       [super viewDidLoad];
 }
 -(void)getProducts{
@@ -81,78 +89,12 @@ bool loadingData = FALSE;
     NSLog(@"%@",categories);
     [self.tableView reloadData];
 
-    [self endOfGetData];
 }
 -(void)endOfGetData{
     sleep(5);
     loadingData = FALSE;
 }
--(void)getList{
-    NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentDir = [documentPaths objectAtIndex:0];
-    NSURL* pListURL = [NSURL URLWithString: [NSString stringWithFormat:@"http://php.spark-books.com/sparkLib/books.csv"]];
-    NSData* pListData = [NSData dataWithContentsOfURL: pListURL];
-    NSString* downloadedFilePath = [documentDir stringByAppendingPathComponent:@"books.csv"];
-    [pListData writeToFile: downloadedFilePath atomically: NO];
 
-  
-    NSString* filePath = [documentDir stringByAppendingPathComponent:[NSString stringWithFormat:@"books.csv"]];
-    
-  	NSFileManager *fileManager = [NSFileManager defaultManager];
-    BOOL success = [fileManager fileExistsAtPath:filePath];
-    if (success) {
-        
-    }
-	NSString *fileContents = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
-        
-	NSMutableArray *rows = [[NSArray alloc] initWithArray:[fileContents componentsSeparatedByString:@"\n"]];
-    
-        NSMutableArray * AllBooksList = [[NSMutableArray alloc]init];        
-    for(int i=0 ; i < rows.count-1 ; i++){
-        NSString * row = [rows objectAtIndex:i];
-
-        NSArray * data = [[NSArray alloc] initWithArray:[row componentsSeparatedByString:@","]];
-        
-        
-        [self checkAndCreatePList];
-         plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
-        //read plist
-
-
- 
-            NSMutableDictionary * booksList = [NSMutableDictionary dictionary];        
-        NSString * name = [[data objectAtIndex:0] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-        NSString * author = [[data objectAtIndex:1] stringByReplacingOccurrencesOfString:@"\"" withString:@""];        
-        NSString * price = [[data objectAtIndex:2] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-         NSString * description = [[data objectAtIndex:3] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-        NSString * imageName = [[data objectAtIndex:4] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-        NSString * inAppKey = [[data objectAtIndex:5] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-        NSString * fileName = [[data objectAtIndex:6] stringByReplacingOccurrencesOfString:@"\"" withString:@""];
-        NSString * noOfPages = [[data objectAtIndex:7] stringByReplacingOccurrencesOfString:@"\"" withString:@""];  
-                [booksList setValue:[NSString stringWithFormat:@"%@", name]  forKey:@"name"];
-                [booksList setValue:[NSString stringWithFormat:@"%@", author]  forKey:@"author"];
-                [booksList setValue:[NSString stringWithFormat:@"%@", price]  forKey:@"price"];
-                [booksList setValue:[NSString stringWithFormat:@"%@", description]  forKey:@"description"];
-                [booksList setValue:[NSString stringWithFormat:@"%@", imageName]  forKey:@"imageName"];
-                [booksList setValue:[NSString stringWithFormat:@"%@", inAppKey] forKey: @"inAppKey"];
-                [booksList setValue:[NSString stringWithFormat:@"%@", fileName]  forKey:@"fileName"];
-                [booksList setValue:[NSString stringWithFormat:@"%@", noOfPages]  forKey:@"noOfPages"];
-        
-            [AllBooksList addObject:booksList];
-
-        [plistDict setValue:AllBooksList forKey:@"Categories"];
-        
-    
- 
-        
-        [plistDict writeToFile:pListPath atomically: YES];
-
-        [data release];
-
-        booksList = nil;
-        row=nil;
-    }
-}
 
 -(void)checkAndCreatePList{
 	BOOL success;
@@ -242,17 +184,6 @@ bool loadingData = FALSE;
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    loadingData = TRUE;
-    HUD = [[MBProgressHUD alloc] initWithView:self.navigationController.view];
-	[self.navigationController.view addSubview:HUD];
-	
-	HUD.dimBackground = YES;
-	
-	// Regiser for HUD callbacks so we can remove it from the window at the right time
-    HUD.delegate = self;
-	
-    // Show the HUD while the provided method executes in a new thread
-    [HUD showWhileExecuting:@selector(endOfGetData) onTarget:self withObject:nil animated:YES];
     
     
     //navigationbar items
@@ -284,7 +215,7 @@ bool loadingData = FALSE;
     awView = [AdWhirlView requestAdWhirlViewWithDelegate:self]; 
 	
 	awView.autoresizingMask=UIViewAutoresizingFlexibleLeftMargin;
-	[self.view addSubview:awView];
+	[self.tableView addSubview:awView];
 	
 	CGSize adSize = [awView actualAdSize];
 	CGRect newFrame = awView.frame;
@@ -322,6 +253,14 @@ bool loadingData = FALSE;
      
 }
 
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+   //ads
+	CGSize adSize = [awView actualAdSize];
+	CGRect newFrame = awView.frame;
+	
+	newFrame.origin.y = (self.tableView.contentOffset.y+ self.view.bounds.size.height- adSize.height/2) -21;
+	awView.frame = newFrame;
+}
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
         return 225;
@@ -418,6 +357,7 @@ bool loadingData = FALSE;
             cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
             cell.dollarSign.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];
             cell.priceLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];            
+            cell.priceText.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];            
         }else{
             cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
             
@@ -426,7 +366,7 @@ bool loadingData = FALSE;
             cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
             cell.dollarSign.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
             cell.priceLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];            
-
+            cell.priceText.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];            
             
         }
     NSString* filePath = [documentDir stringByAppendingPathComponent:[[categories objectAtIndex:row]objectForKey:@"imageName"]];
@@ -448,18 +388,23 @@ bool loadingData = FALSE;
 
     }
     if([self.categories count] == 0 || loadingData){
-        cell.pagesText.hidden = TRUE;
-        cell.nameLabel.hidden = TRUE;
-        cell.noOfPages.hidden = TRUE;
-        cell.authorName.hidden = TRUE;
-        cell.dollarSign.hidden = TRUE;
-        cell.priceText.hidden = TRUE;
-        cell.descButton.hidden=TRUE;
-        cell.buyButton.hidden=TRUE;
-        cell.bookCover.hidden=TRUE;
-        cell.priceLabel.hidden=TRUE;
-        cell.userInteractionEnabled=FALSE;
+        cell = [self setCellHidden:cell];
     }
+    return cell;
+}
+
+-(CellViewController*)setCellHidden:(CellViewController*)cell{
+    cell.pagesText.hidden = TRUE;
+    cell.nameLabel.hidden = TRUE;
+    cell.noOfPages.hidden = TRUE;
+    cell.authorName.hidden = TRUE;
+    cell.dollarSign.hidden = TRUE;
+    cell.priceText.hidden = TRUE;
+    cell.descButton.hidden=TRUE;
+    cell.buyButton.hidden=TRUE;
+    cell.bookCover.hidden=TRUE;
+    cell.priceLabel.hidden=TRUE;
+    cell.userInteractionEnabled=FALSE;
     return cell;
 }
 

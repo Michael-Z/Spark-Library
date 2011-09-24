@@ -12,11 +12,12 @@
 @interface SparkLibraryAppDelegate : NSObject <UIApplicationDelegate>
 {
     UIViewController *viewController;
-
+    NSString *pListPath;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 @property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
-
+-(void)getList;
+-(void)checkAndCreatePList;
 @end

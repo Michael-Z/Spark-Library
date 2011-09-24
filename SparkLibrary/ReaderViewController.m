@@ -19,7 +19,7 @@
 @implementation ReaderViewController
 @synthesize bookMarkDone;
 bool enlargeFont = FALSE;
-
+int zoom =0;
 NSMutableDictionary* plistDict;
 
 
@@ -626,22 +626,15 @@ NSMutableDictionary* plistDict;
 			NSNumber *key = [NSNumber numberWithInteger:page]; // Page number key
             
 			ReaderContentView *targetView = [contentViews objectForKey:key];
-            
-			switch (recognizer.numberOfTouchesRequired) // Touches count
-			{
-				case 1: // One finger double tap: zoom ++
-				{
-					[targetView zoomIncrement]; break;
-				}
-                    
-				case 2: // Two finger double tap: zoom --
-				{
-					[targetView zoomDecrement]; break;
-				}
-			}
-            
-			return;
-		}
+            if(zoom==0){
+			 		[targetView zoomIncrement]; 
+                zoom=1;
+            }else if(zoom==1){
+			 		[targetView zoomDecrement]; 
+                zoom=0;
+            }
+        }
+          
         
 		CGRect nextPageRect = viewRect;
 		nextPageRect.size.width = PAGING_AREA_WIDTH;

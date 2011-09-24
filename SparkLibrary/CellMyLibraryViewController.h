@@ -14,13 +14,13 @@
     IBOutlet UILabel *noOfPages;
     IBOutlet UILabel *authorName;
     IBOutlet UIImageView *bookCover;
-    IBOutlet UIImageView *pagesText;
+    IBOutlet UILabel *pagesText;
 }
 
 @property (nonatomic,retain) UILabel *authorName;
 @property (nonatomic,retain) UILabel * nameLabel;
 @property (nonatomic,retain) UILabel *noOfPages;
 @property (nonatomic,retain) UIImageView *bookCover;
-@property (nonatomic,retain) UIImageView *pagesText;
+@property (nonatomic,retain) UILabel *pagesText;
 
 @end

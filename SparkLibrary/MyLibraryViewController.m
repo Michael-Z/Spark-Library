@@ -188,7 +188,7 @@ NSMutableDictionary* plistDocDict;
     
     viewController = [[[RootViewController alloc] init] autorelease] ;
 
-    NSObject<EPGLTransitionViewDelegate> *transition;
+  /*  NSObject<EPGLTransitionViewDelegate> *transition;
     transition = [[[Transition alloc] init] autorelease];
     
     
@@ -207,7 +207,7 @@ NSMutableDictionary* plistDocDict;
     
     [glview startTransition];
     
-
+*/
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -312,6 +312,7 @@ NSMutableDictionary* plistDocDict;
                  cell.noOfPages.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];
 
                  cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
+                 cell.pagesText.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];            
 
              }else{
                  cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
@@ -319,6 +320,7 @@ NSMutableDictionary* plistDocDict;
                  cell.noOfPages.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
                  
                  cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+                 cell.pagesText.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];            
 
              }
         
