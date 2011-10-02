@@ -127,11 +127,11 @@
 	controller.mailComposeDelegate = self;
 	[controller setSubject:@"مقترحات لمكتبة سبارك"];
     NSMutableArray * emails = [[NSMutableArray alloc] init];
-    [emails addObject:@"emadhegab@gmail.com,"];
+    [emails addObject:@"spark.books.library@gmail.com,"];
     [controller setToRecipients:emails];
 	[self presentModalViewController:controller animated:YES];
 	[controller release];
-	
+    [emails release];
 }
 - (void)mailComposeController:(MFMailComposeViewController*)controller  
           didFinishWithResult:(MFMailComposeResult)result 

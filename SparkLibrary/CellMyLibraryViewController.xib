@@ -99,7 +99,7 @@
 							<object class="IBUILabel" id="643174264">
 								<reference key="NSNextResponder" ref="357955847"/>
 								<int key="NSvFlags">301</int>
-								<string key="NSFrame">{{82, 61}, {50, 27}}</string>
+								<string key="NSFrame">{{82, 67}, {50, 27}}</string>
 								<reference key="NSSuperview" ref="357955847"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="140174584"/>
@@ -114,6 +114,7 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUITextAlignment">1</int>
 							</object>
 							<object class="IBUIImageView" id="149581396">
 								<reference key="NSNextResponder" ref="357955847"/>
@@ -121,7 +122,6 @@
 								<string key="NSFrame">{{231, 20}, {75, 85}}</string>
 								<reference key="NSSuperview" ref="357955847"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:541</string>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>

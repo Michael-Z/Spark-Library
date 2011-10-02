@@ -240,7 +240,7 @@ static MKStoreManager* _sharedStoreManager;
     NSMutableArray *productsArray = [NSMutableArray array];
    // NSArray *consumables = [[[self storeKitItems] objectForKey:@"Consumables"] allKeys];
 
-    NSArray *nonConsumables = [[[self storeKitItems] objectForKey:@"Categories"]valueForKey:@"inAppKey"];
+    NSMutableArray *nonConsumables = [[[self storeKitItems] objectForKey:@"Categories"]valueForKey:@"inAppKey"];
 
 
     //NSArray *subscriptions = [[[self storeKitItems] objectForKey:@"Subscriptions"] allKeys];
@@ -256,7 +256,7 @@ static MKStoreManager* _sharedStoreManager;
 - (BOOL) removeAllKeychainData {
     NSMutableArray *productsArray = [NSMutableArray array];
 //    NSArray *consumables = [[[self storeKitItems] objectForKey:@"Consumables"] allKeys];
-    NSArray *nonConsumables = [[[self storeKitItems] objectForKey:@"Categories"]objectForKey:@"inAppKey"];
+    NSMutableArray *nonConsumables = [[[self storeKitItems] objectForKey:@"Categories"]objectForKey:@"inAppKey"];
     
   //  NSArray *subscriptions = [[[self storeKitItems] objectForKey:@"Subscriptions"] allKeys];
     

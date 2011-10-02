@@ -13,11 +13,11 @@
 #import <StoreKit/StoreKit.h>
 #import "AdWhirlView.h"
 #import "AdWhirlDelegateProtocol.h"
-
+@class Reachability;
 
 @interface RootViewController : UITableViewController <MBProgressHUDDelegate,SKRequestDelegate,AdWhirlDelegate>
 {
-    
+    Reachability* hostReach;
   	AdWhirlView *awView;
     MBProgressHUD *HUD;
     NSString *pListPath;
@@ -35,6 +35,7 @@
 
 -(void)getProducts;
 -(void)alertMessage;
+-(void)alertMessageNotReachable;
 
 -(void)checkAndCreatePList;
 -(IBAction)myLibraryPage:(id)sender;

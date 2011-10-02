@@ -8,17 +8,33 @@
 
 #import "SparkLibraryAppDelegate.h"
 #import "MKStoreManager.h"
+#import "Reachability.h"
 
 @implementation SparkLibraryAppDelegate
-
+ 
 @synthesize window = _window;
 @synthesize navigationController = _navigationController;
+
 NSMutableDictionary* plistDict;
+
+
+//Called by Reachability whenever status changes.
+- (void) reachabilityChanged: (NSNotification* )note
+{
+	     [self getList];
+      
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self getList];
+     [self checkAndCreatePList];
+     [self getList];
+    // Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the
+     
+    //Change the host name here to change the server your monitoring
+      
+    
     [[UIApplication sharedApplication]
      registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
                                          UIRemoteNotificationTypeSound |
@@ -217,7 +233,7 @@ NSMutableDictionary* plistDict;
         NSArray * data = [[NSArray alloc] initWithArray:[row componentsSeparatedByString:@","]];
         
         
-        [self checkAndCreatePList];
+       
         plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
         //read plist
         

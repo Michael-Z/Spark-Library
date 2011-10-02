@@ -14,7 +14,9 @@
 #import "DescriptionViewController.h"
 #import "AboutUsViewController.h"
 #import "MKStoreManager.h"
- 
+#import "Reachability.h"
+#import "SparkLibraryAppDelegate.h"
+
 @implementation RootViewController
 @synthesize categories;
 @synthesize readerController;
@@ -32,6 +34,22 @@ int currentRow;
 NSIndexPath * currentIndexPath;
 bool downloading=FALSE;
 bool loadingData = FALSE;
+NetworkStatus netStatus;
+
+
+- (void)dealloc
+{
+    [super dealloc];
+    [categories release];
+    [readerController release];
+    [awView release];
+    [inAppKeys release];
+    [plistDict release];
+    [downloadedFile release];
+    [myBooks release];
+    [fileName release];
+    [secondFileName release];
+}
 
 - (void)viewDidLoad
 {
@@ -66,13 +84,48 @@ bool loadingData = FALSE;
 
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter addObserver:self selector:@selector(getProducts) name:kProductFetchedNotification object:nil];
+    
+     
     myBooks = [plistDict valueForKey:@"myBooks"];
     [categories  removeObjectsInArray:myBooks];
+    
+    
+    // Observe the kNetworkReachabilityChangedNotification. When that notification is posted, the
+    // method "reachabilityChanged" will be called. 
+    [[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(reachabilityChanged:) name: kReachabilityChangedNotification object: nil];
+    
+    //Change the host name here to change the server your monitoring
+    
+	hostReach = [[Reachability reachabilityWithHostName: @"www.php.spark-books.com"] retain];
+	[hostReach startNotifier];
+    
+    
+    
       [super viewDidLoad];
+}
+
+//Called by Reachability whenever status changes.
+- (void) reachabilityChanged: (NSNotification* )note
+{
+	Reachability* curReach = [note object];
+	NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+     netStatus = [curReach currentReachabilityStatus];
+    if(netStatus==NotReachable){    
+        [self getProducts];
+    } 
 }
 -(void)getProducts{
 
     inAppKeys = [[MKStoreManager sharedManager]  purchasableObjectsDescription ];
+    for (int k = 0; k < [myBooks count];k++) {
+        for (int l = 0 ; l<[inAppKeys count]; l++){
+            NSString * inAppKey =  [inAppKeys objectAtIndex:l];
+            if([inAppKey isEqualToString:[[myBooks objectAtIndex:k] valueForKey:@"inAppKey"]]){
+                [inAppKeys removeObject:[inAppKeys objectAtIndex:l]];
+            }
+        }
+    }
+    if([inAppKeys count] > 0){
     NSMutableArray * unremovableArray = [[NSMutableArray alloc] init];   
     for(int i = 0; i<[inAppKeys count]; i++){
         for (int j=0; j< [categories count]; j++) {
@@ -86,13 +139,14 @@ bool loadingData = FALSE;
   
     categories = [[NSMutableArray alloc] init];
     [categories addObjectsFromArray:unremovableArray];
-    NSLog(@"%@",categories);
-    [self.tableView reloadData];
-
+ 
+   
+    }
+     [self.tableView reloadData];
+    loadingData = FALSE;
 }
 -(void)endOfGetData{
-    sleep(5);
-    loadingData = FALSE;
+    sleep(6);
 }
 
 
@@ -468,6 +522,9 @@ bool loadingData = FALSE;
 }
 
 -(IBAction)buyBook:(id)sender{
+    if(netStatus ==NotReachable){
+        [self alertMessageNotReachable];
+    }
     if(!downloading){
         UIButton *button = (UIButton*) sender;
         int row = button.tag;        
@@ -514,6 +571,11 @@ bool loadingData = FALSE;
     [alert show];
     [alert release];
 }
+-(void)alertMessageNotReachable{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"تنبيه" message: @"عذرا لا يوجد لديك إتصال بالإنترنت" delegate: self cancelButtonTitle:@"حسنًا" otherButtonTitles: nil];
+    [alert show];
+    [alert release];
+}
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -530,14 +592,6 @@ bool loadingData = FALSE;
     // For example: self.myOutlet = nil;
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-    [categories release];
-   // [pdfViewController release];
-    //[readerController release];
-
-}
 
 
 
@@ -663,7 +717,7 @@ bool loadingData = FALSE;
 #pragma mark -
 #pragma mark AdWhirlDelegate methods
 -(NSString *)adWhirlApplicationKey{
-	return @"8a71b8a4c3484b31b7866f019d7461ba";
+	return @"f2ded5b21ea84e58b4aa744dc7215d08";
 }
 -(UIViewController *) viewControllerForPresentingModalView{
 	
