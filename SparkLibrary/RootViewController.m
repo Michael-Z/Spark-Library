@@ -43,10 +43,10 @@ NetworkStatus netStatus;
     [categories release];
     [readerController release];
     [awView release];
-    [inAppKeys release];
+//    [inAppKeys release];
     [plistDict release];
     [downloadedFile release];
-    [myBooks release];
+//    [myBooks release];
     [fileName release];
     [secondFileName release];
 }
