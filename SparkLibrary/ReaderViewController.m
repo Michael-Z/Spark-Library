@@ -665,6 +665,11 @@ NSMutableDictionary* plistDict;
 	if (printInteraction != nil) [printInteraction dismissAnimated:NO]; // Dismiss
     
 	[delegate dismissReaderViewController:self]; // Dismiss view controller
+    [self checkAndCreatePList];
+    NSMutableDictionary* plistDict;
+    plistDict = [[NSMutableDictionary alloc] initWithContentsOfFile:pListPath];
+    [plistDict removeObjectForKey:@"fileName"];
+    [plistDict writeToFile:pListPath atomically: YES];
 }
 
 /////////////////

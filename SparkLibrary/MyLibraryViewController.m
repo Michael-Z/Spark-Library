@@ -371,7 +371,7 @@ NSMutableDictionary* plistDocDict;
   	NSFileManager *fileManager = [NSFileManager defaultManager];
 	success = [fileManager fileExistsAtPath:pListDocPath];
 	
-	if(success) return;
+if(success) return;
 	
 	NSString *pListPathFromApp = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"sparkProperties.plist"];
 	
