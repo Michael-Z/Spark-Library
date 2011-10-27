@@ -66,19 +66,7 @@
 
 		[toolbarItems addObject:flexSpace]; [flexSpace release];
 
-#if (READER_ENABLE_PRINT == TRUE) // Option
-
-		Class printInteractionController = NSClassFromString(@"UIPrintInteractionController");
-
-		if ((printInteractionController != nil) && [printInteractionController isPrintingAvailable])
-		{
-			UIBarButtonItem *printButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Reader-Print.png"]
-											style:UIBarButtonItemStyleBordered target:self action:@selector(printButtonTapped:)];
-
-			[toolbarItems addObject:printButton]; [printButton release]; buttonCount++; titleWidth -= PRINT_BUTTON_WIDTH;
-		}
-
-#endif // end of READER_ENABLE_PRINT Option
+ 
 
  //big font
         UIBarButtonItem *enlargeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"enlargeIcon.png"]

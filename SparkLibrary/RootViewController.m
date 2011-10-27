@@ -40,15 +40,12 @@ NetworkStatus netStatus;
 - (void)dealloc
 {
     [super dealloc];
-    [categories release];
-    [readerController release];
-    [awView release];
-//    [inAppKeys release];
-    [plistDict release];
-    [downloadedFile release];
-//    [myBooks release];
-    [fileName release];
-    [secondFileName release];
+  //  [categories release];
+   [readerController release];
+  //  [awView release];
+  //   [downloadedFile release];
+//    [fileName release];
+//    [secondFileName release];
 }
 
 - (void)viewDidLoad
@@ -98,8 +95,6 @@ NetworkStatus netStatus;
     
 	hostReach = [[Reachability reachabilityWithHostName: @"www.php.spark-books.com"] retain];
 	[hostReach startNotifier];
-    
-    
     
       [super viewDidLoad];
 }
@@ -201,30 +196,8 @@ NetworkStatus netStatus;
 -(IBAction)aboutUsPage:(id)sender{
         if(!downloading){
     UIViewController *viewController;
-    
     viewController = [[AboutUsViewController alloc] init] ;
-    NSObject<EPGLTransitionViewDelegate> *transition;
-    transition = [[[Transition alloc] init] autorelease];
-    
-    
-    EPGLTransitionView *glview = [[[EPGLTransitionView alloc] 
-                                   initWithView:self.navigationController.view
-                                   delegate:transition] autorelease];
-    
-    
-    [glview prepareTextureTo:viewController.view];
-    // If you are using an "IN" animation for the "next" view set appropriate 
-    // clear color (ie no alpha) 
-    [glview setClearColorRed:0.0
-                       green:0.0
-                        blue:0.0
-                       alpha:1.0];
-    
-    [glview startTransition];
-    
-    
-
-        [self.navigationController pushViewController:viewController animated:YES];
+    [self.navigationController pushViewController:viewController animated:YES];
     }else{
         [self alertMessage];
     }
@@ -261,9 +234,9 @@ NetworkStatus netStatus;
 	self.navigationItem.leftBarButtonItem = leftButton;
 	[leftButtonItem release];
 	[leftButton release];
-    
-      [categories removeObjectsInArray:myBooks];
- 
+    if([categories count] >0){
+       [categories removeObjectsInArray:myBooks];
+    }
     
     //ads
     awView = [AdWhirlView requestAdWhirlViewWithDelegate:self]; 
@@ -404,23 +377,27 @@ NetworkStatus netStatus;
     cell.noOfPages.text =[[categories objectAtIndex:row]objectForKey:@"noOfPages"];     
     cell.authorName.text=[[categories objectAtIndex:row]objectForKey:@"author"];     
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
-            cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];
+            cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:40];
             
             cell.noOfPages.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];
             
             cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
+            cell.authorText.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
             cell.dollarSign.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];
             cell.priceLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];            
-            cell.priceText.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];            
+            cell.priceText.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];            
+            cell.pagesText.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];            
         }else{
-            cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
+            cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
             
-            cell.noOfPages.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
+            cell.noOfPages.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
             
             cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
-            cell.dollarSign.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
-            cell.priceLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];            
-            cell.priceText.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];            
+            cell.authorText.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+            cell.dollarSign.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
+            cell.priceLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];            
+            cell.priceText.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];            
+            cell.pagesText.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];            
             
         }
     NSString* filePath = [documentDir stringByAppendingPathComponent:[[categories objectAtIndex:row]objectForKey:@"imageName"]];
@@ -434,6 +411,13 @@ NetworkStatus netStatus;
     NSString *imagePath = [documentDir stringByAppendingPathComponent:[[categories objectAtIndex:row]objectForKey:@"imageName"]];
      
     cell.bookCover.image = [UIImage imageWithContentsOfFile:imagePath];
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+                CGRect bookCoverFrame = cell.bookCover.frame;
+                bookCoverFrame.size.width = 55;
+                bookCoverFrame.size.height = 90;
+                 cell.bookCover.frame = bookCoverFrame;
+ 
+            }
     // Configure the cell.
  
     cell.descButton.tag = row;
@@ -452,6 +436,7 @@ NetworkStatus netStatus;
     cell.nameLabel.hidden = TRUE;
     cell.noOfPages.hidden = TRUE;
     cell.authorName.hidden = TRUE;
+    cell.authorText.hidden = TRUE;
     cell.dollarSign.hidden = TRUE;
     cell.priceText.hidden = TRUE;
     cell.descButton.hidden=TRUE;

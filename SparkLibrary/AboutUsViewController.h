@@ -13,10 +13,10 @@
 
 @interface AboutUsViewController : UIViewController<MFMailComposeViewControllerDelegate>
 {
-    IBOutlet UITextView * aboutusTextView;
+    IBOutlet UIWebView * aboutusWebView;
 }
 
-@property(nonatomic,retain) UITextView * aboutusTextView;
+@property(nonatomic,retain) UIWebView * aboutusWebView;
 -(IBAction)sendMail:(id)sender;
--(void)importProductsTable;
+
 @end

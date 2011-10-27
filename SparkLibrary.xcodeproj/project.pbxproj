@@ -26,7 +26,6 @@
 		A50D3F44140A633B002C84EF /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = A50D3F42140A633B002C84EF /* background.png */; };
 		A511B9A814141F2500F5676A /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A511B9A614141F2400F5676A /* AboutUsViewController.m */; };
 		A511B9A914141F2500F5676A /* AboutUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A511B9A714141F2500F5676A /* AboutUsViewController.xib */; };
-		A5146060142DD64F000FBB9D /* aboutUsMainImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A514605F142DD64F000FBB9D /* aboutUsMainImage.png */; };
 		A51BE8C814248D70004B0C23 /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = A51BE8B914248D70004B0C23 /* JSONKit.m */; };
 		A51BE8C914248D70004B0C23 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = A51BE8BB14248D70004B0C23 /* NSData+Base64.m */; };
 		A51BE8CA14248D70004B0C23 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = A51BE8BD14248D70004B0C23 /* SFHFKeychainUtils.m */; };
@@ -134,6 +133,7 @@
 		A5AB7FF014196A3400092B8B /* 114.png in Resources */ = {isa = PBXBuildFile; fileRef = A5AB7FEF14196A3400092B8B /* 114.png */; };
 		A5BE3E5B1426869800A2FCF3 /* pageNoText.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BE3E591426869800A2FCF3 /* pageNoText.png */; };
 		A5BE3E5C1426869800A2FCF3 /* priceText.png in Resources */ = {isa = PBXBuildFile; fileRef = A5BE3E5A1426869800A2FCF3 /* priceText.png */; };
+		A5D6886F143F199D00169A3B /* aboutMainImage.png in Resources */ = {isa = PBXBuildFile; fileRef = A5D6886E143F199D00169A3B /* aboutMainImage.png */; };
 		A5E4BBE8141FEDD600A81BB3 /* book.png in Resources */ = {isa = PBXBuildFile; fileRef = A5E4BBE7141FEDD600A81BB3 /* book.png */; };
 		A5E4BBEF141FF1E700A81BB3 /* max.png in Resources */ = {isa = PBXBuildFile; fileRef = A5E4BBEE141FF1E700A81BB3 /* max.png */; };
 		A5E4BBF1141FF25600A81BB3 /* min.png in Resources */ = {isa = PBXBuildFile; fileRef = A5E4BBF0141FF25600A81BB3 /* min.png */; };
@@ -169,7 +169,6 @@
 		A511B9A514141F2400F5676A /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
 		A511B9A614141F2400F5676A /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
 		A511B9A714141F2500F5676A /* AboutUsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutUsViewController.xib; sourceTree = "<group>"; };
-		A514605F142DD64F000FBB9D /* aboutUsMainImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutUsMainImage.png; sourceTree = "<group>"; };
 		A51BE8B814248D70004B0C23 /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		A51BE8B914248D70004B0C23 /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		A51BE8BA14248D70004B0C23 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
@@ -350,6 +349,7 @@
 		A5AB7FEF14196A3400092B8B /* 114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = 114.png; path = ../114.png; sourceTree = "<group>"; };
 		A5BE3E591426869800A2FCF3 /* pageNoText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pageNoText.png; sourceTree = "<group>"; };
 		A5BE3E5A1426869800A2FCF3 /* priceText.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = priceText.png; sourceTree = "<group>"; };
+		A5D6886E143F199D00169A3B /* aboutMainImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aboutMainImage.png; sourceTree = "<group>"; };
 		A5E4BBE7141FEDD600A81BB3 /* book.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = book.png; sourceTree = "<group>"; };
 		A5E4BBEE141FF1E700A81BB3 /* max.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = max.png; sourceTree = "<group>"; };
 		A5E4BBF0141FF25600A81BB3 /* min.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = min.png; sourceTree = "<group>"; };
@@ -434,8 +434,8 @@
 				A50D3F3E140A5EBD002C84EF /* selectedTopRow.png */,
 				A50D3F42140A633B002C84EF /* background.png */,
 				A5A1577214115BDA001BD4C5 /* close.png */,
-				A514605F142DD64F000FBB9D /* aboutUsMainImage.png */,
 				A533D79814196C7C0056CD20 /* descriptionBG.png */,
+				A5D6886E143F199D00169A3B /* aboutMainImage.png */,
 				A533D79A141971BD0056CD20 /* descriptionBG2.png */,
 				A545F848141B6D5500F544AA /* 37x-Checkmark.png */,
 				A51BE8D61424A209004B0C23 /* Reader-Print.png */,
@@ -909,8 +909,8 @@
 				A5BE3E5B1426869800A2FCF3 /* pageNoText.png in Resources */,
 				A5BE3E5C1426869800A2FCF3 /* priceText.png in Resources */,
 				A59B2D0C142BD89300577D09 /* AdWhirlWebBrowser.xib in Resources */,
-				A5146060142DD64F000FBB9D /* aboutUsMainImage.png in Resources */,
 				A58B4813142FC5A900BA7AAB /* 72.png in Resources */,
+				A5D6886F143F199D00169A3B /* aboutMainImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1033,7 +1033,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ali Shamsah (4KX596Q284)";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1058,7 +1061,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				ARCHS = (
+					armv7,
+					armv6,
+				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ali Shamsah";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

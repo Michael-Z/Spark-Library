@@ -306,23 +306,19 @@ NSMutableDictionary* plistDocDict;
     cell.noOfPages.text =[[categories objectAtIndex:row]objectForKey:@"noOfPages"];     
     cell.authorName.text =[[categories objectAtIndex:row]objectForKey:@"author"];     
     
-             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
-                 cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];
-
-                 cell.noOfPages.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];
-
-                 cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
-                 cell.pagesText.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];            
-
-             }else{
-                 cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
-                 
-                 cell.noOfPages.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
-                 
-                 cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
-                 cell.pagesText.font = [UIFont fontWithName:@"Helvetica-Bold" size:17];            
-
-             }
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+            cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:40];
+            cell.noOfPages.font = [UIFont fontWithName:@"Helvetica-Bold" size:32];
+            cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
+            cell.authorText.font = [UIFont fontWithName:@"Helvetica-Bold" size:22];
+            cell.pagesText.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];            
+        }else{
+            cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:20];
+            cell.noOfPages.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
+            cell.authorName.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+            cell.authorText.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];
+            cell.pagesText.font = [UIFont fontWithName:@"Helvetica-Bold" size:12];            
+        }
         
 
     NSArray *documentPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -332,12 +328,21 @@ NSMutableDictionary* plistDocDict;
     NSString *imagePath = [documentDir stringByAppendingPathComponent:[[categories objectAtIndex:row]objectForKey:@"imageName"]];
     
     cell.bookCover.image = [UIImage imageWithContentsOfFile:imagePath];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad){
+            CGRect bookCoverFrame = cell.bookCover.frame;
+            bookCoverFrame.size.width = 55;
+            bookCoverFrame.size.height = 90;
+            cell.bookCover.frame = bookCoverFrame;
+            
+        }
+    
     }
     if([self.categories count] == 0 ){
         cell.pagesText.hidden = TRUE;
         cell.nameLabel.hidden = TRUE;
         cell.noOfPages.hidden = TRUE;
         cell.authorName.hidden = TRUE;
+        cell.authorText.hidden = TRUE;
         cell.bookCover.hidden=TRUE;
         cell.userInteractionEnabled=FALSE;
     }

@@ -13,12 +13,13 @@
 #import "OurProducts.h"
 @implementation AboutUsViewController
 
-@synthesize aboutusTextView;
+@synthesize aboutusWebView;
 
 
 
 -(void)viewDidAppear:(BOOL)animated{
-    [self importProductsTable];
+    
+    
     UIButton * leftButtonItem = [[UIButton buttonWithType:UIButtonTypeInfoLight] retain];
 	leftButtonItem.frame = CGRectMake(0.0, 0.0, 52.5, 30.0);
 	leftButtonItem.backgroundColor = [UIColor clearColor];
@@ -29,8 +30,15 @@
 	[leftButtonItem release];
 	[leftButton release];
     
+   
     [super viewDidAppear:animated];    
 
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [self.aboutusWebView setBackgroundColor:[UIColor clearColor]];
+    [self.aboutusWebView setOpaque:NO];
+    NSString* html = [NSString stringWithFormat:@"<html><body><p \"style=\"font-size:20px;text-align:right; color:black; direction:rtl;\">%@</p></body></html>",NSLocalizedString(@"aboutUs", @"text")];
+    [self.aboutusWebView loadHTMLString:html baseURL:nil];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,7 +61,7 @@
 
 - (void)viewDidLoad
 {
-    aboutusTextView.text = NSLocalizedString(@"aboutUs", @"text");
+     
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 }
@@ -76,26 +84,7 @@
     UIViewController *viewController;
     
     viewController = [[[RootViewController alloc] init] autorelease] ;
- /*   
-    NSObject<EPGLTransitionViewDelegate> *transition;
-    transition = [[[Transition alloc] init] autorelease];
-    
-    
-    EPGLTransitionView *glview = [[[EPGLTransitionView alloc] 
-                                   initWithView:self.navigationController.view
-                                   delegate:transition] autorelease];
-    
-    
-    [glview prepareTextureTo:viewController.view];
-    // If you are using an "IN" animation for the "next" view set appropriate 
-    // clear color (ie no alpha) 
-    [glview setClearColorRed:0.0
-                       green:0.0
-                        blue:0.0
-                       alpha:1.0];
-    
-    [glview startTransition];
-  */
+  
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -127,7 +116,7 @@
 	controller.mailComposeDelegate = self;
 	[controller setSubject:@"مقترحات لمكتبة سبارك"];
     NSMutableArray * emails = [[NSMutableArray alloc] init];
-    [emails addObject:@"spark.books.library@gmail.com,"];
+    [emails addObject:@"admin@spark-books.com,"];
     [controller setToRecipients:emails];
 	[self presentModalViewController:controller animated:YES];
 	[controller release];
@@ -144,17 +133,10 @@
 	}
 	[self dismissModalViewControllerAnimated:YES];
 }
-
--(void)importProductsTable{
-    //import table from web for previous apps
-    NSString* docsDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    NSURL* pListURL = [NSURL URLWithString: @"http://www.thedarkdimension.com/apps/table"];
-    NSData* pListData = [NSData dataWithContentsOfURL: pListURL];
-    NSString* filePath = [docsDir stringByAppendingPathComponent:@"productlist.plist"];
-    [pListData writeToFile: filePath atomically: NO];
-}
--(IBAction)darkDimensionWebSiteLunching:(id)sender{
-    UIViewController *viewController;
+ -(IBAction)darkDimensionWebSiteLunching:(id)sender{
+    
+     
+     UIViewController *viewController;
     
     viewController = [[TheDarkDimension alloc] init] ;
     [self.navigationController presentModalViewController:viewController animated:YES];

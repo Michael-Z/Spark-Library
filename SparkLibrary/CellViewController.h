@@ -14,16 +14,20 @@
     IBOutlet UILabel *priceLabel;
     IBOutlet UILabel *noOfPages;
     IBOutlet UILabel *authorName;
+    IBOutlet UILabel *authorText;
     IBOutlet UILabel *dollarSign;
     IBOutlet UIImageView *bookCover;
     IBOutlet UILabel *pagesText;
     IBOutlet UILabel *priceText;
+
     IBOutlet UIButton * descButton;
     IBOutlet UIButton * buyButton;
+    
     
 }
 @property (nonatomic,retain) UIButton * descButton;
 @property (nonatomic,retain) UILabel *authorName;
+@property (nonatomic,retain) UILabel * authorText;
 @property (nonatomic,retain) UILabel *dollarSign;
 @property (nonatomic,retain) UIButton * buyButton;
 @property (nonatomic,retain) UILabel * nameLabel;
